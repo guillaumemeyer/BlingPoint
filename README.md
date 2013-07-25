@@ -2,11 +2,10 @@ BlingPoint
 ==========
 
 BlingPoint is a JS runtime &amp; framework for easily building instrumented, modular and robust SharePoint solutions that relies on the best design principles.
-
 Its name comes from its root namespace "$P" that derives from JQuery one "$".
 
 For testing purposes only, you can use 
-<a href="javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://institutsharepoint.sharepoint.com/sites/Criteo/Scripts/BlingPoint.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">
+<a href="javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/guillaumemeyer/BlingPoint/master/dist/0.0.1/BlingPoint.min.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">
 This bookmarklet
 </a>
 
