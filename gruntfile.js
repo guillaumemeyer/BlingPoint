@@ -1,7 +1,28 @@
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks("grunt-image-embed");
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-yuidoc');
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    yuidoc: {
+      compile: {
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        url: '<%= pkg.homepage %>',
+        options: {
+          paths: 'src',
+          outdir: 'dist/<%= pkg.version %>/docs/'
+        }
+      }
+    },
     concat: {
       options: {
         separator: ''
@@ -73,16 +94,8 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks("grunt-image-embed");
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-
   grunt.registerTask('test', ['jshint']);
-  grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'copy']);
+  grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'copy', 'yuidoc']);
   grunt.registerTask('dev', ['jshint', 'concat', 'uglify', 'watch']);
   grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'imageEmbed', 'cssmin']);
 
