@@ -1,7 +1,6 @@
-BlingPoint
-==========
+# BlingPoint
 
-BlingPoint is a JS runtime &amp; framework for easily building instrumented, modular and robust SharePoint solutions that relies on the best design principles.
+BlingPoint is a JS runtime &amp; framework for easily building instrumented, modular and robust SharePoint solutions that relies on the best design principles.  
 Its name comes from its root namespace "$P" that derives from the JQuery one "$".
 
 BlingPoint provides an easy to use, lightweight and efficient library of tools and features to ease development of powerful SharePoint solutions :
@@ -13,7 +12,7 @@ BlingPoint provides an easy to use, lightweight and efficient library of tools a
 - Script-oriented syntax
 - More to come... Stay Tuned !
 
-GET STARTED :
+## GET STARTED
 - Public API are documented through YuiDoc generation, see dist\version\docs\ folder.
 - Checkout the code at <a href='https://github.com/guillaumemeyer/BlingPoint'>Github</a>
 And don't hesitate to fork and send a pull request for any cool example of yours as well!
@@ -21,16 +20,16 @@ And don't hesitate to fork and send a pull request for any cool example of yours
 - Follow <a href='https://twitter.com/blingpoint'>@blingpoint on Twitter</a> 
 - Troubleshooting? <a href='https://github.com/guillaumemeyer/BlingPoint/issues/new'>Open an issue</a>
 
-ABOUT :
-BlingPoint was built &amp; designed by a developer for developers.
+## ABOUT
+BlingPoint was built &amp; designed by a developer for developers.  
 As a single minified javascript file, BlingPoint is easy to deploy :
-- Using this bookmarklet to inject it dynamically into any SharePoint page
-- By registering a script in your site MasterPage
-- Using the kindly provided Sandbox solution
+- Using a bookmarklet to inject it dynamically into any SharePoint page
+- By registering a script tag in your site MasterPage
+- Using a kindly provided Sandbox solution to register a new ScriptLink
 
-LICENCE :
-BlingPoint is released under the terms of the MIT license.
-
+## LICENCE
+BlingPoint is released under the terms of the MIT license.  
+  
 Copyright (c) 2012-2013 Guillaume Meyer
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
