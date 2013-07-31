@@ -13,17 +13,13 @@ BlingPoint provides an easy to use, lightweight and efficient library of tools a
 - Script-oriented syntax
 - More to come... Stay Tuned !
 
-DOWNLOAD :
-Latest hipstered version is 0.0.3
-Latest old boring stable version is 0.0.2
-
 GET STARTED :
-Public API are documented through YuiDoc generation, see dist\version\docs\ folder.
-Checkout the code at Github : https://github.com/guillaumemeyer/BlingPoint
+- Public API are documented through YuiDoc generation, see dist\version\docs\ folder.
+- Checkout the code at <a href='https://github.com/guillaumemeyer/BlingPoint'>Github</a>
 And don't hesitate to fork and send a pull request for any cool example of yours as well!
-Troubleshooting? Open an issue : https://github.com/guillaumemeyer/BlingPoint/issues/new
-Support ? Join the BlingPoint community : https://www.yammer.com/blingpoint
-Follow @blingpoint on Twitter : https://twitter.com/blingpoint
+- Support ? Join the <a href='https://www.yammer.com/blingpoint'>BlingPoint community</a>
+- Follow <a href='https://twitter.com/blingpoint'>@blingpoint on Twitter</a> 
+- Troubleshooting? <a href='https://github.com/guillaumemeyer/BlingPoint/issues/new'>Open an issue</a>
 
 ABOUT :
 BlingPoint was built &amp; designed by a developer for developers.
