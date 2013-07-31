@@ -2,30 +2,35 @@ BlingPoint
 ==========
 
 BlingPoint is a JS runtime &amp; framework for easily building instrumented, modular and robust SharePoint solutions that relies on the best design principles.
-Its name comes from its root namespace "$P" that derives from JQuery one "$".
+Its name comes from its root namespace "$P" that derives from the JQuery one "$".
 
 BlingPoint provides an easy to use, lightweight and efficient library of tools and features to ease development of powerful SharePoint solutions :
 - Embedded logging system
 - Simple profiling tool
 - Application parameters Management
 - Scripts & CSS dynamic loading
-- PlugIn Management
+- PlugIn Management System
 - Script-oriented syntax
 - More to come... Stay Tuned !
 
 DOWNLOAD :
-BlingPoint latest hipstered version is 0.0.3,
-Download 0.0.1 (ZIP)
+Latest hipstered version is 0.0.3
+Latest old boring stable version is 0.0.2
 
-BlingPoint latest old boring stable version is 0.0.2,
-Download 0.0.2 (ZIP)
+GET STARTED :
+Public API are documented through YuiDoc generation, see dist\version\docs\ folder.
+Checkout the code at Github : https://github.com/guillaumemeyer/BlingPoint
+And don't hesitate to fork and send a pull request for any cool example of yours as well!
+Troubleshooting? Open an issue : https://github.com/guillaumemeyer/BlingPoint/issues/new
+Support ? Join the BlingPoint community : https://www.yammer.com/blingpoint
+Follow @blingpoint on Twitter : https://twitter.com/blingpoint
 
 ABOUT :
-Technical overview
-
-DOCUMENTATION
-Public API are documented through YuiDoc generation.
-See dist\version\docs\ folder.
+BlingPoint was built &amp; designed by a developer for developers.
+As a single minified javascript file, BlingPoint is easy to deploy :
+- Using this bookmarklet to inject it dynamically into any SharePoint page
+- By registering a script in your site MasterPage
+- Using the kindly provided Sandbox solution
 
 LICENCE :
 BlingPoint is released under the terms of the MIT license.
