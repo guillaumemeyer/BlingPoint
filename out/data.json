@@ -1,10 +1,5 @@
 {
-    "project": {
-        "name": "BlingPoint",
-        "description": "BlingPoint JS runtime and framework for SharePoint",
-        "version": "0.0.1",
-        "url": "https://github.com/guillaumemeyer/BlingPoint"
-    },
+    "project": {},
     "files": {
         "src\\BlingPoint.Log.js": {
             "name": "src\\BlingPoint.Log.js",
