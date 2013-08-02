@@ -4,13 +4,14 @@ BlingPoint is a JS runtime &amp; framework for easily building instrumented, mod
 Its name comes from its root namespace "$P" that derives from the JQuery one "$".
 
 BlingPoint provides an easy to use, lightweight and efficient library of tools and features to ease development of powerful, modular &amp; robust SharePoint solutions :
-- Embedded logging &amp; diagnostic system
-- Simple profiling tool
-- URL tools
+
+- Embedded logging &amp; diagnostic system : https://github.com/guillaumemeyer/BlingPoint/wiki/Logging-&-Diagnostics
+- Simple profiling tool : https://github.com/guillaumemeyer/BlingPoint/wiki/Profiling
+- URL tools : https://github.com/guillaumemeyer/BlingPoint/wiki/URL-tools
 - Application parameters Management
-- Scripts & CSS dynamic loading
+- Scripts & CSS dynamic loading : https://github.com/guillaumemeyer/BlingPoint/wiki/Loading-resources
 - PlugIn Management System
-- Schema provisioning
+- Schema provisioning : https://github.com/guillaumemeyer/BlingPoint/wiki/Schema-Namespace
 - Script-oriented syntax
 - More to come... Stay Tuned !
 
