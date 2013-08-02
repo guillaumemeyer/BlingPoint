@@ -45,6 +45,12 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/Framework.html">Framework</a></li>
+            
+                <li><a href="../modules/Global.html">Global</a></li>
+            
+                <li><a href="../modules/Loader.html">Loader</a></li>
+            
                 <li><a href="../modules/Log.html">Log</a></li>
             
             </ul>
@@ -95,7 +101,7 @@
 	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
 	var BLINGPOINT_LOG_NAMESPACE = &#x27;log&#x27;;
 
-	// Initialize namespaces
+	// Init namespaces
 	window[ BLINGPOINT_LOG_NAMESPACE ] = {};
 	
 	var IE6_POSITION_FIXED = true; // enable IE6 {position:fixed}
@@ -124,9 +130,9 @@
 	
 	
 	/**
-	Builds the log viewer markup
+	Builds BlingPoint Logviewer Markup
 	@method generateMarkup
-	@return {string} DIV markup
+	@return {string} BlingPoint Logviewer node
 	**/
 	function generateMarkup() { //build markup
 		var spans = [];
@@ -189,11 +195,7 @@
 		}
 	}
 	
-	/**
-	Clear log viewer output
-	@method clear
-	**/
-	function clear() { 
+	function clear() { //clear list output
 		outputList.innerHTML = &#x27;&#x27;;
 	}
 	
@@ -296,7 +298,6 @@
 		setState();
 	}
 
-
 	function resize( size ) {
 		if ( size === undefined || size === null ) {
 			size = ( state &amp;&amp; state.size === null ) ? 0 : ( state.size + 1 ) % 2;
@@ -355,7 +356,7 @@
 		}
 	}
 
-	//event management
+	//event management ( thanks John Resig )
 	function addEvent( obj, type, fn ) {
 		var obj = ( obj.constructor === String ) ? document.getElementById( obj ) : obj;
 		if ( obj.attachEvent ) {
@@ -373,10 +374,7 @@
 		else obj.removeEventListener( type, fn, false );
 	}
 
-	/**
-	Initialize log viewer
-	@method initBlackbird
-	**/
+
 	function InitBlackbird() {
 		var body = document.getElementsByTagName( &#x27;BODY&#x27; )[ 0 ];
 		bbird = body.appendChild( generateMarkup() );

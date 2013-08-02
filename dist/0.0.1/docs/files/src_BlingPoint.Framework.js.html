@@ -1,3 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\BlingPoint.Framework.js - BlingPoint</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="BlingPoint"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Framework.html">Framework</a></li>
+            
+                <li><a href="../modules/Global.html">Global</a></li>
+            
+                <li><a href="../modules/Loader.html">Loader</a></li>
+            
+                <li><a href="../modules/Log.html">Log</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\BlingPoint.Framework.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 /**
  * BlingPoint Framework Module
  * @module Framework
@@ -8,15 +102,15 @@ var user;
 
 ( function() {
 	
-	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
-	var BLINGPOINT_PLUGINS_NAMESPACE = 'plugins';
-	var BLINGPOINT_SCHEMA_NAMESPACE = 'schema';
-	var BLINGPOINT_SECURITY_NAMESPACE = 'security';
-	var BLINGPOINT_PARAMETERS_NAMESPACE = 'parameters';
-	var BLINGPOINT_UI_NAMESPACE = 'ui';
-	var BLINGPOINT_SITES_NAMESPACE = 'sites';
-	var BLINGPOINT_LISTS_NAMESPACE = 'lists';
-	var BLINGPOINT_ITEMS_NAMESPACE = 'items';
+	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
+	var BLINGPOINT_PLUGINS_NAMESPACE = &#x27;plugins&#x27;;
+	var BLINGPOINT_SCHEMA_NAMESPACE = &#x27;schema&#x27;;
+	var BLINGPOINT_SECURITY_NAMESPACE = &#x27;security&#x27;;
+	var BLINGPOINT_PARAMETERS_NAMESPACE = &#x27;parameters&#x27;;
+	var BLINGPOINT_UI_NAMESPACE = &#x27;ui&#x27;;
+	var BLINGPOINT_SITES_NAMESPACE = &#x27;sites&#x27;;
+	var BLINGPOINT_LISTS_NAMESPACE = &#x27;lists&#x27;;
+	var BLINGPOINT_ITEMS_NAMESPACE = &#x27;items&#x27;;
 	
 	// Init namespaces
 	window[ BLINGPOINT_PLUGINS_NAMESPACE ] = {};
@@ -41,26 +135,26 @@ var user;
 
 		ctx.executeQueryAsync(
 			function() {
-				log.info('Web Context loaded');
-				log.debug('web title:' + web.get_title());
-				log.debug('Description:' + web.get_description());
-				log.debug('ID:' + web.get_id());
-				log.debug('Created Date:' + web.get_created());
-				log.debug('Web Url:' + web.get_serverRelativeUrl());
-				log.info('Current user loaded');
-				log.debug('ID:' + user.get_id());
-				log.debug('User title:' + user.get_title());
-				log.debug('Email:' + user.get_email());
+				log.info(&#x27;Web Context loaded&#x27;);
+				log.debug(&#x27;web title:&#x27; + web.get_title());
+				log.debug(&#x27;Description:&#x27; + web.get_description());
+				log.debug(&#x27;ID:&#x27; + web.get_id());
+				log.debug(&#x27;Created Date:&#x27; + web.get_created());
+				log.debug(&#x27;Web Url:&#x27; + web.get_serverRelativeUrl());
+				log.info(&#x27;Current user loaded&#x27;);
+				log.debug(&#x27;ID:&#x27; + user.get_id());
+				log.debug(&#x27;User title:&#x27; + user.get_title());
+				log.debug(&#x27;Email:&#x27; + user.get_email());
 				blingpoint.plugins.loadPlugIns();
 			},
 			function (sender, args) {
-				blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
 		);
 
 	}
 
-	ExecuteOrDelayUntilScriptLoaded(InitWeb,"sp.js");
+	ExecuteOrDelayUntilScriptLoaded(InitWeb,&quot;sp.js&quot;);
 
 
 
@@ -69,65 +163,65 @@ var user;
 
         var fields = web.get_fields();
  
-        var fieldXml = "<Field Type='" + fieldType + "' DisplayName='" + fieldDisplayName + "' Name='" + fieldName + 
-            "' Group='" + fieldGroup + "' Hidden='" + fieldHidden + "'></Field>";
+        var fieldXml = &quot;&lt;Field Type=&#x27;&quot; + fieldType + &quot;&#x27; DisplayName=&#x27;&quot; + fieldDisplayName + &quot;&#x27; Name=&#x27;&quot; + fieldName + 
+            &quot;&#x27; Group=&#x27;&quot; + fieldGroup + &quot;&#x27; Hidden=&#x27;&quot; + fieldHidden + &quot;&#x27;&gt;&lt;/Field&gt;&quot;;
  
         /*
 		Text, Number, DateTime, Note, HTML, Image, URL, Boolean, Choice, MultiChoice, Lookup, LookupMulti
 
 		Sharepoint Field Types - Elements.xml
 		Single Line of Text:
-		field id="{FDDC4E38-25E0-4FD9-92E7-D17F34A5AB12}" description="My Content ID of Item" staticname="ContentID" name="ContentID" displayname="ContentID" type="Text" group="Sample Site Columns" sourceid="http://schemas.microsoft.com/sharepoint/v3"
+		field id=&quot;{FDDC4E38-25E0-4FD9-92E7-D17F34A5AB12}&quot; description=&quot;My Content ID of Item&quot; staticname=&quot;ContentID&quot; name=&quot;ContentID&quot; displayname=&quot;ContentID&quot; type=&quot;Text&quot; group=&quot;Sample Site Columns&quot; sourceid=&quot;http://schemas.microsoft.com/sharepoint/v3&quot;
 
 		Number:
-		Field ID="{13b3652a-d543-465d-91cb-a9d625637855}" StaticName="Read_Times" Name ="Read_Times" DisplayName ="Read_Times" Description="Read Time count of Item" Type="Number" Group ="Sample Site Columns" SourceID ="http://schemas.microsoft.com/sharepoint/v3"
+		Field ID=&quot;{13b3652a-d543-465d-91cb-a9d625637855}&quot; StaticName=&quot;Read_Times&quot; Name =&quot;Read_Times&quot; DisplayName =&quot;Read_Times&quot; Description=&quot;Read Time count of Item&quot; Type=&quot;Number&quot; Group =&quot;Sample Site Columns&quot; SourceID =&quot;http://schemas.microsoft.com/sharepoint/v3&quot;
 
 		Date Time:
-		Field ID="{d076e4d5-c785-4c04-8b56-c1f021721749}" StaticName="CreateDate" Name="CreateDate" DisplayName="Create_Date" Description="Create Date of Item" Group="Sample Site Columns" Type="DateTime" Format="DateOnly" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
+		Field ID=&quot;{d076e4d5-c785-4c04-8b56-c1f021721749}&quot; StaticName=&quot;CreateDate&quot; Name=&quot;CreateDate&quot; DisplayName=&quot;Create_Date&quot; Description=&quot;Create Date of Item&quot; Group=&quot;Sample Site Columns&quot; Type=&quot;DateTime&quot; Format=&quot;DateOnly&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot;
 
 		Multiple lines of text:
-		Field ID="{2ae59f08-0fb0-4a9c-8a31-a180161b1029}" StaticName="PublisherDescription" Name="PublisherDescription" Description="Publisher Description of Item" DisplayName="Publisher_Description" Type="Note" RichText="FALSE" NumLines="6" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
+		Field ID=&quot;{2ae59f08-0fb0-4a9c-8a31-a180161b1029}&quot; StaticName=&quot;PublisherDescription&quot; Name=&quot;PublisherDescription&quot; Description=&quot;Publisher Description of Item&quot; DisplayName=&quot;Publisher_Description&quot; Type=&quot;Note&quot; RichText=&quot;FALSE&quot; NumLines=&quot;6&quot; Group=&quot;Sample Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot;
 
 		Rich Text HTML:
-		Field ID="{13cd0291-df15-4278-9894-630913e4d2b9}" StaticName="AccrediterDescription" Name="AccrediterDescription" DisplayName="Accrediter_Description" Description="Accrediter Description of Item" Type="Note" NumLines="6" RichText="TRUE" RichTextMode="FullHtml" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
+		Field ID=&quot;{13cd0291-df15-4278-9894-630913e4d2b9}&quot; StaticName=&quot;AccrediterDescription&quot; Name=&quot;AccrediterDescription&quot; DisplayName=&quot;Accrediter_Description&quot; Description=&quot;Accrediter Description of Item&quot; Type=&quot;Note&quot; NumLines=&quot;6&quot; RichText=&quot;TRUE&quot; RichTextMode=&quot;FullHtml&quot; Group=&quot;Sample Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot;
 
 		Publishing HTML:
-		Field ID="{E2CC0231-FA6C-4F90-839C-118C304DFCF1}" StaticName="PMediaDescription" Name="PMediaDescription" DisplayName="MediaDescription" Type="HTML" RichText="TRUE" RichTextMode="ThemeHtml" Group="Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" UnlimitedLengthInDocumentLibrary ="TRUE"
+		Field ID=&quot;{E2CC0231-FA6C-4F90-839C-118C304DFCF1}&quot; StaticName=&quot;PMediaDescription&quot; Name=&quot;PMediaDescription&quot; DisplayName=&quot;MediaDescription&quot; Type=&quot;HTML&quot; RichText=&quot;TRUE&quot; RichTextMode=&quot;ThemeHtml&quot; Group=&quot;Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3&quot; UnlimitedLengthInDocumentLibrary =&quot;TRUE&quot;
 
 		Publishing Image:
-		field id="{148e8191-afe7-4422-b1d1-7202eda667f1}" description="Image 1 link of Item" staticname="PImageID1" name="PImageID1" displayname="Image_ID1" type="Image" group="My Site Columns" sourceid="http://schemas.microsoft.com/sharepoint/v3" richtext="TRUE" richtextmode="ThemeHtml">
+		field id=&quot;{148e8191-afe7-4422-b1d1-7202eda667f1}&quot; description=&quot;Image 1 link of Item&quot; staticname=&quot;PImageID1&quot; name=&quot;PImageID1&quot; displayname=&quot;Image_ID1&quot; type=&quot;Image&quot; group=&quot;My Site Columns&quot; sourceid=&quot;http://schemas.microsoft.com/sharepoint/v3&quot; richtext=&quot;TRUE&quot; richtextmode=&quot;ThemeHtml&quot;&gt;
 
 
-		HyperLink & Image:
-		Field ID="{635a2031-2088-4413-b54e-d2af5daf08bf}" StaticName="ImageAuthor" Name="ImageAuthor" DisplayName="Image_Author" Description="Author Image" Type="URL" Format="Image" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
+		HyperLink &amp; Image:
+		Field ID=&quot;{635a2031-2088-4413-b54e-d2af5daf08bf}&quot; StaticName=&quot;ImageAuthor&quot; Name=&quot;ImageAuthor&quot; DisplayName=&quot;Image_Author&quot; Description=&quot;Author Image&quot; Type=&quot;URL&quot; Format=&quot;Image&quot; Group=&quot;Sample Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot;
 
 
 		YES/No Boolean:
-		<Field ID="{11018312-58f9-4eb0-867d-71298f82d98d}" Name="isActive" StaticName="isActive" DisplayName="isActive" Description="Select if Item is Active" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" Type="Boolean"&gt;
-		<default>0</default>
-		</FIELD>
+		&lt;Field ID=&quot;{11018312-58f9-4eb0-867d-71298f82d98d}&quot; Name=&quot;isActive&quot; StaticName=&quot;isActive&quot; DisplayName=&quot;isActive&quot; Description=&quot;Select if Item is Active&quot; Group=&quot;Sample Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3&quot; Type=&quot;Boolean&quot;&amp;gt;
+		&lt;default&gt;0&lt;/default&gt;
+		&lt;/FIELD&gt;
 
 		CHOICES:
-		<Field ID="{67f8faa4-e3ee-44bf-a3b4-6e7fc9c6b9fe}" Name="Market" StaticName="Market" DisplayName="Market" Description="Market of the Country" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" Type="Choice"&gt;
-		<choices>
-		choice>Gold</choice
-		</choices>
-		</FIELD>
+		&lt;Field ID=&quot;{67f8faa4-e3ee-44bf-a3b4-6e7fc9c6b9fe}&quot; Name=&quot;Market&quot; StaticName=&quot;Market&quot; DisplayName=&quot;Market&quot; Description=&quot;Market of the Country&quot; Group=&quot;Sample Site Columns&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3&quot; Type=&quot;Choice&quot;&amp;gt;
+		&lt;choices&gt;
+		choice&gt;Gold&lt;/choice
+		&lt;/choices&gt;
+		&lt;/FIELD&gt;
 
 		MultiSelect:
-		<Field Type="MultiChoice" DisplayName="Labels_Selected" FillInChoice="FALSE" Group="Sample Site Columns" ID="{2fdf0ba7-0052-4e9f-80f6-e7669ac4ae4f}" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="LabelsSelected" Name="LabelsSelected"&gt;
-		</FIELD>
+		&lt;Field Type=&quot;MultiChoice&quot; DisplayName=&quot;Labels_Selected&quot; FillInChoice=&quot;FALSE&quot; Group=&quot;Sample Site Columns&quot; ID=&quot;{2fdf0ba7-0052-4e9f-80f6-e7669ac4ae4f}&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3&quot; StaticName=&quot;LabelsSelected&quot; Name=&quot;LabelsSelected&quot;&amp;gt;
+		&lt;/FIELD&gt;
 
 		Lookup Columns:
-		Field Type="Lookup" ID="{FE45AC76-C0E2-46C8-A047-E8C43C10315C}" Name="LU_Country" StaticName="LU_Country" DisplayName="LU_Country" Required="FALSE" List="Lists/Region Country Master" ShowField="RollOutCountry" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
+		Field Type=&quot;Lookup&quot; ID=&quot;{FE45AC76-C0E2-46C8-A047-E8C43C10315C}&quot; Name=&quot;LU_Country&quot; StaticName=&quot;LU_Country&quot; DisplayName=&quot;LU_Country&quot; Required=&quot;FALSE&quot; List=&quot;Lists/Region Country Master&quot; ShowField=&quot;RollOutCountry&quot; UnlimitedLengthInDocumentLibrary=&quot;FALSE&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot; Group=&quot;Sample Site Columns&quot;
 
 		Multi Lookup Columns:
-		Field Type="LookupMulti" Mult="TRUE" ID="{85062ACF-315B-460A-B756-2230A5FE082F}" Name="LU_Language" StaticName="LU_Language" DisplayName="LU_Language" Required="FALSE" List="Lists/Language Master" ShowField="Title" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
+		Field Type=&quot;LookupMulti&quot; Mult=&quot;TRUE&quot; ID=&quot;{85062ACF-315B-460A-B756-2230A5FE082F}&quot; Name=&quot;LU_Language&quot; StaticName=&quot;LU_Language&quot; DisplayName=&quot;LU_Language&quot; Required=&quot;FALSE&quot; List=&quot;Lists/Language Master&quot; ShowField=&quot;Title&quot; UnlimitedLengthInDocumentLibrary=&quot;FALSE&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot; Group=&quot;Sample Site Columns&quot;
 
 		Lookup with Additional Field Lookup column:
-		Field Type="Lookup" ID="{9AA2985D-AA17-4EA2-9556-9B0E112A64F6}" Name="LU_ApplicationType" StaticName="LU_ApplicationType" DisplayName="LU_ApplicationType" Required="FALSE" List="Lists/Application Type" ShowField="ApplicationType" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
+		Field Type=&quot;Lookup&quot; ID=&quot;{9AA2985D-AA17-4EA2-9556-9B0E112A64F6}&quot; Name=&quot;LU_ApplicationType&quot; StaticName=&quot;LU_ApplicationType&quot; DisplayName=&quot;LU_ApplicationType&quot; Required=&quot;FALSE&quot; List=&quot;Lists/Application Type&quot; ShowField=&quot;ApplicationType&quot; UnlimitedLengthInDocumentLibrary=&quot;FALSE&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot; Group=&quot;Sample Site Columns&quot;
 
-		Field Type="Lookup" ID="{668D51C4-804D-43E7-8211-950AE3BCD9A3}" Name="LU_ApplicationType_ID" StaticName="LU_ApplicationType_ID" DisplayName="LU_ApplicationType_ID" List="Lists/Application Type" ShowField="ApplicationTypeID" FieldRef="9AA2985D-AA17-4EA2-9556-9B0E112A64F6" ReadOnly="TRUE" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
+		Field Type=&quot;Lookup&quot; ID=&quot;{668D51C4-804D-43E7-8211-950AE3BCD9A3}&quot; Name=&quot;LU_ApplicationType_ID&quot; StaticName=&quot;LU_ApplicationType_ID&quot; DisplayName=&quot;LU_ApplicationType_ID&quot; List=&quot;Lists/Application Type&quot; ShowField=&quot;ApplicationTypeID&quot; FieldRef=&quot;9AA2985D-AA17-4EA2-9556-9B0E112A64F6&quot; ReadOnly=&quot;TRUE&quot; UnlimitedLengthInDocumentLibrary=&quot;FALSE&quot; SourceID=&quot;http://schemas.microsoft.com/sharepoint/v3/fields&quot; Group=&quot;Sample Site Columns&quot;
 
         */
 
@@ -138,11 +232,11 @@ var user;
 		ctx.load(createdField);
 		ctx.executeQueryAsync(
 			function(){
-				blingpoint.log.debug('Field provisioned in host web successfully.');
+				blingpoint.log.debug(&#x27;Field provisioned in host web successfully.&#x27;);
 				callBackFunctionOnSuccess();
 			},
 			function (sender, args){
-				blingpoint.log.warn('Failed to provision field into host web. Error:' + sender.statusCode);
+				blingpoint.log.warn(&#x27;Failed to provision field into host web. Error:&#x27; + sender.statusCode);
 				callBackFunctionOnError();
 			}
 		);
@@ -159,11 +253,11 @@ var user;
 		ctx.load(hostWebContentTypes);
 		ctx.executeQueryAsync(
 			function(){
-				blingpoint.log.debug('Content type provisioned in host web successfully.');
+				blingpoint.log.debug(&#x27;Content type provisioned in host web successfully.&#x27;);
 				callBackFunctionOnSuccess();
 			},
 			function (sender, args){
-				blingpoint.log.warn('Failed to provision content type into host web. Error:' + sender.statusCode);
+				blingpoint.log.warn(&#x27;Failed to provision content type into host web. Error:&#x27; + sender.statusCode);
 				callBackFunctionOnError();
 			}
 		);
@@ -187,7 +281,7 @@ var user;
 				performAddFieldToContentTypeInHost(createdContentTypeName, createdFieldInternalName, callBackFunctionOnSuccess, callBackFunctionOnError);
 			},
 			function (sender, args) {
-				blingpoint.log.warn('Failed to re-fetch field and content type. Error:' + sender.statusCode);
+				blingpoint.log.warn(&#x27;Failed to re-fetch field and content type. Error:&#x27; + sender.statusCode);
 				callBackFunctionOnError();
 			}
 		);
@@ -210,7 +304,7 @@ var user;
         }
 
 		if (cTypeFound) {
-			// - NOT the below line - SP.FieldCollection doesn't appear to have an add() method when fetched from content type..
+			// - NOT the below line - SP.FieldCollection doesn&#x27;t appear to have an add() method when fetched from content type..
 			//contentType.get_fields.add(fieldInternalName)
 			// - instead, this..
 			var fieldRef = new SP.FieldLinkCreationInformation();
@@ -223,17 +317,17 @@ var user;
 			ctx.load(createdContentType);
 			ctx.executeQueryAsync(
 				function () {
-					blingpoint.log.debug('Field added to content type in host web successfully.');
+					blingpoint.log.debug(&#x27;Field added to content type in host web successfully.&#x27;);
 					callBackFunctionOnSuccess();
 				},
 				function (sender, args) {
-					blingpoint.log.warn('Failed to add field to content type. Error:' + sender.statusCode);
+					blingpoint.log.warn(&#x27;Failed to add field to content type. Error:&#x27; + sender.statusCode);
 					callBackFunctionOnError();
 				}
 			);
 		}
 		else {
-			blingpoint.log.warn('Failed to add field to content type - check the content type exists!');
+			blingpoint.log.warn(&#x27;Failed to add field to content type - check the content type exists!&#x27;);
 			callBackFunctionOnError();
 		}
     }
@@ -264,7 +358,7 @@ var user;
 				}
 			},
 			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 				callBackFunctionOnError();
 			}
 		);
@@ -279,11 +373,11 @@ var user;
 		ctx.load(listContentTypeColl);
 		ctx.executeQueryAsync(
 			function () {
-				blingpoint.log.debug('Content Type added successfully');
+				blingpoint.log.debug(&#x27;Content Type added successfully&#x27;);
 				callBackFunctionOnSuccess();
 			},
 			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 				callBackFunctionOnError();
 			}
 		);
@@ -328,13 +422,13 @@ var user;
 
 					}, 
 					function (sender, args) {
-						blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+						blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 					}
 				);
 			},
 
 			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
 		);
 	}
@@ -356,10 +450,10 @@ var user;
 
 		ctx.executeQueryAsync(
 			function (sender, args) {
-				blingpoint.log.debug('WebSite property ' + property + ' = ' + propertyValue);
+				blingpoint.log.debug(&#x27;WebSite property &#x27; + property + &#x27; = &#x27; + propertyValue);
 			},
 			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
 		);
 	}
@@ -375,7 +469,7 @@ var user;
 				callBackFunction(propertyValue);
 			},
 			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
 		);
 	}
@@ -392,45 +486,45 @@ var user;
 			createBlingPointPlugInList();
 		}
 		function createBlingPointPlugInList() {
-			$p.lists.createList('BlingPointPlugIns', SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
+			$p.lists.createList(&#x27;BlingPointPlugIns&#x27;, SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
 		}
 		function createBlingPointPlugInContentType() {
-			$p.schema.createContentTypeInHost('BlingPointPlugIn', 'BlingPoint PlugIn', 'BlingPointContentTypes', createBlingPointPlugInDescriptionField, null);
+			$p.schema.createContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;BlingPoint PlugIn&#x27;, &#x27;BlingPointContentTypes&#x27;, createBlingPointPlugInDescriptionField, null);
 		}
 		function createBlingPointPlugInDescriptionField() {
-			$p.schema.createField('Text', 'PlugInDescription', 'PlugIn Description', 'BlingPointFields', false, createBlingPointPlugInUrlTriggerField, null);
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInDescription&#x27;, &#x27;PlugIn Description&#x27;, &#x27;BlingPointFields&#x27;, false, createBlingPointPlugInUrlTriggerField, null);
 		}
 		function createBlingPointPlugInUrlTriggerField() {
-			$p.schema.createField('Text', 'PlugInUrlTrigger', 'PlugIn URL Trigger', 'BlingPointFields', false, createBlingPointPlugInSourceUrlField, null);
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInUrlTrigger&#x27;, &#x27;PlugIn URL Trigger&#x27;, &#x27;BlingPointFields&#x27;, false, createBlingPointPlugInSourceUrlField, null);
 		}
 		function createBlingPointPlugInSourceUrlField() {
-			$p.schema.createField('Text', 'PlugInSourceUrl', 'PlugIn Source URL', 'BlingPointFields', false, addBlingPointPlugInDescriptionField, null);
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInSourceUrl&#x27;, &#x27;PlugIn Source URL&#x27;, &#x27;BlingPointFields&#x27;, false, addBlingPointPlugInDescriptionField, null);
 		}
 		function addBlingPointPlugInDescriptionField() {
-			$p.schema.addFieldToContentTypeInHost('BlingPointPlugIn', 'PlugInDescription', addBlingPointPlugInUrlTriggerField, null);
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInDescription&#x27;, addBlingPointPlugInUrlTriggerField, null);
 		}
 		function addBlingPointPlugInUrlTriggerField() {
-			$p.schema.addFieldToContentTypeInHost('BlingPointPlugIn', 'PlugInUrlTrigger',addBlingPointPlugInSourceUrlField, null);
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInUrlTrigger&#x27;,addBlingPointPlugInSourceUrlField, null);
 		}
 		function addBlingPointPlugInSourceUrlField() {
-			$p.schema.addFieldToContentTypeInHost('BlingPointPlugIn', 'PlugInSourceUrl', addBlingPointPlugInContentTypeToList, null);
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInSourceUrl&#x27;, addBlingPointPlugInContentTypeToList, null);
 		}
 		function addBlingPointPlugInContentTypeToList() {
-			$p.schema.addExistingContentTypetoList('BlingPointPlugIns', 'BlingPointPlugIn', null, null);
+			$p.schema.addExistingContentTypetoList(&#x27;BlingPointPlugIns&#x27;, &#x27;BlingPointPlugIn&#x27;, null, null);
 		}
 		provisionBlingPointPlugInSystem();
 	}
 
 	function LoadPlugIns() {
 
-		var list = web.get_lists().getByTitle("BlingPointPlugIns");
+		var list = web.get_lists().getByTitle(&quot;BlingPointPlugIns&quot;);
 		var camlQuery = new SP.CamlQuery();
-		var q = '<View><RowLimit>500</RowLimit></View>';
+		var q = &#x27;&lt;View&gt;&lt;RowLimit&gt;500&lt;/RowLimit&gt;&lt;/View&gt;&#x27;;
 
 		camlQuery.set_viewXml(q);
 		var oListItems = list.getItems(camlQuery);
 
-		ctx.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
+		ctx.load(oListItems, &#x27;Include(DisplayName,Id,PlugInSource,UrlTrigger)&#x27;);
 
 		ctx.executeQueryAsync(
 			function(){
@@ -440,21 +534,21 @@ var user;
 					var item = oListEnumerator.get_current();
 					var title = item.get_displayName();
 					var id = item.get_id();
-					// If its an URL field, add ".get_url()"
-					var plugInSource = item.get_item('PlugInSource');
-					var urlTrigger = item.get_item('UrlTrigger');
+					// If its an URL field, add &quot;.get_url()&quot;
+					var plugInSource = item.get_item(&#x27;PlugInSource&#x27;);
+					var urlTrigger = item.get_item(&#x27;UrlTrigger&#x27;);
 
-					log.debug("Checking PlugIn : " + title);
-					log.debug("PlugIn ID : " + id);
-					log.debug("PlugIn URL Trigger : " + urlTrigger);
+					log.debug(&quot;Checking PlugIn : &quot; + title);
+					log.debug(&quot;PlugIn ID : &quot; + id);
+					log.debug(&quot;PlugIn URL Trigger : &quot; + urlTrigger);
 
 					if (blingpoint.global.checkUrl(urlTrigger)) {
-						if (blingpoint.global.check(plugInSource,".js")) {
-							log.info("Loading PlugIn : " + title);
+						if (blingpoint.global.check(plugInSource,&quot;.js&quot;)) {
+							log.info(&quot;Loading PlugIn : &quot; + title);
 							blingpoint.loader.addScriptToPage(plugInSource);
 						}
-						if (blingpoint.global.check(plugInSource,".css")) {
-							log.info("Loading PlugIn : " + title);
+						if (blingpoint.global.check(plugInSource,&quot;.css&quot;)) {
+							log.info(&quot;Loading PlugIn : &quot; + title);
 							blingpoint.loader.addCssToPage(plugInSource);
 						}
 					}
@@ -462,8 +556,8 @@ var user;
 				}
 			}, 
 			function(sender, args){
-				blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
-				blingpoint.log.error('If the list BlingPointPlugIns does not exist, <a href="javascript:$p.plugins.setupPlugInSystem();">click here to setup BlingPoint !</a>');
+				blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
+				blingpoint.log.error(&#x27;If the list BlingPointPlugIns does not exist, &lt;a href=&quot;javascript:$p.plugins.setupPlugInSystem();&quot;&gt;click here to setup BlingPoint !&lt;/a&gt;&#x27;);
 			}
 		);
 	}	
@@ -478,7 +572,7 @@ var user;
 			log.debug(notificationId);
 			return notificationId;
 		},
-		"sp.js"
+		&quot;sp.js&quot;
 		);  
 	}
 
@@ -515,11 +609,11 @@ var user;
 				//options.dialogReturnValueCallback = Function.createDelegate(this, this.onOpenDialogCallback); 
 				options.dialogReturnValueCallback = function (result, target) { 
 					if(result === SP.UI.DialogResult.OK) { 
-						console.log("OK was clicked!"); 
-						blingpoint.ui.addNotification('New leave application request submitted',false);
+						console.log(&quot;OK was clicked!&quot;); 
+						blingpoint.ui.addNotification(&#x27;New leave application request submitted&#x27;,false);
 					} 
 					if(result === SP.UI.DialogResult.cancel) { 
-						console.log("Cancel was clicked!"); 
+						console.log(&quot;Cancel was clicked!&quot;); 
 					} 
 				};
 				
@@ -527,11 +621,11 @@ var user;
 				
 				//log.info(dialog.get_frameElement().id);
 				
-				//dialog.get_frameElement().contentWindow.document.write('<html><body>Hello World<script>alert("coucou");</script></body></html>');
+				//dialog.get_frameElement().contentWindow.document.write(&#x27;&lt;html&gt;&lt;body&gt;Hello World&lt;script&gt;alert(&quot;coucou&quot;);&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;&#x27;);
 				//log.info(dialog.get_frameElement().contentWindow.document.body.innerHTML);
 				//log.info(dialog.get_frameElement().contentWindow.document.body.innerText);
 			},
-			"sp.js"
+			&quot;sp.js&quot;
 		);
 	}
 
@@ -543,7 +637,7 @@ var user;
 
 	// siteLanguage : http://technet.microsoft.com/en-us/library/ff463597.aspx
 	// siteTemplate : https://www.nothingbutsharepoint.com/sites/devwiki/SP2010Dev/Pages/Site%20Templates%20in%20SharePoint%202010.aspx
-	// Exemple : czaCreateSite('monblog','madesc','blog1',1033, 'BLOG#0', true);
+	// Exemple : czaCreateSite(&#x27;monblog&#x27;,&#x27;madesc&#x27;,&#x27;blog1&#x27;,1033, &#x27;BLOG#0&#x27;, true);
 	// Blank : STS#1
 	
 	ExecuteOrDelayUntilScriptLoaded(
@@ -561,7 +655,7 @@ var user;
 			oNewWebsite = web.get_webs().add(webCreateInfo);
 
 				// Charger dans le load les propriétés à initialiser
-				//clientContext.load(this.oNewWebsite,'Title', 'Created','ServerRelativeUrl');
+				//clientContext.load(this.oNewWebsite,&#x27;Title&#x27;, &#x27;Created&#x27;,&#x27;ServerRelativeUrl&#x27;);
 
 				ctx.load(oNewWebsite);
 
@@ -573,21 +667,21 @@ var user;
 						
 						createdSiteUrl = oNewWebsite.get_serverRelativeUrl();
 						
-						log.info('Site Created');
-						log.debug('Site Url : ' + createdSiteUrl);
+						log.info(&#x27;Site Created&#x27;);
+						log.debug(&#x27;Site Url : &#x27; + createdSiteUrl);
 
 						callBackFunction(createdSiteUrl);
 						
 					},
 
 					function (sender, args) {
-						log.warn('Site creation failed : ' + args.get_message() + '\n' + args.get_stackTrace());
+						log.warn(&#x27;Site creation failed : &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 					}
 
 					);
 				
 			},
-			"sp.js"
+			&quot;sp.js&quot;
 			);  
 	}
 
@@ -596,7 +690,7 @@ var user;
 	-------------------------------------------------------------*/
 	function CreateList(listName, listTemplate, displayInQuickLaunch, callBackFunctionOnSuccess, callBackFunctionOnError) {
 
-		//Let's create list creation information object 
+		//Let&#x27;s create list creation information object 
 		var listCreationInfo = new SP.ListCreationInformation(); 
 
 		// Nom de la liste
@@ -635,12 +729,12 @@ var user;
 		//Execute the actual script 
 		ctx.executeQueryAsync(
 			function(){
-				blingpoint.log.info("List <b>" + oList.get_title() + "</b> created...", false);
+				blingpoint.log.info(&quot;List &lt;b&gt;&quot; + oList.get_title() + &quot;&lt;/b&gt; created...&quot;, false);
 				callBackFunctionOnSuccess();
 			},
 			function (sender, args){
-				handleManagedError("Operation was cancelled...", sender, args);
-				blingpoint.log.warn("List creation operation was cancelled...", false);
+				handleManagedError(&quot;Operation was cancelled...&quot;, sender, args);
+				blingpoint.log.warn(&quot;List creation operation was cancelled...&quot;, false);
 				callBackFunctionOnError();
 			}
 		); 
@@ -664,7 +758,7 @@ var user;
 		var listItem = list.addItem(itemCreationInfo);
 		//Set the title of the list Item
 		//to the value in the txtCar
-		listItem.set_item('Title', itemTitle);
+		listItem.set_item(&#x27;Title&#x27;, itemTitle);
 		//Call Update the listItem
 		listItem.update();
 		//Finally execute the operation
@@ -677,15 +771,15 @@ var user;
 				createdItemId = listItem.get_id();
 				blingpoint.log.debug(createdItemId);
 				//blingpoint.items.lastCreatedItemId = listItem.get_id();
-				blingpoint.ui.addNotification('created', false);
+				blingpoint.ui.addNotification(&#x27;created&#x27;, false);
 				
 				callBackFunction(createdItemId);
 				
 			},
 			function (sender, args) {
-				blingpoint.global.handleManagedError("Operation was cancelled...", sender, args);
-				blingpoint.log.debug('Error');
-				blingpoint.ui.addNotification("Operation was cancelled...", false);
+				blingpoint.global.handleManagedError(&quot;Operation was cancelled...&quot;, sender, args);
+				blingpoint.log.debug(&#x27;Error&#x27;);
+				blingpoint.ui.addNotification(&quot;Operation was cancelled...&quot;, false);
 			}
 		);
 	}
@@ -704,7 +798,7 @@ var user;
 			
 			Use this snippet for lookupf fields :
 			var _newLookupField = new SP.FieldLookupValue();
-			newLookupField.set_lookupId(10) -> Updated with some lookup value for Department column
+			newLookupField.set_lookupId(10) -&gt; Updated with some lookup value for Department column
 			currentItem.set_item(‘Department’, newLookupField);
 			currentItem.update();
 			// Call context.executeQueryAsync again
@@ -720,7 +814,7 @@ var user;
 			Lookup field – SP.ListItem.get_item(‘LookupFieldName’).get_lookupValue();
 			Choice Field – SP.ListItem.get_item(‘ChoiceFieldName‘);
 			Created Date – SP.ListItem.get_item(“Created“);
-			Modified Date – SP.ListItem.get_item(“Modified“); -> case sensitive does not work with ‘modified’
+			Modified Date – SP.ListItem.get_item(“Modified“); -&gt; case sensitive does not work with ‘modified’
 			Created By – SP.ListItem.get_item(“Author“).get_lookupValue());
 			Modified by – SP.ListItem.get_item(“Editor“).get_lookupValue());
 			File  – SP.ListItem.get_file();
@@ -735,21 +829,21 @@ var user;
 			
 			ctx.executeQueryAsync(
 				function () {
-					blingpoint.log.debug('Updated');
-					//blingpoint.ui.addNotification("updated", false);
+					blingpoint.log.debug(&#x27;Updated&#x27;);
+					//blingpoint.ui.addNotification(&quot;updated&quot;, false);
 					
 					callBackFunction();
 					
 				},
 				function (sender, args) {
-					blingpoint.global.handleManagedError("Operation was cancelled...", sender, args);
-					blingpoint.log.debug('Error');
-					//blingpoint.ui.addNotification("Operation was cancelled...", false);
+					blingpoint.global.handleManagedError(&quot;Operation was cancelled...&quot;, sender, args);
+					blingpoint.log.debug(&#x27;Error&#x27;);
+					//blingpoint.ui.addNotification(&quot;Operation was cancelled...&quot;, false);
 				}
 				);
 
 		},
-		"sp.js"
+		&quot;sp.js&quot;
 		);
 
 	}
@@ -762,8 +856,8 @@ var user;
 			var list = web.get_lists().getByTitle(listName);
 			var oListItem = list.getItemById(itemId);
 
-			// context.load(<object>,'<Field1>','<Field2>','<Field3>');
-			// context.load(<objectCollection>,'Include(<Field1>,<Field2>,<Field3>');
+			// context.load(&lt;object&gt;,&#x27;&lt;Field1&gt;&#x27;,&#x27;&lt;Field2&gt;&#x27;,&#x27;&lt;Field3&gt;&#x27;);
+			// context.load(&lt;objectCollection&gt;,&#x27;Include(&lt;Field1&gt;,&lt;Field2&gt;,&lt;Field3&gt;&#x27;);
 
 			ctx.load(oListItem,column);
 
@@ -781,29 +875,29 @@ var user;
 
 					ctx.executeQueryAsync(
 						function () {
-							log.debug('Updated');
-							//blingpoint.ui.addNotification("updated", false);
+							log.debug(&#x27;Updated&#x27;);
+							//blingpoint.ui.addNotification(&quot;updated&quot;, false);
 							
 							callBackFunction();
 							
 						},
 						function (sender, args) {
-							blingpoint.global.handleManagedError("Operation was cancelled...", sender, args);
-							blingpoint.log.debug('Error');
-							//blingpoint.ui.addNotification("Operation was cancelled...", false);
+							blingpoint.global.handleManagedError(&quot;Operation was cancelled...&quot;, sender, args);
+							blingpoint.log.debug(&#x27;Error&#x27;);
+							//blingpoint.ui.addNotification(&quot;Operation was cancelled...&quot;, false);
 						}
 					);
 
 				},
 				function (sender, args) {
-					blingpoint.global.handleManagedError("Operation was cancelled...", sender, args);
-					blingpoint.log.debug('Error');
-					//blingpoint.ui.addNotification("Operation was cancelled...", false);
+					blingpoint.global.handleManagedError(&quot;Operation was cancelled...&quot;, sender, args);
+					blingpoint.log.debug(&#x27;Error&#x27;);
+					//blingpoint.ui.addNotification(&quot;Operation was cancelled...&quot;, false);
 				}
 			);
 
 		},
-		"sp.js");
+		&quot;sp.js&quot;);
 	}	
 
 
@@ -850,3 +944,23 @@ var user;
 	window[ BLINGPOINT_ROOT_NAMESPACE ].items = window[ BLINGPOINT_ITEMS_NAMESPACE ];
 
 })();
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

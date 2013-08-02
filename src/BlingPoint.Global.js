@@ -1,26 +1,24 @@
-//****************************
-// BlingPoint Global
-//****************************
-
+/**
+ * BlingPoint Global Module
+ * @module Global
+ */
 ( function() {
 
-	//****************************
-	// Global BlingPoint handlers
-	//****************************
-	
-	
 	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
 	var BLINGPOINT_GLOBAL_NAMESPACE = 'global';
 	
 	// Init namespaces
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ] = {};
 	
-	//----------------------
-	// Global error handling
-	//----------------------
-	
+	/**
+	Catch unhandled errors
+	@method handleUnhandledError
+	@param {string} desc Descrpition
+	@param {string} page Page
+	@param {string} line Line
+	@param {string} chr Character
+	**/
 	function HandleUnhandledError(desc,page,line,chr) {
-		
 		try {
 			blingpoint.log.error("An unexpected error has occured");
 			blingpoint.log.error("Description: " + desc);
@@ -33,25 +31,30 @@
 			console.log("An unexpected error has occured");
 			console.log("Description: " + err.description);
 		}
-		return true;
-	
 	}
 		
+	/**
+	Catch handled errors
+	@method handleUnhandledError
+	@param {string} customMessage Error message
+	@param {string} sender Sender
+	@param {string} args Arguments
+	**/
 	function HandleManagedError(customMessage, sender, args) {
-		
 		blingpoint.log.warn("A managed error has occured");
 		blingpoint.log.warn("Message: " + customMessage);
 		blingpoint.log.warn("Technical message: " + args.get_message());
 		blingpoint.log.warn("Stack trace: " + args.get_stackTrace());
-	
-		return true;
-		
 	}
 	
 
-	/*
-	URL & Querystring Management
-	*/
+	/**
+	Retrieves parameters and values from current URL
+	@method getUrlParameters
+	@return {string} vars A table of key / Value pairs
+	@example blingpoint.global.getUrlParameters() => ["PARAMETERNAME", "PARAMETERVALUE"]
+	@example blingpoint.global.getUrlParameters()['PARAMETERNAME'] => "PARAMETERVALUE"
+	**/
 	function GetUrlParameters() {
 	
 		var vars = [], hash;
@@ -63,15 +66,15 @@
 			vars[hash[0]] = hash[1];
 		}
 		return vars;
-		/*-------------------------------------------------------------
-		// Sample usage
-		blingpoint.global.getUrlParameters()
-		=> ["itemId", "testp"]
-		blingpoint.global.getUrlParameters()['testp']
-		=> "4567"
-		-------------------------------------------------------------*/
 	}
 	
+	/**
+	Checks if the current URL matchs a specific regular expression (Case insensitive)
+	@method checkUrl
+	@param {string} regExp A valid JS regular expression
+	@return {boolean} Returns the regex result against current URL
+	@example blingpoint.global.checkUrl('/lists/mylist/')
+	**/
 	function CheckUrl(regExp) {
 	
 		// Alternative regex creation
@@ -88,6 +91,14 @@
 		}
 	}
 
+	/**
+	Checks if a string matchs a specific regular expression (Case insensitive)
+	@method check
+	@param {string} inputString String to be tested
+	@param {string} regExp A valid JS regular expression
+	@return {boolean} Returns the regex result against current URL
+	@example blingpoint.global.check('abcde','bcd') => True
+	**/
 	function Check(inputString, regExp) {
 
 		var oRegExp = new RegExp(regExp,'gi');
@@ -102,12 +113,18 @@
 
 	}
 
+	/**
+	Checks if a string is a number
+	@method isNumber
+	@param {string} n String to be tested
+	@return {boolean} Returns true if n is a number
+	@example blingpoint.global.isNumber(3) => True
+	**/
 	function IsNumber(n) {
 		return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 	
 	// Public functions mapping
-		
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].getUrlParameters = GetUrlParameters;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].checkUrl = CheckUrl;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].check = Check;

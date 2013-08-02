@@ -90,13 +90,13 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'concat', 'uglify']
+      tasks: ['jshint', 'concat', 'uglify', 'cssmin', 'copy']
     }
   });
 
   grunt.registerTask('test', ['jshint']);
   grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'copy', 'yuidoc']);
-  grunt.registerTask('dev', ['jshint', 'concat', 'uglify', 'watch']);
+  grunt.registerTask('dev', ['watch']);
   grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'imageEmbed', 'cssmin']);
 
 };

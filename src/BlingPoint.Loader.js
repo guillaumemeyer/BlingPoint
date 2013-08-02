@@ -1,7 +1,7 @@
-//****************************
-// BlingPoint Loader
-//****************************
-	
+/**
+ * BlingPoint Loader Module
+ * @module Loader
+ */
 ( function() {
 	
 	var BLINGPOINT_ALIAS_1 = '$p';
@@ -10,38 +10,60 @@
 	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
 	var BLINGPOINT_LOADER_NAMESPACE = 'loader';
 	
-	// Init namespaces
+	// Initialize namespaces
 	window[ BLINGPOINT_ROOT_NAMESPACE ] = {};
 	window[ BLINGPOINT_LOADER_NAMESPACE ] = {};
 	
+	/**
+	Returns BlingPoint loading URL
+	@method getScriptUrl
+	@return {string} BlingPoint loading URL
+	**/
 	function GetScriptUrl(){
 		var scripts = document.getElementsByTagName('script');
 		for (i=0;i<scripts.length;i++){
-			if (scripts[i].src.indexOf('BlingPoint.js') > -1)
+			var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.js');
+			if (blingPointDevPosition > -1) {
 				//return scripts[i].src;
-				return scripts[i].src.substring(0,scripts[i].src.length-13);
+				return scripts[i].src.substring(0,blingPointDevPosition);
+			}
+			var blingPointMinPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.min.js');
+			if (blingPointMinPosition > -1) {
+				//return scripts[i].src;
+				return scripts[i].src.substring(0,blingPointMinPosition);
+			}
 		}
 	}
 
 	var CDN_PATH = GetScriptUrl();
 	
-	var BLACKBIRD_CSS_URL = CDN_PATH + "BlackbirdJs/blackbird.min.css";
-	
-	// Loading CSS resources
+	/**
+	Loads a CSS file
+	@method addCssToPage
+	@param {string} cssUrl URL of the CSS file to load
+	@return {boolean} True if CSS file is loaded successfully
+	**/
 	function AddCssToPage(cssUrl)
 	{
 		var s = document.createElement("link") ;
 		s.type = "text/css" ;
 		s.rel = "Stylesheet";
 		s.href = cssUrl ;
-		// puis on l’insère dans la balise <head> en haut de document
+
 		var head = document.head || document.getElementsByTagName("head")[0] ;
 		head.appendChild(s) ;
 		
-		console.log('CSS loaded : ' + cssUrl);	
+		console.log('CSS loaded : ' + cssUrl);
+		return true;
+
 	} 
 	
-	// Loading Scripts
+	/**
+	Loads a script file
+	@method addScriptToPage
+	@param {string} scriptUrl URL of the script file to load
+	@return {boolean} True if the script file is loaded successfully
+	**/
 	function AddScriptToPage(scriptUrl)
 	{	
 		var s = document.createElement("script") ;
@@ -55,14 +77,14 @@
 		console.log('Script loaded : ' + scriptUrl);
 	}
 	
-
+	// Loads blackbird CSS
+	var BLACKBIRD_CSS_URL = CDN_PATH + "BlackbirdJs/blackbird.min.css";
 	AddCssToPage(BLACKBIRD_CSS_URL);
 
 	// Public functions mapping
 	window[ BLINGPOINT_LOADER_NAMESPACE ].addCssToPage = AddCssToPage;
 	window[ BLINGPOINT_LOADER_NAMESPACE ].addScriptToPage = AddScriptToPage;
 	
-	// Define Parent NameSpace
 	window[ BLINGPOINT_ROOT_NAMESPACE ].loader = window[BLINGPOINT_LOADER_NAMESPACE];
 
 	// Define Alias

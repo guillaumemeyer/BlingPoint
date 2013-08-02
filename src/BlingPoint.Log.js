@@ -7,7 +7,7 @@
 	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
 	var BLINGPOINT_LOG_NAMESPACE = 'log';
 
-	// Initialize namespaces
+	// Init namespaces
 	window[ BLINGPOINT_LOG_NAMESPACE ] = {};
 	
 	var IE6_POSITION_FIXED = true; // enable IE6 {position:fixed}
@@ -36,9 +36,9 @@
 	
 	
 	/**
-	Builds the log viewer markup
+	Builds BlingPoint Logviewer Markup
 	@method generateMarkup
-	@return {string} DIV markup
+	@return {string} BlingPoint Logviewer node
 	**/
 	function generateMarkup() { //build markup
 		var spans = [];
@@ -101,11 +101,7 @@
 		}
 	}
 	
-	/**
-	Clear log viewer output
-	@method clear
-	**/
-	function clear() { 
+	function clear() { //clear list output
 		outputList.innerHTML = '';
 	}
 	
@@ -208,7 +204,6 @@
 		setState();
 	}
 
-
 	function resize( size ) {
 		if ( size === undefined || size === null ) {
 			size = ( state && state.size === null ) ? 0 : ( state.size + 1 ) % 2;
@@ -267,7 +262,7 @@
 		}
 	}
 
-	//event management
+	//event management ( thanks John Resig )
 	function addEvent( obj, type, fn ) {
 		var obj = ( obj.constructor === String ) ? document.getElementById( obj ) : obj;
 		if ( obj.attachEvent ) {
@@ -285,10 +280,7 @@
 		else obj.removeEventListener( type, fn, false );
 	}
 
-	/**
-	Initialize log viewer
-	@method initBlackbird
-	**/
+
 	function InitBlackbird() {
 		var body = document.getElementsByTagName( 'BODY' )[ 0 ];
 		bbird = body.appendChild( generateMarkup() );
