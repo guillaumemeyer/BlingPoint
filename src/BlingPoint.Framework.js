@@ -73,64 +73,8 @@ var user;
             "' Group='" + fieldGroup + "' Hidden='" + fieldHidden + "'></Field>";
  
         /*
-		Text, Number, DateTime, Note, HTML, Image, URL, Boolean, Choice, MultiChoice, Lookup, LookupMulti
-
-		Sharepoint Field Types - Elements.xml
-		Single Line of Text:
-		field id="{FDDC4E38-25E0-4FD9-92E7-D17F34A5AB12}" description="My Content ID of Item" staticname="ContentID" name="ContentID" displayname="ContentID" type="Text" group="Sample Site Columns" sourceid="http://schemas.microsoft.com/sharepoint/v3"
-
-		Number:
-		Field ID="{13b3652a-d543-465d-91cb-a9d625637855}" StaticName="Read_Times" Name ="Read_Times" DisplayName ="Read_Times" Description="Read Time count of Item" Type="Number" Group ="Sample Site Columns" SourceID ="http://schemas.microsoft.com/sharepoint/v3"
-
-		Date Time:
-		Field ID="{d076e4d5-c785-4c04-8b56-c1f021721749}" StaticName="CreateDate" Name="CreateDate" DisplayName="Create_Date" Description="Create Date of Item" Group="Sample Site Columns" Type="DateTime" Format="DateOnly" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
-
-		Multiple lines of text:
-		Field ID="{2ae59f08-0fb0-4a9c-8a31-a180161b1029}" StaticName="PublisherDescription" Name="PublisherDescription" Description="Publisher Description of Item" DisplayName="Publisher_Description" Type="Note" RichText="FALSE" NumLines="6" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
-
-		Rich Text HTML:
-		Field ID="{13cd0291-df15-4278-9894-630913e4d2b9}" StaticName="AccrediterDescription" Name="AccrediterDescription" DisplayName="Accrediter_Description" Description="Accrediter Description of Item" Type="Note" NumLines="6" RichText="TRUE" RichTextMode="FullHtml" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
-
-		Publishing HTML:
-		Field ID="{E2CC0231-FA6C-4F90-839C-118C304DFCF1}" StaticName="PMediaDescription" Name="PMediaDescription" DisplayName="MediaDescription" Type="HTML" RichText="TRUE" RichTextMode="ThemeHtml" Group="Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" UnlimitedLengthInDocumentLibrary ="TRUE"
-
-		Publishing Image:
-		field id="{148e8191-afe7-4422-b1d1-7202eda667f1}" description="Image 1 link of Item" staticname="PImageID1" name="PImageID1" displayname="Image_ID1" type="Image" group="My Site Columns" sourceid="http://schemas.microsoft.com/sharepoint/v3" richtext="TRUE" richtextmode="ThemeHtml">
-
-
-		HyperLink & Image:
-		Field ID="{635a2031-2088-4413-b54e-d2af5daf08bf}" StaticName="ImageAuthor" Name="ImageAuthor" DisplayName="Image_Author" Description="Author Image" Type="URL" Format="Image" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields"
-
-
-		YES/No Boolean:
-		<Field ID="{11018312-58f9-4eb0-867d-71298f82d98d}" Name="isActive" StaticName="isActive" DisplayName="isActive" Description="Select if Item is Active" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" Type="Boolean"&gt;
-		<default>0</default>
-		</FIELD>
-
-		CHOICES:
-		<Field ID="{67f8faa4-e3ee-44bf-a3b4-6e7fc9c6b9fe}" Name="Market" StaticName="Market" DisplayName="Market" Description="Market of the Country" Group="Sample Site Columns" SourceID="http://schemas.microsoft.com/sharepoint/v3" Type="Choice"&gt;
-		<choices>
-		choice>Gold</choice
-		</choices>
-		</FIELD>
-
-		MultiSelect:
-		<Field Type="MultiChoice" DisplayName="Labels_Selected" FillInChoice="FALSE" Group="Sample Site Columns" ID="{2fdf0ba7-0052-4e9f-80f6-e7669ac4ae4f}" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="LabelsSelected" Name="LabelsSelected"&gt;
-		</FIELD>
-
-		Lookup Columns:
-		Field Type="Lookup" ID="{FE45AC76-C0E2-46C8-A047-E8C43C10315C}" Name="LU_Country" StaticName="LU_Country" DisplayName="LU_Country" Required="FALSE" List="Lists/Region Country Master" ShowField="RollOutCountry" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
-
-		Multi Lookup Columns:
-		Field Type="LookupMulti" Mult="TRUE" ID="{85062ACF-315B-460A-B756-2230A5FE082F}" Name="LU_Language" StaticName="LU_Language" DisplayName="LU_Language" Required="FALSE" List="Lists/Language Master" ShowField="Title" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
-
-		Lookup with Additional Field Lookup column:
-		Field Type="Lookup" ID="{9AA2985D-AA17-4EA2-9556-9B0E112A64F6}" Name="LU_ApplicationType" StaticName="LU_ApplicationType" DisplayName="LU_ApplicationType" Required="FALSE" List="Lists/Application Type" ShowField="ApplicationType" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
-
-		Field Type="Lookup" ID="{668D51C4-804D-43E7-8211-950AE3BCD9A3}" Name="LU_ApplicationType_ID" StaticName="LU_ApplicationType_ID" DisplayName="LU_ApplicationType_ID" List="Lists/Application Type" ShowField="ApplicationTypeID" FieldRef="9AA2985D-AA17-4EA2-9556-9B0E112A64F6" ReadOnly="TRUE" UnlimitedLengthInDocumentLibrary="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3/fields" Group="Sample Site Columns"
-
+        See XML Fields reference : http://msdn.microsoft.com/en-us/library/aa979575.aspx
         */
-
 
 		var createdField = fields.addFieldAsXml(fieldXml, false, SP.AddFieldOptions.AddToNoContentType);
 
