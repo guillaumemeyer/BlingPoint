@@ -6,6 +6,7 @@ Its name comes from its root namespace "$P" that derives from the JQuery one "$"
 BlingPoint provides an easy to use, lightweight and efficient library of tools and features to ease development of powerful, modular &amp; robust SharePoint solutions :
 - Embedded logging &amp; diagnostic system
 - Simple profiling tool
+- URL tools
 - Application parameters Management
 - Scripts & CSS dynamic loading
 - PlugIn Management System
