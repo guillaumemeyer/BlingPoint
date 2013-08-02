@@ -23,7 +23,7 @@ And don't hesitate to fork and send a pull request for any cool example of yours
 
 ## ABOUT
 As a single minified javascript file, BlingPoint is easy to deploy :
-- Using <a href="javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://www.eryemconseil.com/wp-content/BlingPoint/BlingPoint.min.js?random='+Math.floor(Math.random()*10001);document.getElementsByTagName('head')[0].appendChild(_my_script);})();">this bookmarklet</a> to inject it dynamically into any SharePoint page
+- Using this bookmarklet <a href="javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://www.eryemconseil.com/wp-content/BlingPoint/BlingPoint.min.js?random='+Math.floor(Math.random()*10001);document.getElementsByTagName('head')[0].appendChild(_my_script);})();" onclick="return false" id="blingPointBookmark" title="Launch BlingPoint">Drag me to your bookmarks bar !</a> to inject it dynamically into any SharePoint page
 - By registering a script tag in your site MasterPage
 - Using a Sandbox solution to register a new ScriptLink
 
