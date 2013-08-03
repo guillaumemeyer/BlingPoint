@@ -12,7 +12,7 @@ BlingPoint provides an easy to use, lightweight and efficient library of tools a
 - Scripts & CSS dynamic loading : https://github.com/guillaumemeyer/BlingPoint/wiki/Loading-resources
 - PlugIn Management System : https://github.com/guillaumemeyer/BlingPoint/wiki/PlugIn-Management
 - Schema provisioning : https://github.com/guillaumemeyer/BlingPoint/wiki/Schema-Namespace
-- Script-oriented syntax : 
+- Script-oriented syntax : https://github.com/guillaumemeyer/BlingPoint/wiki/Script-oriented-syntax
 - More to come... Stay Tuned !
 
 ## GET STARTED
