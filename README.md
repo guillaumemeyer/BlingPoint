@@ -8,11 +8,11 @@ BlingPoint provides an easy to use, lightweight and efficient library of tools a
 - Embedded logging &amp; diagnostic system : https://github.com/guillaumemeyer/BlingPoint/wiki/Logging-&-Diagnostics
 - Simple profiling tool : https://github.com/guillaumemeyer/BlingPoint/wiki/Profiling
 - URL tools : https://github.com/guillaumemeyer/BlingPoint/wiki/URL-tools
-- Application parameters Management
+- Application parameters Management : https://github.com/guillaumemeyer/BlingPoint/wiki/Application-parameters
 - Scripts & CSS dynamic loading : https://github.com/guillaumemeyer/BlingPoint/wiki/Loading-resources
-- PlugIn Management System
+- PlugIn Management System : 
 - Schema provisioning : https://github.com/guillaumemeyer/BlingPoint/wiki/Schema-Namespace
-- Script-oriented syntax
+- Script-oriented syntax : 
 - More to come... Stay Tuned !
 
 ## GET STARTED
