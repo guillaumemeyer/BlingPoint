@@ -32,4 +32,4 @@ And don't hesitate to fork and send a pull request for any cool example of yours
 ## ACKNOWLEDGEMENTS
 - My wonderful wife for supporting me during these weeks of late homework
 - The worldwide SharePoint community for their help and advised advices
-- BlingPoint log viewer &amp profiling tool is a fork of the great BlackBirdJs Open Source JavaScript Logging Utility by G Scott Olson : [https://code.google.com/p/blackbirdjs/])(https://code.google.com/p/blackbirdjs/)
+- BlingPoint log viewer &amp profiling tool is a fork of the great BlackBirdJs Open Source JavaScript Logging Utility by G Scott Olson : https://code.google.com/p/blackbirdjs/
