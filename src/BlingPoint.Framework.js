@@ -360,7 +360,10 @@ var user;
 			$p.schema.addFieldToContentTypeInHost('BlingPointPlugIn', 'PlugInSourceUrl', addBlingPointPlugInContentTypeToList, null);
 		}
 		function addBlingPointPlugInContentTypeToList() {
-			$p.schema.addExistingContentTypetoList('BlingPointPlugIns', 'BlingPointPlugIn', null, null);
+			$p.schema.addExistingContentTypetoList('BlingPointPlugIns', 'BlingPointPlugIn', createBlingPointPlugInLibrary, null);
+		}
+		function createBlingPointPlugInLibrary() {
+			$p.lists.createList('BlingPointAssets', SP.ListTemplateType.documentLibrary, false, null, null);
 		}
 		provisionBlingPointPlugInSystem();
 	}
