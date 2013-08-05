@@ -41,6 +41,51 @@
             "classes": {},
             "fors": {},
             "namespaces": {}
+        },
+        "src\\BlingPoint.Parameters.js": {
+            "name": "src\\BlingPoint.Parameters.js",
+            "modules": {
+                "Parameters": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\BlingPoint.PlugIns.js": {
+            "name": "src\\BlingPoint.PlugIns.js",
+            "modules": {
+                "PlugIns": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\BlingPoint.Schema.js": {
+            "name": "src\\BlingPoint.Schema.js",
+            "modules": {
+                "Schema": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\BlingPoint.Security.js": {
+            "name": "src\\BlingPoint.Security.js",
+            "modules": {
+                "Security": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src\\BlingPoint.Ui.js": {
+            "name": "src\\BlingPoint.Ui.js",
+            "modules": {
+                "UI": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -87,6 +132,61 @@
             "file": "src\\BlingPoint.Log.js",
             "line": 1,
             "description": "BlingPoint Log Module"
+        },
+        "Parameters": {
+            "name": "Parameters",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\BlingPoint.Parameters.js",
+            "line": 1,
+            "description": "BlingPoint Parameters Module"
+        },
+        "PlugIns": {
+            "name": "PlugIns",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\BlingPoint.PlugIns.js",
+            "line": 1,
+            "description": "BlingPoint PlugIns Module"
+        },
+        "Schema": {
+            "name": "Schema",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\BlingPoint.Schema.js",
+            "line": 1,
+            "description": "BlingPoint Schema Module"
+        },
+        "Security": {
+            "name": "Security",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\BlingPoint.Security.js",
+            "line": 1,
+            "description": "BlingPoint Security Module"
+        },
+        "UI": {
+            "name": "UI",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\BlingPoint.Ui.js",
+            "line": 1,
+            "description": "BlingPoint UI Module"
         }
     },
     "classes": {},
@@ -274,7 +374,7 @@
         },
         {
             "file": "src\\BlingPoint.Loader.js",
-            "line": 61,
+            "line": 58,
             "description": "Loads a script file",
             "itemtype": "method",
             "name": "addScriptToPage",
@@ -304,6 +404,19 @@
             },
             "class": "",
             "module": "Log"
+        },
+        {
+            "file": "src\\BlingPoint.Security.js",
+            "line": 14,
+            "description": "Checks if the current user is a member of the specified group",
+            "itemtype": "method",
+            "name": "currentUserIsUserMemberOf",
+            "return": {
+                "description": "BlingPoint Logviewer node",
+                "type": "String"
+            },
+            "class": "",
+            "module": "Security"
         }
     ],
     "warnings": []

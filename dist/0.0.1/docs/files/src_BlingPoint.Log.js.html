@@ -53,6 +53,16 @@
             
                 <li><a href="../modules/Log.html">Log</a></li>
             
+                <li><a href="../modules/Parameters.html">Parameters</a></li>
+            
+                <li><a href="../modules/PlugIns.html">PlugIns</a></li>
+            
+                <li><a href="../modules/Schema.html">Schema</a></li>
+            
+                <li><a href="../modules/Security.html">Security</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
             </ul>
         </div>
     </div>
@@ -463,6 +473,14 @@
 
 blingpoint.log.initBlackbird();
 
+// Toggle log viewer in dev mode
+var scripts = document.getElementsByTagName(&#x27;script&#x27;);
+for (i=0;i&lt;scripts.length;i++) {
+	var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.js&#x27;);
+	if (blingPointDevPosition &gt; -1) {
+		blingpoint.log.toggle();
+	}
+}
     </pre>
 </div>
 

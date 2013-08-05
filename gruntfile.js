@@ -8,6 +8,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-yuidoc');
+  grunt.loadNpmTasks('grunt-contrib-commands');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -32,7 +33,12 @@ module.exports = function(grunt) {
         'src/BlingPoint.Loader.js',
         'src/BlingPoint.Log.js',
         'src/BlingPoint.Global.js',
-        'src/BlingPoint.Framework.js'
+        'src/BlingPoint.Framework.js',
+        'src/BlingPoint.Security.js',
+        'src/BlingPoint.Ui.js',
+        'src/BlingPoint.PlugIns.js',
+        'src/BlingPoint.Parameters.js',
+        'src/BlingPoint.schema.js'
         ],
         dest: 'dist/<%= pkg.version %>/<%= pkg.name %>.js'
       }
@@ -75,9 +81,15 @@ module.exports = function(grunt) {
     },
     jshint: {
       files: ['gruntfile.js',
-        'src/BlingPoint.Framework.js',
+        'src/BlingPoint.Loader.js',
         'src/BlingPoint.Global.js',
-        'src/BlingPoint.Loader.js'],
+        'src/BlingPoint.Framework.js',
+        'src/BlingPoint.Security.js',
+        'src/BlingPoint.Ui.js',
+        'src/BlingPoint.PlugIns.js',
+        'src/BlingPoint.Parameters.js',
+        'src/BlingPoint.schema.js'
+        ],
       options: {
         // options here to override JSHint defaults
         globals: {
@@ -87,6 +99,13 @@ module.exports = function(grunt) {
           document: true
         }
       }
+    },
+    command: {
+        bat_1: {
+            type: 'bat',
+            cmd: 'FtpUpload.bat',
+            arg: []
+        }
     },
     watch: {
       files: ['<%= jshint.files %>'],

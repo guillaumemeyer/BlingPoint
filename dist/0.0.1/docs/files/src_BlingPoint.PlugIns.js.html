@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\BlingPoint.PlugIns.js - BlingPoint</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="BlingPoint"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Framework.html">Framework</a></li>
+            
+                <li><a href="../modules/Global.html">Global</a></li>
+            
+                <li><a href="../modules/Loader.html">Loader</a></li>
+            
+                <li><a href="../modules/Log.html">Log</a></li>
+            
+                <li><a href="../modules/Parameters.html">Parameters</a></li>
+            
+                <li><a href="../modules/PlugIns.html">PlugIns</a></li>
+            
+                <li><a href="../modules/Schema.html">Schema</a></li>
+            
+                <li><a href="../modules/Security.html">Security</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\BlingPoint.PlugIns.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * BlingPoint PlugIns Module
+ * @module PlugIns
+ */
+
+( function() {
+	
+	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
+	var BLINGPOINT_PLUGINS_NAMESPACE = &#x27;plugins&#x27;;
+	
+	// Init namespaces
+	window[ BLINGPOINT_PLUGINS_NAMESPACE ] = {};
+
+
+	/*-------------------------------------------------------------
+	PlugIns
+	-------------------------------------------------------------*/
+	function SetupPlugInSystem() {
+
+		function provisionBlingPointPlugInSystem() {
+			createBlingPointPlugInList();
+		}
+		function createBlingPointPlugInList() {
+			$p.lists.createList(&#x27;BlingPointPlugIns&#x27;, SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
+		}
+		function createBlingPointPlugInContentType() {
+			$p.schema.createContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;BlingPoint PlugIn&#x27;, &#x27;BlingPointContentTypes&#x27;, createBlingPointPlugInDescriptionField, null);
+		}
+		function createBlingPointPlugInDescriptionField() {
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInDescription&#x27;, &#x27;PlugIn Description&#x27;, &#x27;BlingPointFields&#x27;, false, createBlingPointPlugInUrlTriggerField, null);
+		}
+		function createBlingPointPlugInUrlTriggerField() {
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInUrlTrigger&#x27;, &#x27;PlugIn URL Trigger&#x27;, &#x27;BlingPointFields&#x27;, false, createBlingPointPlugInSourceUrlField, null);
+		}
+		function createBlingPointPlugInSourceUrlField() {
+			$p.schema.createField(&#x27;Text&#x27;, &#x27;PlugInSourceUrl&#x27;, &#x27;PlugIn Source URL&#x27;, &#x27;BlingPointFields&#x27;, false, addBlingPointPlugInDescriptionField, null);
+		}
+		function addBlingPointPlugInDescriptionField() {
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInDescription&#x27;, addBlingPointPlugInUrlTriggerField, null);
+		}
+		function addBlingPointPlugInUrlTriggerField() {
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInUrlTrigger&#x27;,addBlingPointPlugInSourceUrlField, null);
+		}
+		function addBlingPointPlugInSourceUrlField() {
+			$p.schema.addFieldToContentTypeInHost(&#x27;BlingPointPlugIn&#x27;, &#x27;PlugInSourceUrl&#x27;, addBlingPointPlugInContentTypeToList, null);
+		}
+		function addBlingPointPlugInContentTypeToList() {
+			$p.schema.addExistingContentTypetoList(&#x27;BlingPointPlugIns&#x27;, &#x27;BlingPointPlugIn&#x27;, createBlingPointPlugInLibrary, null);
+		}
+		function createBlingPointPlugInLibrary() {
+			$p.lists.createList(&#x27;BlingPointAssets&#x27;, SP.ListTemplateType.documentLibrary, false, null, null);
+		}
+		provisionBlingPointPlugInSystem();
+	}
+
+	function LoadPlugIns() {
+
+		var list = web.get_lists().getByTitle(&quot;BlingPointPlugIns&quot;);
+		var camlQuery = new SP.CamlQuery();
+		var q = &#x27;&lt;View&gt;&lt;RowLimit&gt;500&lt;/RowLimit&gt;&lt;/View&gt;&#x27;;
+
+		camlQuery.set_viewXml(q);
+		var oListItems = list.getItems(camlQuery);
+
+		ctx.load(oListItems, &#x27;Include(DisplayName,Id,PlugInSource,UrlTrigger)&#x27;);
+
+		ctx.executeQueryAsync(
+			function(){
+				var oListEnumerator = oListItems.getEnumerator();
+				//iterate though all of the items
+				while (oListEnumerator.moveNext()) {
+					var item = oListEnumerator.get_current();
+					var title = item.get_displayName();
+					var id = item.get_id();
+					// If its an URL field, add &quot;.get_url()&quot;
+					var plugInSource = item.get_item(&#x27;PlugInSource&#x27;);
+					var urlTrigger = item.get_item(&#x27;UrlTrigger&#x27;);
+
+					log.debug(&quot;Checking PlugIn : &quot; + title);
+					log.debug(&quot;PlugIn ID : &quot; + id);
+					log.debug(&quot;PlugIn URL Trigger : &quot; + urlTrigger);
+
+					if (blingpoint.global.checkUrl(urlTrigger)) {
+						if (blingpoint.global.check(plugInSource,&quot;.js&quot;)) {
+							log.info(&quot;Loading PlugIn : &quot; + title);
+							blingpoint.loader.addScriptToPage(plugInSource);
+						}
+						if (blingpoint.global.check(plugInSource,&quot;.css&quot;)) {
+							log.info(&quot;Loading PlugIn : &quot; + title);
+							blingpoint.loader.addCssToPage(plugInSource);
+						}
+					}
+
+				}
+			}, 
+			function(sender, args){
+				blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
+				blingpoint.log.error(&#x27;If the list BlingPointPlugIns does not exist, &lt;a href=&quot;javascript:$p.plugins.setupPlugInSystem();&quot;&gt;click here to setup BlingPoint !&lt;/a&gt;&#x27;);
+			}
+		);
+	}	
+
+
+
+	// Namespaces
+	window[ BLINGPOINT_PLUGINS_NAMESPACE ].loadPlugIns = LoadPlugIns;
+	window[ BLINGPOINT_PLUGINS_NAMESPACE ].setupPlugInSystem = SetupPlugInSystem;
+
+	window[ BLINGPOINT_ROOT_NAMESPACE ].plugins = window[ BLINGPOINT_PLUGINS_NAMESPACE ];
+	
+})();
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

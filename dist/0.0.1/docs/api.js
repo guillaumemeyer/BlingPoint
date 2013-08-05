@@ -5,7 +5,12 @@ YUI.add("yuidoc-meta", function(Y) {
         "Framework",
         "Global",
         "Loader",
-        "Log"
+        "Log",
+        "Parameters",
+        "PlugIns",
+        "Schema",
+        "Security",
+        "UI"
     ],
     "allModules": [
         {
@@ -27,6 +32,31 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Log",
             "name": "Log",
             "description": "BlingPoint Log Module"
+        },
+        {
+            "displayName": "Parameters",
+            "name": "Parameters",
+            "description": "BlingPoint Parameters Module"
+        },
+        {
+            "displayName": "PlugIns",
+            "name": "PlugIns",
+            "description": "BlingPoint PlugIns Module"
+        },
+        {
+            "displayName": "Schema",
+            "name": "Schema",
+            "description": "BlingPoint Schema Module"
+        },
+        {
+            "displayName": "Security",
+            "name": "Security",
+            "description": "BlingPoint Security Module"
+        },
+        {
+            "displayName": "UI",
+            "name": "UI",
+            "description": "BlingPoint UI Module"
         }
     ]
 } };

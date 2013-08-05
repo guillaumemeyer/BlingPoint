@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\BlingPoint.Loader.js - BlingPoint</title>
+    <title>src\BlingPoint.Ui.js - BlingPoint</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,98 +98,99 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\BlingPoint.Loader.js</h1>
+                        <h1 class="file-heading">File: src\BlingPoint.Ui.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * BlingPoint Loader Module
- * @module Loader
+ * BlingPoint UI Module
+ * @module UI
  */
+
 ( function() {
 	
-	var BLINGPOINT_ALIAS_1 = &#x27;$p&#x27;;
-	var BLINGPOINT_ALIAS_2 = &#x27;$P&#x27;;
-
 	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
-	var BLINGPOINT_LOADER_NAMESPACE = &#x27;loader&#x27;;
+	var BLINGPOINT_UI_NAMESPACE = &#x27;ui&#x27;;
 	
-	// Initialize namespaces
-	window[ BLINGPOINT_ROOT_NAMESPACE ] = {};
-	window[ BLINGPOINT_LOADER_NAMESPACE ] = {};
+	// Init namespaces
+	window[ BLINGPOINT_UI_NAMESPACE ] = {};
 	
-	/**
-	Returns BlingPoint loading URL
-	@method getScriptUrl
-	@return {string} BlingPoint loading URL
-	**/
-	function GetScriptUrl(){
-		var scripts = document.getElementsByTagName(&#x27;script&#x27;);
-		for (i=0;i&lt;scripts.length;i++){
-			var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.js&#x27;);
-			if (blingPointDevPosition &gt; -1) {
-				//return scripts[i].src;
-				return scripts[i].src.substring(0,blingPointDevPosition);
-			}
-			var blingPointMinPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.min.js&#x27;);
-			if (blingPointMinPosition &gt; -1) {
-				//return scripts[i].src;
-				return scripts[i].src.substring(0,blingPointMinPosition);
-			}
-		}
+	
+
+	function AddNotification(htmlMessage,sticky) {
+		ExecuteOrDelayUntilScriptLoaded(function(){
+			notificationId = SP.UI.Notify.addNotification(htmlMessage, sticky);
+			log.debug(notificationId);
+			return notificationId;
+		},
+		&quot;sp.js&quot;
+		);  
 	}
 
-	var CDN_PATH = GetScriptUrl();
-	
-	/**
-	Loads a CSS file
-	@method addCssToPage
-	@param {string} cssUrl URL of the CSS file to load
-	@return {boolean} True if CSS file is loaded successfully
-	**/
-	function AddCssToPage(cssUrl)
-	{
-		var s = document.createElement(&quot;link&quot;) ;
-		s.type = &quot;text/css&quot; ;
-		s.rel = &quot;Stylesheet&quot;;
-		s.href = cssUrl ;
-		var head = document.head || document.getElementsByTagName(&quot;head&quot;)[0] ;
-		head.appendChild(s) ;
-		
-		return true;
-	} 
-	
-	/**
-	Loads a script file
-	@method addScriptToPage
-	@param {string} scriptUrl URL of the script file to load
-	@return {boolean} True if the script file is loaded successfully
-	**/
-	function AddScriptToPage(scriptUrl)
-	{	
-		var s = document.createElement(&quot;script&quot;) ;
-		s.type = &quot;text/JavaScript&quot; ;
-		s.src = scriptUrl ;
-		s.async = false ;
-		var head = document.head || document.getElementsByTagName(&quot;head&quot;)[0] ;
-		head.appendChild(s) ;
+	function RemoveNotification(notificationId) {
+		SP.UI.Notify.removeNotification(notificationId);
+	}	
 
-		return true;
+	function AddStatus(htmlMessage,color) {
+		statusId = SP.UI.Status.addStatus(htmlMessage);
+		SP.UI.Status.setStatusPriColor(statusId, color);
+		log.debug(statusId);
+		return statusId;
 	}
-	
-	// Loads blackbird CSS
-	var BLACKBIRD_CSS_URL = CDN_PATH + &quot;BlackbirdJs/blackbird.min.css&quot;;
-	AddCssToPage(BLACKBIRD_CSS_URL);
 
-	// Public functions mapping
-	window[ BLINGPOINT_LOADER_NAMESPACE ].addCssToPage = AddCssToPage;
-	window[ BLINGPOINT_LOADER_NAMESPACE ].addScriptToPage = AddScriptToPage;
-	
-	window[ BLINGPOINT_ROOT_NAMESPACE ].loader = window[BLINGPOINT_LOADER_NAMESPACE];
+	function RemoveStatus(statusId) {
+		SP.UI.Status.removeStatus(statusId);
+	}
 
-	// Define Alias
-	window[ BLINGPOINT_ALIAS_1 ] = window[BLINGPOINT_ROOT_NAMESPACE];
-	window[ BLINGPOINT_ALIAS_2 ] = window[BLINGPOINT_ROOT_NAMESPACE];
+	function RemoveAllStatus() {
+		SP.UI.Status.removeAllStatus(true);
+	}
+
+	//Dialog opening 
+	function OpenDialog(dialogUrl, dialogWidth, dialogHeight) { 
+
+		ExecuteOrDelayUntilScriptLoaded(
+
+			function() {
+				
+				var options = SP.UI.$create_DialogOptions(); 
+				options.url = dialogUrl; 
+				options.width = dialogWidth; 
+				options.height = dialogHeight;
+				//options.dialogReturnValueCallback = Function.createDelegate(this, this.onOpenDialogCallback); 
+				options.dialogReturnValueCallback = function (result, target) { 
+					if(result === SP.UI.DialogResult.OK) { 
+						console.log(&quot;OK was clicked!&quot;); 
+						blingpoint.ui.addNotification(&#x27;New leave application request submitted&#x27;,false);
+					} 
+					if(result === SP.UI.DialogResult.cancel) { 
+						console.log(&quot;Cancel was clicked!&quot;); 
+					} 
+				};
+				
+				var dialog = SP.UI.ModalDialog.showModalDialog(options);
+				
+				//log.info(dialog.get_frameElement().id);
+				
+				//dialog.get_frameElement().contentWindow.document.write(&#x27;&lt;html&gt;&lt;body&gt;Hello World&lt;script&gt;alert(&quot;coucou&quot;);&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;&#x27;);
+				//log.info(dialog.get_frameElement().contentWindow.document.body.innerHTML);
+				//log.info(dialog.get_frameElement().contentWindow.document.body.innerText);
+			},
+			&quot;sp.js&quot;
+		);
+	}
+
+
+
+	// Namespaces
+	window[ BLINGPOINT_UI_NAMESPACE ].addStatus = AddStatus;
+	window[ BLINGPOINT_UI_NAMESPACE ].removeStatus = RemoveStatus;
+	window[ BLINGPOINT_UI_NAMESPACE ].removeAllStatus = RemoveAllStatus;
+	window[ BLINGPOINT_UI_NAMESPACE ].addNotification = AddNotification;
+	window[ BLINGPOINT_UI_NAMESPACE ].removeNotification = RemoveNotification;
+	window[ BLINGPOINT_UI_NAMESPACE ].openDialog = OpenDialog;
+
+	window[ BLINGPOINT_ROOT_NAMESPACE ].ui = window[ BLINGPOINT_UI_NAMESPACE ];
 	
 })();
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\BlingPoint.Loader.js - BlingPoint</title>
+    <title>src\BlingPoint.Security.js - BlingPoint</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -98,98 +98,82 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\BlingPoint.Loader.js</h1>
+                        <h1 class="file-heading">File: src\BlingPoint.Security.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
- * BlingPoint Loader Module
- * @module Loader
+ * BlingPoint Security Module
+ * @module Security
  */
+
 ( function() {
 	
-	var BLINGPOINT_ALIAS_1 = &#x27;$p&#x27;;
-	var BLINGPOINT_ALIAS_2 = &#x27;$P&#x27;;
-
 	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
-	var BLINGPOINT_LOADER_NAMESPACE = &#x27;loader&#x27;;
+	var BLINGPOINT_SECURITY_NAMESPACE = &#x27;security&#x27;;
 	
-	// Initialize namespaces
-	window[ BLINGPOINT_ROOT_NAMESPACE ] = {};
-	window[ BLINGPOINT_LOADER_NAMESPACE ] = {};
+	// Init namespaces
+	window[ BLINGPOINT_SECURITY_NAMESPACE]  = {};
 	
 	/**
-	Returns BlingPoint loading URL
-	@method getScriptUrl
-	@return {string} BlingPoint loading URL
+	Checks if the current user is a member of the specified group
+	@method currentUserIsUserMemberOf
+	@return {string} BlingPoint Logviewer node
 	**/
-	function GetScriptUrl(){
-		var scripts = document.getElementsByTagName(&#x27;script&#x27;);
-		for (i=0;i&lt;scripts.length;i++){
-			var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.js&#x27;);
-			if (blingPointDevPosition &gt; -1) {
-				//return scripts[i].src;
-				return scripts[i].src.substring(0,blingPointDevPosition);
+	function CurrentUserIsUserMemberOf(groupIdOrName, callbackFunctionIfMember, callbackFunctionIfNotMember) {
+
+		var collGroup = web.get_siteGroups();
+		ctx.load(collGroup);
+
+		ctx.executeQueryAsync(
+
+			function (sender, args) {
+
+				var oGroup;
+				if (blingpoint.global.isNumber(groupIdOrName)) {
+					oGroup = collGroup.getById(groupIdOrName);
+				}
+				else {
+					oGroup = collGroup.getByName(groupIdOrName);
+				}
+
+				var collUser = oGroup.get_users();
+				ctx.load(collUser);
+				ctx.executeQueryAsync(
+
+					function (sender, args) {
+						var userEnumerator = collUser.getEnumerator();
+						while (userEnumerator.moveNext()) {
+							var oUser = userEnumerator.get_current();
+							if (oUser.get_id() == user.get_id()) {
+								
+								callbackFunctionIfMember();
+								return;
+
+							}
+						}
+						callbackFunctionIfNotMember();
+						return;	
+
+					}, 
+					function (sender, args) {
+						blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
+					}
+				);
+			},
+
+			function (sender, args) {
+				blingpoint.log.warn(&#x27;Request failed. &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
-			var blingPointMinPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.min.js&#x27;);
-			if (blingPointMinPosition &gt; -1) {
-				//return scripts[i].src;
-				return scripts[i].src.substring(0,blingPointMinPosition);
-			}
-		}
+		);
 	}
 
-	var CDN_PATH = GetScriptUrl();
-	
-	/**
-	Loads a CSS file
-	@method addCssToPage
-	@param {string} cssUrl URL of the CSS file to load
-	@return {boolean} True if CSS file is loaded successfully
-	**/
-	function AddCssToPage(cssUrl)
-	{
-		var s = document.createElement(&quot;link&quot;) ;
-		s.type = &quot;text/css&quot; ;
-		s.rel = &quot;Stylesheet&quot;;
-		s.href = cssUrl ;
-		var head = document.head || document.getElementsByTagName(&quot;head&quot;)[0] ;
-		head.appendChild(s) ;
-		
-		return true;
-	} 
-	
-	/**
-	Loads a script file
-	@method addScriptToPage
-	@param {string} scriptUrl URL of the script file to load
-	@return {boolean} True if the script file is loaded successfully
-	**/
-	function AddScriptToPage(scriptUrl)
-	{	
-		var s = document.createElement(&quot;script&quot;) ;
-		s.type = &quot;text/JavaScript&quot; ;
-		s.src = scriptUrl ;
-		s.async = false ;
-		var head = document.head || document.getElementsByTagName(&quot;head&quot;)[0] ;
-		head.appendChild(s) ;
 
-		return true;
-	}
-	
-	// Loads blackbird CSS
-	var BLACKBIRD_CSS_URL = CDN_PATH + &quot;BlackbirdJs/blackbird.min.css&quot;;
-	AddCssToPage(BLACKBIRD_CSS_URL);
 
-	// Public functions mapping
-	window[ BLINGPOINT_LOADER_NAMESPACE ].addCssToPage = AddCssToPage;
-	window[ BLINGPOINT_LOADER_NAMESPACE ].addScriptToPage = AddScriptToPage;
+	// Namespaces
+	window[ BLINGPOINT_SECURITY_NAMESPACE ].currentUserIsUserMemberOf = CurrentUserIsUserMemberOf;
 	
-	window[ BLINGPOINT_ROOT_NAMESPACE ].loader = window[BLINGPOINT_LOADER_NAMESPACE];
-
-	// Define Alias
-	window[ BLINGPOINT_ALIAS_1 ] = window[BLINGPOINT_ROOT_NAMESPACE];
-	window[ BLINGPOINT_ALIAS_2 ] = window[BLINGPOINT_ROOT_NAMESPACE];
+	window[ BLINGPOINT_ROOT_NAMESPACE ].security = window[ BLINGPOINT_SECURITY_NAMESPACE ];
 	
 })();
 

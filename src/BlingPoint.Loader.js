@@ -49,13 +49,10 @@
 		s.type = "text/css" ;
 		s.rel = "Stylesheet";
 		s.href = cssUrl ;
-
 		var head = document.head || document.getElementsByTagName("head")[0] ;
 		head.appendChild(s) ;
 		
-		console.log('CSS loaded : ' + cssUrl);
 		return true;
-
 	} 
 	
 	/**
@@ -70,11 +67,10 @@
 		s.type = "text/JavaScript" ;
 		s.src = scriptUrl ;
 		s.async = false ;
-		// puis on l’insère dans la balise <head> en haut de document
 		var head = document.head || document.getElementsByTagName("head")[0] ;
 		head.appendChild(s) ;
-		
-		console.log('Script loaded : ' + scriptUrl);
+
+		return true;
 	}
 	
 	// Loads blackbird CSS
