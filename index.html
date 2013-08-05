@@ -33,9 +33,10 @@
         <div id="title">
           <h1>BlingPoint</h1>
           <p>BlingPoint is a JS runtime &amp; framework for easily building instrumented, modular and robust SharePoint solutions that relies on the best design principles.</p>
+          <p>Its name comes from its root namespace "$P" that derives from the JQuery one "$".</p>
           <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/guillaumemeyer">guillaumemeyer</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          <span class="credits left">Project maintained by <a href="about.me/guillaumemeyer">Guillaume Meyer</a></span>
+          <span class="credits right">Proudly sponsored by <a href="http://www.eryemconseil.com/">ERYEM</a></span>
         </div>
 
         <h1>
@@ -67,9 +68,9 @@
 <p>As a single minified javascript file, BlingPoint is easy to deploy :</p>
 
 <ul>
-<li>Using a bookmarklet to inject it dynamically into any SharePoint page</li>
-<li>By registering a script tag in your site MasterPage</li>
-<li>Using a Sandbox solution to register a new ScriptLink</li>
+<li>By manually registering a script tag in your site MasterPage</li>
+<li>Using this bookmarklet to inject it dynamically into any SharePoint page (For testing purposes only !): <a href="javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://www.eryemconseil.com/wp-content/BlingPoint/BlingPoint.js?random='+Math.floor(Math.random()*10001);document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Drag me to your bookmark bar !</a></li>
+<li>Using <a href="https://www.eryemconseil.com/wp-content/BlingPoint/BlingPointSandBox.wsp"></a>this Sandbox solution (For testing purposes only !): </li>
 </ul><h1>
 <a name="more-" class="anchor" href="#more-"><span class="octicon octicon-link"></span></a>MORE ?</h1>
 
