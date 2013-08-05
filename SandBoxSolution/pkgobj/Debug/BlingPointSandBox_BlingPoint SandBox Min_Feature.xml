@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" ActivateOnDefault="FALSE" Id="f8906101-eccb-4099-8e2d-8e2ed511c556" Scope="Web" Title="BlingPoint SandBox Min">
+  <ElementManifests>
+    <ElementManifest Location="BlingPointDevScriptLinkCustomAction\BlingPointMinScriptLinkCustomAction.xml" />
+  </ElementManifests>
+</Feature>

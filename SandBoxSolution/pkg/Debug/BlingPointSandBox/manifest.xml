@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="0d088393-d54c-4ef2-af25-7e8469c3ec85" SharePointProductVersion="15.0">
+  <FeatureManifests>
+    <FeatureManifest Location="BlingPointSandBox_BlingPoint SandBox Dev\Feature.xml" />
+    <FeatureManifest Location="BlingPointSandBox_BlingPoint SandBox Min\Feature.xml" />
+  </FeatureManifests>
+</Solution>

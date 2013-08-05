@@ -1,0 +1,19 @@
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CriteoLMS\BlingPointSandBox\bin\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CriteoLMS\BlingPointSandBox\bin\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CriteoLMS\BlingPointSandBox\obj\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\CriteoLMS\BlingPointSandBox\obj\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPointSandBox\bin\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPointSandBox\bin\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPointSandBox\obj\Debug\BlingPointSandBox.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPointSandBox\obj\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPointSandBox\obj\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\bin\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\bin\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\obj\Debug\BlingPointSandBox.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\obj\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\obj\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\bin\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\bin\Debug\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\obj\Debug\BlingPointSandBox.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\obj\Debug\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\obj\Debug\BlingPointSandBox.pdb

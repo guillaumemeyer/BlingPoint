@@ -1,0 +1,8 @@
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\bin\Release\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\bin\Release\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\obj\Release\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\Visual Studio 2012\Projects\BlingPoint\BlingPointSandBox\obj\Release\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\bin\Release\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\bin\Release\BlingPointSandBox.pdb
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\obj\Release\BlingPointSandBox.dll
+C:\Users\Administrator\Documents\GitHub\BlingPoint\SandBoxSolution\obj\Release\BlingPointSandBox.pdb
