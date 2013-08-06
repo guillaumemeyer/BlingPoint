@@ -1,0 +1,4 @@
+C:\Users\gmeyer\Downloads\spohelper-101606\SharePointOnline.Helper\bin\Debug\SharePointOnline.Helper.dll
+C:\Users\gmeyer\Downloads\spohelper-101606\SharePointOnline.Helper\bin\Debug\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\Downloads\spohelper-101606\SharePointOnline.Helper\obj\Debug\SharePointOnline.Helper.dll
+C:\Users\gmeyer\Downloads\spohelper-101606\SharePointOnline.Helper\obj\Debug\SharePointOnline.Helper.pdb

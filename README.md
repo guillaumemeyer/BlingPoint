@@ -1,2 +1,14 @@
-Please visit the BlingPoint project website :  
-http://guillaumemeyer.github.io/BlingPoint/
+	 ____     ___                           ____                        __      
+	/\  _`\  /\_ \    __                   /\  _`\         __          /\ \__   
+	\ \ \L\ \\//\ \  /\_\     ___       __ \ \ \L\ \ ___  /\_\     ___ \ \ ,_\  
+	 \ \  _ <' \ \ \ \/\ \  /' _ `\   /'_ `\\ \ ,__// __`\\/\ \  /' _ `\\ \ \/  
+	  \ \ \L\ \ \_\ \_\ \ \ /\ \/\ \ /\ \L\ \\ \ \//\ \L\ \\ \ \ /\ \/\ \\ \ \_ 
+	   \ \____/ /\____\\ \_\\ \_\ \_\\ \____ \\ \_\\ \____/ \ \_\\ \_\ \_\\ \__\
+	    \/___/  \/____/ \/_/ \/_/\/_/ \/___L\ \\/_/ \/___/   \/_/ \/_/\/_/ \/__/
+	                                    /\____/                                 
+	                                    \_/__/       
+
+
+					Please visit the BlingPoint project website
+										@
+					http://guillaumemeyer.github.io/BlingPoint/

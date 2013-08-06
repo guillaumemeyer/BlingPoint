@@ -1,0 +1,9 @@
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\SharePointOnline.Helper\SharePointOnline.Helper\bin\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\SharePointOnline.Helper\SharePointOnline.Helper\bin\Release\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\SharePointOnline.Helper\SharePointOnline.Helper\obj\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\SharePointOnline.Helper\SharePointOnline.Helper\obj\Release\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\SharePointOnline.Helper\bin\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\SharePointOnline.Helper\bin\Release\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\SharePointOnline.Helper\obj\Release\SharePointOnline.Helper.csprojResolveAssemblyReference.cache
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\SharePointOnline.Helper\obj\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\SharePointOnline.Helper\obj\Release\SharePointOnline.Helper.pdb

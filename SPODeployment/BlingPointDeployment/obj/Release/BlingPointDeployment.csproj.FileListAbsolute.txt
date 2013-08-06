@@ -1,0 +1,16 @@
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\bin\Release\BlingPointDeployment.exe.config
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\bin\Release\BlingPointDeployment.exe
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\bin\Release\BlingPointDeployment.pdb
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\bin\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\bin\Release\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\obj\Release\BlingPointDeployment.csprojResolveAssemblyReference.cache
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\obj\Release\BlingPointDeployment.exe
+C:\Users\gmeyer\SkyDrive\BlingPoint\BlingPointSolution\BlingPointDeployment\obj\Release\BlingPointDeployment.pdb
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\bin\Release\BlingPointDeployment.exe.config
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\bin\Release\BlingPointDeployment.exe
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\bin\Release\BlingPointDeployment.pdb
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\bin\Release\SharePointOnline.Helper.dll
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\bin\Release\SharePointOnline.Helper.pdb
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\obj\Release\BlingPointDeployment.csprojResolveAssemblyReference.cache
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\obj\Release\BlingPointDeployment.exe
+C:\Users\gmeyer\Documents\GitHub\BlingPoint\SPODeployment\BlingPointDeployment\obj\Release\BlingPointDeployment.pdb
