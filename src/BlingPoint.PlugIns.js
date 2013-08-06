@@ -21,7 +21,7 @@
 			createBlingPointPlugInList();
 		}
 		function createBlingPointPlugInList() {
-			$p.lists.createList('BlingPointPlugIns', SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
+			$p.schema.createList('BlingPointPlugIns', SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
 		}
 		function createBlingPointPlugInContentType() {
 			$p.schema.createContentTypeInHost('BlingPointPlugIn', 'BlingPoint PlugIn', 'BlingPointContentTypes', createBlingPointPlugInDescriptionField, null);
@@ -48,7 +48,7 @@
 			$p.schema.addExistingContentTypetoList('BlingPointPlugIns', 'BlingPointPlugIn', createBlingPointPlugInLibrary, null);
 		}
 		function createBlingPointPlugInLibrary() {
-			$p.lists.createList('BlingPointAssets', SP.ListTemplateType.documentLibrary, false, null, null);
+			$p.schema.createList('BlingPointAssets', SP.ListTemplateType.documentLibrary, false, null, null);
 		}
 		provisionBlingPointPlugInSystem();
 	}

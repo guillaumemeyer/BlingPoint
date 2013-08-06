@@ -18,13 +18,12 @@
 	@param {string} line Line
 	@param {string} chr Character
 	**/
-	function HandleUnhandledError(desc,page,line,chr) {
+	function HandleUnhandledError(error, url, line) {
 		try {
 			blingpoint.log.error("An unexpected error has occured");
-			blingpoint.log.error("Description: " + desc);
-			blingpoint.log.error("Page: " + page);
+			blingpoint.log.error("Description: " + error);
+			blingpoint.log.error("Url: " + url);
 			blingpoint.log.error("Line: " + line);
-			blingpoint.log.error("Chr: " + chr);
 		}
 		catch(err)
 		{
@@ -40,13 +39,27 @@
 	@param {string} sender Sender
 	@param {string} args Arguments
 	**/
-	function HandleManagedError(customMessage, sender, args) {
+	function HandleManagedError(customMessage, e) {
 		blingpoint.log.warn("A managed error has occured");
 		blingpoint.log.warn("Message: " + customMessage);
-		blingpoint.log.warn("Technical message: " + args.get_message());
-		blingpoint.log.warn("Stack trace: " + args.get_stackTrace());
+		blingpoint.log.warn("Name: " + e.name);
+		blingpoint.log.warn("Technical message: " + e.message);
+		blingpoint.log.warn("Number: " + e.number);
 	}
 	
+
+	function ExecuteCallback(callbackFunction) {
+		try {
+			if (typeof callbackFunction !== 'undefined' && callbackFunction !== null) {
+				callbackFunction();
+			}
+		}
+		catch(e)
+		{
+			HandleManagedError('An error has occurred during calling a callback method', e);
+		}
+	}
+
 
 	/**
 	Retrieves parameters and values from current URL
@@ -131,6 +144,7 @@
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].isNumber = IsNumber;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleUnhandledError = HandleUnhandledError;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleManagedError = HandleManagedError;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].executeCallback = ExecuteCallback;
 	
 	window[ BLINGPOINT_ROOT_NAMESPACE ].global = window[ BLINGPOINT_GLOBAL_NAMESPACE ];
 

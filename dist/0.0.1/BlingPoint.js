@@ -486,13 +486,12 @@ for (i=0;i<scripts.length;i++) {
 	@param {string} line Line
 	@param {string} chr Character
 	**/
-	function HandleUnhandledError(desc,page,line,chr) {
+	function HandleUnhandledError(error, url, line) {
 		try {
 			blingpoint.log.error("An unexpected error has occured");
-			blingpoint.log.error("Description: " + desc);
-			blingpoint.log.error("Page: " + page);
+			blingpoint.log.error("Description: " + error);
+			blingpoint.log.error("Url: " + url);
 			blingpoint.log.error("Line: " + line);
-			blingpoint.log.error("Chr: " + chr);
 		}
 		catch(err)
 		{
@@ -508,13 +507,27 @@ for (i=0;i<scripts.length;i++) {
 	@param {string} sender Sender
 	@param {string} args Arguments
 	**/
-	function HandleManagedError(customMessage, sender, args) {
+	function HandleManagedError(customMessage, e) {
 		blingpoint.log.warn("A managed error has occured");
 		blingpoint.log.warn("Message: " + customMessage);
-		blingpoint.log.warn("Technical message: " + args.get_message());
-		blingpoint.log.warn("Stack trace: " + args.get_stackTrace());
+		blingpoint.log.warn("Name: " + e.name);
+		blingpoint.log.warn("Technical message: " + e.message);
+		blingpoint.log.warn("Number: " + e.number);
 	}
 	
+
+	function ExecuteCallback(callbackFunction) {
+		try {
+			if (typeof callbackFunction !== 'undefined' && callbackFunction !== null) {
+				callbackFunction();
+			}
+		}
+		catch(e)
+		{
+			HandleManagedError('An error has occurred during calling a callback method', e);
+		}
+	}
+
 
 	/**
 	Retrieves parameters and values from current URL
@@ -599,6 +612,7 @@ for (i=0;i<scripts.length;i++) {
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].isNumber = IsNumber;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleUnhandledError = HandleUnhandledError;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleManagedError = HandleManagedError;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].executeCallback = ExecuteCallback;
 	
 	window[ BLINGPOINT_ROOT_NAMESPACE ].global = window[ BLINGPOINT_GLOBAL_NAMESPACE ];
 
@@ -616,13 +630,9 @@ var user;
 ( function() {
 	
 	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
-	var BLINGPOINT_SITES_NAMESPACE = 'sites';
-	var BLINGPOINT_LISTS_NAMESPACE = 'lists';
 	var BLINGPOINT_ITEMS_NAMESPACE = 'items';
 	
 	// Init namespaces
-	window[ BLINGPOINT_SITES_NAMESPACE ] = {};
-	window[ BLINGPOINT_LISTS_NAMESPACE ] = {};
 	window[ BLINGPOINT_ITEMS_NAMESPACE ] = {};
 
 	
@@ -660,121 +670,6 @@ var user;
 	ExecuteOrDelayUntilScriptLoaded(InitWeb,"sp.js");
 
 
-
-
-
-
-	/*-------------------------------------------------------------
-		Sites
-	-------------------------------------------------------------*/
-	function CreateSite(siteTitle, siteDescription, siteUrl, siteLanguage, siteTemplate, inheritsPermissions, callBackFunction) {
-
-	// siteLanguage : http://technet.microsoft.com/en-us/library/ff463597.aspx
-	// siteTemplate : https://www.nothingbutsharepoint.com/sites/devwiki/SP2010Dev/Pages/Site%20Templates%20in%20SharePoint%202010.aspx
-	// Exemple : czaCreateSite('monblog','madesc','blog1',1033, 'BLOG#0', true);
-	// Blank : STS#1
-	
-	ExecuteOrDelayUntilScriptLoaded(
-		
-		function() {
-
-			var webCreateInfo = new SP.WebCreationInformation();
-			webCreateInfo.set_title(siteTitle);
-			webCreateInfo.set_description(siteDescription);
-			webCreateInfo.set_url(siteUrl);
-			webCreateInfo.set_language(siteLanguage);
-			webCreateInfo.set_webTemplate(siteTemplate);
-			webCreateInfo.set_useSamePermissionsAsParentSite(inheritsPermissions);
-
-			oNewWebsite = web.get_webs().add(webCreateInfo);
-
-				// Charger dans le load les propriétés à initialiser
-				//clientContext.load(this.oNewWebsite,'Title', 'Created','ServerRelativeUrl');
-
-				ctx.load(oNewWebsite);
-
-				ctx.executeQueryAsync(
-
-					function (sender, args) {
-						
-						var createdSiteUrl;
-						
-						createdSiteUrl = oNewWebsite.get_serverRelativeUrl();
-						
-						log.info('Site Created');
-						log.debug('Site Url : ' + createdSiteUrl);
-
-						callBackFunction(createdSiteUrl);
-						
-					},
-
-					function (sender, args) {
-						log.warn('Site creation failed : ' + args.get_message() + '\n' + args.get_stackTrace());
-					}
-
-					);
-				
-			},
-			"sp.js"
-			);  
-	}
-
-	/*-------------------------------------------------------------
-	Lists
-	-------------------------------------------------------------*/
-	function CreateList(listName, listTemplate, displayInQuickLaunch, callBackFunctionOnSuccess, callBackFunctionOnError) {
-
-		//Let's create list creation information object 
-		var listCreationInfo = new SP.ListCreationInformation(); 
-
-		// Nom de la liste
-		listCreationInfo.set_title(listName);
-		
-		/*
-		Définition du type
-		// Référence : http://msdn.microsoft.com/en-us/library/jj245053.aspx
-		*/
-		if (listTemplate !== null) {
-			listCreationInfo.set_templateType(listTemplate);
-		}
-		else {
-			listCreationInfo.set_templateType(SP.ListTemplateType.genericList); 
-		}
-		
-		// Affichage dans le QuickLaunch
-		// Référence : http://msdn.microsoft.com/en-us/library/ee556266.aspx
-		switch (displayInQuickLaunch) {
-			case true:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.on); 
-			break;
-			case false:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
-			break;
-			default:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
-			break;
-		}
-
-		// Création de la liste
-		var oList = web.get_lists().add(listCreationInfo); 
-		
-		ctx.load(oList);
-	
-		//Execute the actual script 
-		ctx.executeQueryAsync(
-			function(){
-				blingpoint.log.info("List <b>" + oList.get_title() + "</b> created...", false);
-				callBackFunctionOnSuccess();
-			},
-			function (sender, args){
-				handleManagedError("Operation was cancelled...", sender, args);
-				blingpoint.log.warn("List creation operation was cancelled...", false);
-				callBackFunctionOnError();
-			}
-		); 
-
-	}
-	
 	
 	/*-------------------------------------------------------------
 	Items
@@ -939,16 +834,10 @@ var user;
 	/*-------------------------------------------------------------
 	Namespaces
 	-------------------------------------------------------------*/
-	window[ BLINGPOINT_SITES_NAMESPACE ].createSite = CreateSite;
-
-	window[ BLINGPOINT_LISTS_NAMESPACE ].createList = CreateList;
-
 	window[ BLINGPOINT_ITEMS_NAMESPACE ].updateItem = UpdateItem;
 	window[ BLINGPOINT_ITEMS_NAMESPACE ].updateItemUrl = UpdateItemUrl;
 	window[ BLINGPOINT_ITEMS_NAMESPACE ].createItem = CreateItem;
 
-	window[ BLINGPOINT_ROOT_NAMESPACE ].sites = window[ BLINGPOINT_SITES_NAMESPACE ];
-	window[ BLINGPOINT_ROOT_NAMESPACE ].lists = window[ BLINGPOINT_LISTS_NAMESPACE ];
 	window[ BLINGPOINT_ROOT_NAMESPACE ].items = window[ BLINGPOINT_ITEMS_NAMESPACE ];
 
 })();
@@ -1140,7 +1029,7 @@ var user;
 			createBlingPointPlugInList();
 		}
 		function createBlingPointPlugInList() {
-			$p.lists.createList('BlingPointPlugIns', SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
+			$p.schema.createList('BlingPointPlugIns', SP.ListTemplateType.genericList, false, createBlingPointPlugInContentType, null);	
 		}
 		function createBlingPointPlugInContentType() {
 			$p.schema.createContentTypeInHost('BlingPointPlugIn', 'BlingPoint PlugIn', 'BlingPointContentTypes', createBlingPointPlugInDescriptionField, null);
@@ -1167,7 +1056,7 @@ var user;
 			$p.schema.addExistingContentTypetoList('BlingPointPlugIns', 'BlingPointPlugIn', createBlingPointPlugInLibrary, null);
 		}
 		function createBlingPointPlugInLibrary() {
-			$p.lists.createList('BlingPointAssets', SP.ListTemplateType.documentLibrary, false, null, null);
+			$p.schema.createList('BlingPointAssets', SP.ListTemplateType.documentLibrary, false, null, null);
 		}
 		provisionBlingPointPlugInSystem();
 	}
@@ -1321,11 +1210,11 @@ var user;
 		ctx.executeQueryAsync(
 			function(){
 				blingpoint.log.debug('Field provisioned in host web successfully.');
-				callBackFunctionOnSuccess();
+				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
 			},
 			function (sender, args){
 				blingpoint.log.warn('Failed to provision field into host web. Error:' + sender.statusCode);
-				callBackFunctionOnError();
+				blingpoint.global.executeCallback(callBackFunctionOnError);
 			}
 		);
 	}
@@ -1342,11 +1231,11 @@ var user;
 		ctx.executeQueryAsync(
 			function(){
 				blingpoint.log.debug('Content type provisioned in host web successfully.');
-				callBackFunctionOnSuccess();
+				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
 			},
 			function (sender, args){
 				blingpoint.log.warn('Failed to provision content type into host web. Error:' + sender.statusCode);
-				callBackFunctionOnError();
+				blingpoint.global.executeCallback(callBackFunctionOnError);
 			}
 		);
 	}
@@ -1370,7 +1259,7 @@ var user;
 			},
 			function (sender, args) {
 				blingpoint.log.warn('Failed to re-fetch field and content type. Error:' + sender.statusCode);
-				callBackFunctionOnError();
+				blingpoint.global.executeCallback(callBackFunctionOnError);
 			}
 		);
 
@@ -1406,17 +1295,17 @@ var user;
 			ctx.executeQueryAsync(
 				function () {
 					blingpoint.log.debug('Field added to content type in host web successfully.');
-					callBackFunctionOnSuccess();
+					blingpoint.global.executeCallback(callBackFunctionOnSuccess);
 				},
 				function (sender, args) {
 					blingpoint.log.warn('Failed to add field to content type. Error:' + sender.statusCode);
-					callBackFunctionOnError();
+					blingpoint.global.executeCallback(callBackFunctionOnError);
 				}
 			);
 		}
 		else {
 			blingpoint.log.warn('Failed to add field to content type - check the content type exists!');
-			callBackFunctionOnError();
+			blingpoint.global.executeCallback(callBackFunctionOnError);
 		}
     }
 
@@ -1447,7 +1336,7 @@ var user;
 			},
 			function (sender, args) {
 				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
-				callBackFunctionOnError();
+				blingpoint.global.executeCallback(callBackFunctionOnError);
 			}
 		);
 	} 
@@ -1462,16 +1351,104 @@ var user;
 		ctx.executeQueryAsync(
 			function () {
 				blingpoint.log.debug('Content Type added successfully');
-				callBackFunctionOnSuccess();
+				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
 			},
 			function (sender, args) {
 				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
-				callBackFunctionOnError();
+				blingpoint.global.executeCallback(callBackFunctionOnError);
 			}
 		);
 	}
 
 
+	function CreateList(listName, listTemplate, displayInQuickLaunch, callBackFunctionOnSuccess, callBackFunctionOnError) {
+
+		//Let's create list creation information object 
+		var listCreationInfo = new SP.ListCreationInformation(); 
+		listCreationInfo.set_title(listName);
+		
+		/*
+		Type definition
+		// Référence : http://msdn.microsoft.com/en-us/library/jj245053.aspx
+		*/
+		if (listTemplate !== null) {
+			listCreationInfo.set_templateType(listTemplate);
+		}
+		else {
+			listCreationInfo.set_templateType(SP.ListTemplateType.genericList); 
+		}
+		
+		// Affichage dans le QuickLaunch
+		// Référence : http://msdn.microsoft.com/en-us/library/ee556266.aspx
+		switch (displayInQuickLaunch) {
+			case true:
+			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.on); 
+			break;
+			case false:
+			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
+			break;
+			default:
+			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
+			break;
+		}
+
+		// Création de la liste
+		var oList = web.get_lists().add(listCreationInfo); 
+		
+		ctx.load(oList);
+	
+		//Execute the actual script 
+		ctx.executeQueryAsync(
+			function(){
+				blingpoint.log.info("List <b>" + oList.get_title() + "</b> created...", false);
+				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
+			},
+			function (sender, args){
+				handleManagedError("Operation was cancelled...", sender, args);
+				blingpoint.log.warn("List creation operation was cancelled...", false);
+				blingpoint.global.executeCallback(callBackFunctionOnError);
+			}
+		); 
+
+	}
+
+	/*-------------------------------------------------------------
+		Sites
+	-------------------------------------------------------------*/
+	function CreateSite(siteTitle, siteDescription, siteUrl, siteLanguage, siteTemplate, inheritsPermissions, callBackFunctionOnSuccess, callBackFunctionOnError) {
+
+		// siteLanguage : http://technet.microsoft.com/en-us/library/ff463597.aspx
+		// siteTemplate : https://www.nothingbutsharepoint.com/sites/devwiki/SP2010Dev/Pages/Site%20Templates%20in%20SharePoint%202010.aspx
+		// Exemple : CreateSite('monblog','madesc','blog1',1033, 'BLOG#0', true);
+		// Blank : STS#1
+	
+		var webCreateInfo = new SP.WebCreationInformation();
+		webCreateInfo.set_title(siteTitle);
+		webCreateInfo.set_description(siteDescription);
+		webCreateInfo.set_url(siteUrl);
+		webCreateInfo.set_language(siteLanguage);
+		webCreateInfo.set_webTemplate(siteTemplate);
+		webCreateInfo.set_useSamePermissionsAsParentSite(inheritsPermissions);
+
+		oNewWebsite = web.get_webs().add(webCreateInfo);
+
+		ctx.load(oNewWebsite);
+		ctx.executeQueryAsync(
+			function (sender, args) {
+				var createdSiteUrl;
+				createdSiteUrl = oNewWebsite.get_serverRelativeUrl();
+				log.info('Site Created');
+				log.debug('Site Url : ' + createdSiteUrl);
+				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
+			},
+			function (sender, args) {
+				log.warn('Site creation failed : ' + args.get_message() + '\n' + args.get_stackTrace());
+				blingpoint.global.executeCallback(callBackFunctionOnError);
+			}
+
+		);
+	}
+	
 
 	/*-------------------------------------------------------------
 	Namespaces
@@ -1480,7 +1457,9 @@ var user;
 	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createContentTypeInHost = CreateContentTypeInHost;
 	window[ BLINGPOINT_SCHEMA_NAMESPACE ].addFieldToContentTypeInHost = AddFieldToContentTypeInHost;
 	window[ BLINGPOINT_SCHEMA_NAMESPACE ].addExistingContentTypetoList = AddExistingContentTypetoList;
-	
+	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createList = CreateList;
+	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createSite = CreateSite;
+
 	window[ BLINGPOINT_ROOT_NAMESPACE ].schema = window[ BLINGPOINT_SCHEMA_NAMESPACE ];
 
 })();

@@ -315,7 +315,7 @@
 			removeEvent( document, 'keyup', readKey );
 		});
 		
-		window[ BLINGPOINT_LOG_NAMESPACE ].debug('BlingPoint LogViewer Loaded');
+		window[ BLINGPOINT_LOG_NAMESPACE ].info('BlingPoint LogViewer Loaded');
 		
 	}
 

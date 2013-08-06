@@ -224,7 +224,7 @@
         },
         {
             "file": "src\\BlingPoint.Global.js",
-            "line": 36,
+            "line": 35,
             "description": "Catch handled errors",
             "itemtype": "method",
             "name": "handleUnhandledError",
@@ -250,7 +250,7 @@
         },
         {
             "file": "src\\BlingPoint.Global.js",
-            "line": 51,
+            "line": 64,
             "description": "Retrieves parameters and values from current URL",
             "itemtype": "method",
             "name": "getUrlParameters",
@@ -267,7 +267,7 @@
         },
         {
             "file": "src\\BlingPoint.Global.js",
-            "line": 71,
+            "line": 84,
             "description": "Checks if the current URL matchs a specific regular expression (Case insensitive)",
             "itemtype": "method",
             "name": "checkUrl",
@@ -290,7 +290,7 @@
         },
         {
             "file": "src\\BlingPoint.Global.js",
-            "line": 94,
+            "line": 107,
             "description": "Checks if a string matchs a specific regular expression (Case insensitive)",
             "itemtype": "method",
             "name": "check",
@@ -318,7 +318,7 @@
         },
         {
             "file": "src\\BlingPoint.Global.js",
-            "line": 116,
+            "line": 129,
             "description": "Checks if a string is a number",
             "itemtype": "method",
             "name": "isNumber",

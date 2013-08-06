@@ -122,13 +122,12 @@
 	@param {string} line Line
 	@param {string} chr Character
 	**/
-	function HandleUnhandledError(desc,page,line,chr) {
+	function HandleUnhandledError(error, url, line) {
 		try {
 			blingpoint.log.error(&quot;An unexpected error has occured&quot;);
-			blingpoint.log.error(&quot;Description: &quot; + desc);
-			blingpoint.log.error(&quot;Page: &quot; + page);
+			blingpoint.log.error(&quot;Description: &quot; + error);
+			blingpoint.log.error(&quot;Url: &quot; + url);
 			blingpoint.log.error(&quot;Line: &quot; + line);
-			blingpoint.log.error(&quot;Chr: &quot; + chr);
 		}
 		catch(err)
 		{
@@ -144,13 +143,27 @@
 	@param {string} sender Sender
 	@param {string} args Arguments
 	**/
-	function HandleManagedError(customMessage, sender, args) {
+	function HandleManagedError(customMessage, e) {
 		blingpoint.log.warn(&quot;A managed error has occured&quot;);
 		blingpoint.log.warn(&quot;Message: &quot; + customMessage);
-		blingpoint.log.warn(&quot;Technical message: &quot; + args.get_message());
-		blingpoint.log.warn(&quot;Stack trace: &quot; + args.get_stackTrace());
+		blingpoint.log.warn(&quot;Name: &quot; + e.name);
+		blingpoint.log.warn(&quot;Technical message: &quot; + e.message);
+		blingpoint.log.warn(&quot;Number: &quot; + e.number);
 	}
 	
+
+	function ExecuteCallback(callbackFunction) {
+		try {
+			if (typeof callbackFunction !== &#x27;undefined&#x27; &amp;&amp; callbackFunction !== null) {
+				callbackFunction();
+			}
+		}
+		catch(e)
+		{
+			HandleManagedError(&#x27;An error has occurred during calling a callback method&#x27;, e);
+		}
+	}
+
 
 	/**
 	Retrieves parameters and values from current URL
@@ -235,6 +248,7 @@
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].isNumber = IsNumber;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleUnhandledError = HandleUnhandledError;
 	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleManagedError = HandleManagedError;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].executeCallback = ExecuteCallback;
 	
 	window[ BLINGPOINT_ROOT_NAMESPACE ].global = window[ BLINGPOINT_GLOBAL_NAMESPACE ];
 
