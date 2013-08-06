@@ -11,5 +11,5 @@
 
 				
 				Please visit the BlingPoint project website
-									@
-				<a href="http://guillaumemeyer.github.io/BlingPoint/">http://guillaumemeyer.github.io/BlingPoint/</a>
+						     @
+				[http://guillaumemeyer.github.io/BlingPoint/](http://guillaumemeyer.github.io/BlingPoint/)
