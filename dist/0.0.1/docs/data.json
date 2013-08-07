@@ -341,7 +341,7 @@
         },
         {
             "file": "src\\BlingPoint.Loader.js",
-            "line": 17,
+            "line": 20,
             "description": "Returns BlingPoint loading URL",
             "itemtype": "method",
             "name": "getScriptUrl",
@@ -354,7 +354,7 @@
         },
         {
             "file": "src\\BlingPoint.Loader.js",
-            "line": 40,
+            "line": 43,
             "description": "Loads a CSS file",
             "itemtype": "method",
             "name": "addCssToPage",
@@ -374,7 +374,7 @@
         },
         {
             "file": "src\\BlingPoint.Loader.js",
-            "line": 58,
+            "line": 61,
             "description": "Loads a script file",
             "itemtype": "method",
             "name": "addScriptToPage",

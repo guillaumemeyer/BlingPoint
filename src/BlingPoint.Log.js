@@ -369,11 +369,7 @@
 
 blingpoint.log.initBlackbird();
 
-// Toggle log viewer in dev mode
-var scripts = document.getElementsByTagName('script');
-for (i=0;i<scripts.length;i++) {
-	var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.js');
-	if (blingPointDevPosition > -1) {
-		blingpoint.log.toggle();
-	}
+if (BlingPointDevMode == true) {
+	blingpoint.log.toggle();
+	blingpoint.log.profile('scriptLoading')
 }

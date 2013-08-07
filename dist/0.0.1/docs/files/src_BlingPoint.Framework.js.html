@@ -107,7 +107,9 @@
  * @module Framework
  */
 var ctx;
+var hostCtx;
 var web;
+var hostWeb;
 var user;
 
 ( function() {
@@ -122,6 +124,10 @@ var user;
 	
 	// Initialize blingpoint framework common objects
 	function InitWeb() {
+
+		if (BlingPointDevMode === true) {
+			blingpoint.log.profile(&#x27;contextLoading&#x27;);
+		}
 
 		ctx = SP.ClientContext.get_current();
 		web = ctx.get_web();
@@ -141,16 +147,71 @@ var user;
 				log.debug(&#x27;ID:&#x27; + user.get_id());
 				log.debug(&#x27;User title:&#x27; + user.get_title());
 				log.debug(&#x27;Email:&#x27; + user.get_email());
-				blingpoint.plugins.loadPlugIns();
+
+				if ( hostWebUrl !== undefined &amp;&amp; hostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
+					
+					blingpoint.log.debug(&#x27;App context detected, loading both SPHost context&#x27;);
+
+					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
+					ctx.set_webRequestExecutorFactory(factory);
+					var hostCtx = new SP.AppContextSite(ctx, hostWebUrl);
+					hostWeb = hostCtx.get_web();
+					ctx.load(hostWeb);
+					ctx.executeQueryAsync(
+						function() {
+							log.info(&#x27;Host Web Context loaded&#x27;);
+							log.debug(&#x27;Host web title:&#x27; + hostWeb.get_title());
+							log.debug(&#x27;Host Description:&#x27; + hostWeb.get_description());
+							log.debug(&#x27;Host ID:&#x27; + hostWeb.get_id());
+							log.debug(&#x27;Host Created Date:&#x27; + hostWeb.get_created());
+							log.debug(&#x27;Host Web Url:&#x27; + hostWeb.get_serverRelativeUrl());
+							if (BlingPointDevMode === true) {
+								blingpoint.log.profile(&#x27;contextLoading&#x27;);
+							}
+						},
+						function (sender, args) {
+							if (BlingPointDevMode === true) {
+								blingpoint.log.profile(&#x27;contextLoading&#x27;);
+							}
+							if (args.get_errorTypeName() == &#x27;System.UnauthorizedAccessException&#x27;) {
+								blingpoint.log.error(&#x27;Your App is not authorized to access Host Web. Check your App manifest.&#x27;);
+								blingpoint.log.error(args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
+							}
+							else {
+								blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
+							}
+						}
+					);
+				}
+				else {
+					if (BlingPointDevMode === true) {
+						blingpoint.log.profile(&#x27;contextLoading&#x27;);
+					}
+					blingpoint.plugins.loadPlugIns();
+				}
 			},
 			function (sender, args) {
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile(&#x27;contextLoading&#x27;);
+				}
 				blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 			}
 		);
 
 	}
 
-	ExecuteOrDelayUntilScriptLoaded(InitWeb,&quot;sp.js&quot;);
+	var hostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
+	var appWebUrl = blingpoint.global.getUrlParameters().SPAppWebUrl;
+	if ( hostWebUrl !== undefined &amp;&amp; hostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
+		// Loading SP.Runtime
+		blingpoint.loader.addScriptToPage(&#x27;/_layouts/15/SP.RequestExecutor.js&#x27;);
+		ExecuteOrDelayUntilScriptLoaded(InitWeb,&quot;SP.RequestExecutor.js&quot;);
+	}
+	else {
+		ExecuteOrDelayUntilScriptLoaded(InitWeb,&quot;sp.js&quot;);
+	}
+	
+	
 
 
 	

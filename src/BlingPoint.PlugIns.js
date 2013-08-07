@@ -55,6 +55,10 @@
 
 	function LoadPlugIns() {
 
+		if (BlingPointDevMode === true) {
+			blingpoint.log.profile('pluginsLoading');
+		}
+
 		var list = web.get_lists().getByTitle("BlingPointPlugIns");
 		var camlQuery = new SP.CamlQuery();
 		var q = '<View><RowLimit>500</RowLimit></View>';
@@ -92,8 +96,14 @@
 					}
 
 				}
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile('pluginsLoading');
+				}
 			}, 
 			function(sender, args){
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile('pluginsLoading');
+				}
 				blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
 				blingpoint.log.error('If the list BlingPointPlugIns does not exist, <a href="javascript:$p.plugins.setupPlugInSystem();">click here to setup BlingPoint !</a>');
 			}

@@ -419,7 +419,7 @@
 			removeEvent( document, &#x27;keyup&#x27;, readKey );
 		});
 		
-		window[ BLINGPOINT_LOG_NAMESPACE ].debug(&#x27;BlingPoint LogViewer Loaded&#x27;);
+		window[ BLINGPOINT_LOG_NAMESPACE ].info(&#x27;BlingPoint LogViewer Loaded&#x27;);
 		
 	}
 
@@ -473,13 +473,9 @@
 
 blingpoint.log.initBlackbird();
 
-// Toggle log viewer in dev mode
-var scripts = document.getElementsByTagName(&#x27;script&#x27;);
-for (i=0;i&lt;scripts.length;i++) {
-	var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf(&#x27;blingpoint.js&#x27;);
-	if (blingPointDevPosition &gt; -1) {
-		blingpoint.log.toggle();
-	}
+if (BlingPointDevMode == true) {
+	blingpoint.log.toggle();
+	blingpoint.log.profile(&#x27;scriptLoading&#x27;)
 }
     </pre>
 </div>

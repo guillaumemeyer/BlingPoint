@@ -154,7 +154,7 @@
 
 	function ExecuteCallback(callbackFunction) {
 		try {
-			if (typeof callbackFunction !== &#x27;undefined&#x27; &amp;&amp; callbackFunction !== null) {
+			if (typeof callbackFunction !== undefined &amp;&amp; callbackFunction !== null) {
 				callbackFunction();
 			}
 		}
@@ -180,7 +180,7 @@
 		{
 			hash = hashes[i].split(&#x27;=&#x27;);
 			vars.push(hash[0]);
-			vars[hash[0]] = hash[1];
+			vars[hash[0]] = decodeURIComponent(hash[1]);
 		}
 		return vars;
 	}

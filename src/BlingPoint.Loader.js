@@ -2,6 +2,9 @@
  * BlingPoint Loader Module
  * @module Loader
  */
+
+var BlingPointDevMode;
+
 ( function() {
 	
 	var BLINGPOINT_ALIAS_1 = '$p';
@@ -24,12 +27,12 @@
 		for (i=0;i<scripts.length;i++){
 			var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.js');
 			if (blingPointDevPosition > -1) {
-				//return scripts[i].src;
+				BlingPointDevMode=true;
 				return scripts[i].src.substring(0,blingPointDevPosition);
 			}
 			var blingPointMinPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.min.js');
 			if (blingPointMinPosition > -1) {
-				//return scripts[i].src;
+				BlingPointDevMode=false;
 				return scripts[i].src.substring(0,blingPointMinPosition);
 			}
 		}

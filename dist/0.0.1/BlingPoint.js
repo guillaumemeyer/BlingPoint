@@ -2,6 +2,9 @@
  * BlingPoint Loader Module
  * @module Loader
  */
+
+var BlingPointDevMode;
+
 ( function() {
 	
 	var BLINGPOINT_ALIAS_1 = '$p';
@@ -24,12 +27,12 @@
 		for (i=0;i<scripts.length;i++){
 			var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.js');
 			if (blingPointDevPosition > -1) {
-				//return scripts[i].src;
+				BlingPointDevMode=true;
 				return scripts[i].src.substring(0,blingPointDevPosition);
 			}
 			var blingPointMinPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.min.js');
 			if (blingPointMinPosition > -1) {
-				//return scripts[i].src;
+				BlingPointDevMode=false;
 				return scripts[i].src.substring(0,blingPointMinPosition);
 			}
 		}
@@ -405,7 +408,7 @@
 			removeEvent( document, 'keyup', readKey );
 		});
 		
-		window[ BLINGPOINT_LOG_NAMESPACE ].debug('BlingPoint LogViewer Loaded');
+		window[ BLINGPOINT_LOG_NAMESPACE ].info('BlingPoint LogViewer Loaded');
 		
 	}
 
@@ -459,13 +462,9 @@
 
 blingpoint.log.initBlackbird();
 
-// Toggle log viewer in dev mode
-var scripts = document.getElementsByTagName('script');
-for (i=0;i<scripts.length;i++) {
-	var blingPointDevPosition = scripts[i].src.toLowerCase().indexOf('blingpoint.js');
-	if (blingPointDevPosition > -1) {
-		blingpoint.log.toggle();
-	}
+if (BlingPointDevMode == true) {
+	blingpoint.log.toggle();
+	blingpoint.log.profile('scriptLoading')
 }/**
  * BlingPoint Global Module
  * @module Global
@@ -518,7 +517,7 @@ for (i=0;i<scripts.length;i++) {
 
 	function ExecuteCallback(callbackFunction) {
 		try {
-			if (typeof callbackFunction !== 'undefined' && callbackFunction !== null) {
+			if (typeof callbackFunction !== undefined && callbackFunction !== null) {
 				callbackFunction();
 			}
 		}
@@ -544,7 +543,7 @@ for (i=0;i<scripts.length;i++) {
 		{
 			hash = hashes[i].split('=');
 			vars.push(hash[0]);
-			vars[hash[0]] = hash[1];
+			vars[hash[0]] = decodeURIComponent(hash[1]);
 		}
 		return vars;
 	}
@@ -624,7 +623,9 @@ for (i=0;i<scripts.length;i++) {
  * @module Framework
  */
 var ctx;
+var hostCtx;
 var web;
+var hostWeb;
 var user;
 
 ( function() {
@@ -639,6 +640,10 @@ var user;
 	
 	// Initialize blingpoint framework common objects
 	function InitWeb() {
+
+		if (BlingPointDevMode === true) {
+			blingpoint.log.profile('contextLoading');
+		}
 
 		ctx = SP.ClientContext.get_current();
 		web = ctx.get_web();
@@ -658,16 +663,71 @@ var user;
 				log.debug('ID:' + user.get_id());
 				log.debug('User title:' + user.get_title());
 				log.debug('Email:' + user.get_email());
-				blingpoint.plugins.loadPlugIns();
+
+				if ( hostWebUrl !== undefined && hostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
+					
+					blingpoint.log.debug('App context detected, loading both SPHost context');
+
+					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
+					ctx.set_webRequestExecutorFactory(factory);
+					var hostCtx = new SP.AppContextSite(ctx, hostWebUrl);
+					hostWeb = hostCtx.get_web();
+					ctx.load(hostWeb);
+					ctx.executeQueryAsync(
+						function() {
+							log.info('Host Web Context loaded');
+							log.debug('Host web title:' + hostWeb.get_title());
+							log.debug('Host Description:' + hostWeb.get_description());
+							log.debug('Host ID:' + hostWeb.get_id());
+							log.debug('Host Created Date:' + hostWeb.get_created());
+							log.debug('Host Web Url:' + hostWeb.get_serverRelativeUrl());
+							if (BlingPointDevMode === true) {
+								blingpoint.log.profile('contextLoading');
+							}
+						},
+						function (sender, args) {
+							if (BlingPointDevMode === true) {
+								blingpoint.log.profile('contextLoading');
+							}
+							if (args.get_errorTypeName() == 'System.UnauthorizedAccessException') {
+								blingpoint.log.error('Your App is not authorized to access Host Web. Check your App manifest.');
+								blingpoint.log.error(args.get_message() + '\n' + args.get_stackTrace());
+							}
+							else {
+								blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
+							}
+						}
+					);
+				}
+				else {
+					if (BlingPointDevMode === true) {
+						blingpoint.log.profile('contextLoading');
+					}
+					blingpoint.plugins.loadPlugIns();
+				}
 			},
 			function (sender, args) {
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile('contextLoading');
+				}
 				blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
 			}
 		);
 
 	}
 
-	ExecuteOrDelayUntilScriptLoaded(InitWeb,"sp.js");
+	var hostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
+	var appWebUrl = blingpoint.global.getUrlParameters().SPAppWebUrl;
+	if ( hostWebUrl !== undefined && hostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
+		// Loading SP.Runtime
+		blingpoint.loader.addScriptToPage('/_layouts/15/SP.RequestExecutor.js');
+		ExecuteOrDelayUntilScriptLoaded(InitWeb,"SP.RequestExecutor.js");
+	}
+	else {
+		ExecuteOrDelayUntilScriptLoaded(InitWeb,"sp.js");
+	}
+	
+	
 
 
 	
@@ -1063,6 +1123,10 @@ var user;
 
 	function LoadPlugIns() {
 
+		if (BlingPointDevMode === true) {
+			blingpoint.log.profile('pluginsLoading');
+		}
+
 		var list = web.get_lists().getByTitle("BlingPointPlugIns");
 		var camlQuery = new SP.CamlQuery();
 		var q = '<View><RowLimit>500</RowLimit></View>';
@@ -1100,8 +1164,14 @@ var user;
 					}
 
 				}
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile('pluginsLoading');
+				}
 			}, 
 			function(sender, args){
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile('pluginsLoading');
+				}
 				blingpoint.log.error('request failed ' + args.get_message() + '\n' + args.get_stackTrace());
 				blingpoint.log.error('If the list BlingPointPlugIns does not exist, <a href="javascript:$p.plugins.setupPlugInSystem();">click here to setup BlingPoint !</a>');
 			}
@@ -1463,3 +1533,7 @@ var user;
 	window[ BLINGPOINT_ROOT_NAMESPACE ].schema = window[ BLINGPOINT_SCHEMA_NAMESPACE ];
 
 })();
+
+if (BlingPointDevMode === true) {
+	blingpoint.log.profile('scriptLoading');
+}

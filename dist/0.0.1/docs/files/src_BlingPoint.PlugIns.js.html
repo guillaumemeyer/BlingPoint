@@ -159,6 +159,10 @@
 
 	function LoadPlugIns() {
 
+		if (BlingPointDevMode === true) {
+			blingpoint.log.profile(&#x27;pluginsLoading&#x27;);
+		}
+
 		var list = web.get_lists().getByTitle(&quot;BlingPointPlugIns&quot;);
 		var camlQuery = new SP.CamlQuery();
 		var q = &#x27;&lt;View&gt;&lt;RowLimit&gt;500&lt;/RowLimit&gt;&lt;/View&gt;&#x27;;
@@ -196,8 +200,14 @@
 					}
 
 				}
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile(&#x27;pluginsLoading&#x27;);
+				}
 			}, 
 			function(sender, args){
+				if (BlingPointDevMode === true) {
+					blingpoint.log.profile(&#x27;pluginsLoading&#x27;);
+				}
 				blingpoint.log.error(&#x27;request failed &#x27; + args.get_message() + &#x27;\n&#x27; + args.get_stackTrace());
 				blingpoint.log.error(&#x27;If the list BlingPointPlugIns does not exist, &lt;a href=&quot;javascript:$p.plugins.setupPlugInSystem();&quot;&gt;click here to setup BlingPoint !&lt;/a&gt;&#x27;);
 			}

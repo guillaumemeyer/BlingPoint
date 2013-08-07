@@ -284,3 +284,7 @@
 	window[ BLINGPOINT_ROOT_NAMESPACE ].schema = window[ BLINGPOINT_SCHEMA_NAMESPACE ];
 
 })();
+
+if (BlingPointDevMode === true) {
+	blingpoint.log.profile('scriptLoading');
+}
