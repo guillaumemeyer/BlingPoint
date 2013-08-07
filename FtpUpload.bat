@@ -2,11 +2,17 @@
 
 cd /d %~dp0
 
+echo Uploading to ERYEM CDN
+
 set /p FtpLogin=Login:
 set /p FtpPwd=Password:
 
 echo user %FtpLogin%> ftpcmd.dat
 echo %FtpPwd%>> ftpcmd.dat
+
+set FtpLogin=
+set FtpPwd=
+
 echo bin>> ftpcmd.dat
 
 echo cd /site/wwwroot/wp-content/BlingPoint/>>ftpcmd.dat

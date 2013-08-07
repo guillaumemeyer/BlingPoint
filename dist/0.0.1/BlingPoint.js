@@ -132,7 +132,7 @@ var BlingPointDevMode;
 	Builds BlingPoint Logviewer Markup
 	@method generateMarkup
 	@return {string} BlingPoint Logviewer node
-	**/
+	*/
 	function generateMarkup() { //build markup
 		var spans = [];
 		for ( var type in messageTypes ) {
