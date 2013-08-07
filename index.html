@@ -25,6 +25,9 @@
           <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/blob/master/SandBoxSolution/bin/Release/BlingPointSandBox.wsp?raw=true">WSP</a></li>
           <li class="title">DOWNLOADS</li>
         </nav>
+        <nav>
+          <a href="" onclick="scrollToAnchor('get-started')">Get Started</a>
+        </nav>
       </div><!-- end header -->
 
     <div class="wrapper">
@@ -137,6 +140,13 @@ And don't hesitate to fork and send a pull request for any cool example of yours
               var pageTracker = _gat._getTracker("UA-5688830-9");
             pageTracker._trackPageview();
             } catch(err) {}
+          </script>
+          
+          <script>
+            function scrollToAnchor(aid){
+              var aTag = $("a[name='"+ aid +"']");
+              $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+            }
           </script>
 
   </body>
