@@ -20,16 +20,16 @@
   <body>
       <div id="header">
         <nav>
+          <li class="fork"><a href="javascript:scrollToAnchor('wrapper');"><span class="credits left">Home</span></a></li>
           <li class="fork"><a href="javascript:scrollToAnchor('features');"><span class="credits left">Features</span></a></li>
+          <li class="fork"><a href="javascript:scrollToAnchor('getstarted');"><span class="credits left">Get Started</span></a></li>
+          <li class="fork"><a href="javascript:scrollToAnchor('deployment');"><span class="credits left">Deployment</span></a></li>
+          <li class="fork"><a href="javascript:scrollToAnchor('support');"><span class="credits left">Support</span></a></li>
+          <li class="fork"><a href="javascript:scrollToAnchor('acknowledgements');"><span class="credits left">Acknowledgements</span></a></li>
           <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint">View On GitHub</a></li>
           <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/zipball/master">Get Sources</a></li>
           <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/blob/master/SandBoxSolution/bin/Release/BlingPointSandBox.wsp?raw=true">Download WSP</a></li>
         </nav>
-        <br/>
-          <a onclick="scrollToAnchor('getstarted')"><span class="credits left">Get Started</span></a>
-          <a onclick="scrollToAnchor('deployment')"><span class="credits left">Deployment</span></a>
-          <a onclick="scrollToAnchor('support')"><span class="credits left">Support</span></a>
-          <a onclick="scrollToAnchor('acknowledgements')"><span class="credits left">Acknowledgements</span></a>
       </div><!-- end header -->
 
     <div class="wrapper">
@@ -146,7 +146,7 @@ And don't hesitate to fork and send a pull request for any cool example of yours
           
           <script>
             function scrollToAnchor(aid){
-              $('html, body').animate({scrollTop: $('.' + aid).offset().top -80}, 1500);
+              $('html, body').animate({scrollTop: $('.' + aid).offset().top -80}, 1000);
             }
           </script>
 
