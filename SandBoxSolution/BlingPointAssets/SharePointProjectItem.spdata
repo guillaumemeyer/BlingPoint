@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="BlingPointAssets\" Type="ElementManifest" />
+    <ProjectItemFile Source="BlingPoint.js" Target="BlingPointAssets\" Type="ElementFile" />
+    <ProjectItemFile Source="BlingPoint.min.js" Target="BlingPointAssets\" Type="ElementFile" />
+    <ProjectItemFile Source="BlackbirdJs\blackbird.css" Target="BlingPointAssets\BlackbirdJs\" Type="ElementFile" />
+    <ProjectItemFile Source="BlackbirdJs\blackbird.min.css" Target="BlingPointAssets\BlackbirdJs\" Type="ElementFile" />
+    <ProjectItemFile Source="BlackbirdJs\blackbird_icons.png" Target="BlingPointAssets\BlackbirdJs\" Type="ElementFile" />
+    <ProjectItemFile Source="BlackbirdJs\blackbird_panel.png" Target="BlingPointAssets\BlackbirdJs\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

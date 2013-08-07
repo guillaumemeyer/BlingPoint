@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="8b379f6a-2691-48f9-bd24-e2ce7b7fb3d9" Scope="Web" Title="BlingPoint SandBox Dev">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="BlingPoint SandBox Dev" ActivateOnDefault="FALSE" Id="8b379f6a-2691-48f9-bd24-e2ce7b7fb3d9" Scope="Web">
+  <ActivationDependencies>
+    <ActivationDependency FeatureId="c667e757-7ab6-4d90-be34-4c1e8ffd8d34" FeatureTitle="BlingPoint SandBox Assets" />
+  </ActivationDependencies>
   <ElementManifests>
     <ElementManifest Location="BlingPointDevScriptLinkCustomAction\BlingPointDevScriptLinkCustomAction.xml" />
   </ElementManifests>

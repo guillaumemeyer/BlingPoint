@@ -66,7 +66,13 @@
     <None Include="Features\BlingPoint SandBox Min\BlingPoint SandBox Min.feature">
       <FeatureId>{fde810aa-4911-4012-9925-19d310e76bab}</FeatureId>
     </None>
+    <None Include="Features\BlingPoint SandBox Assets\BlingPoint SandBox Assets.feature">
+      <FeatureId>{d3ed53f8-ef7a-4dbf-9e14-70efd6825716}</FeatureId>
+    </None>
     <None Include="key.snk" />
+    <None Include="BlingPointAssets\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{abc78e63-ebf4-4513-827f-3c8470df26f9}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{0d088393-d54c-4ef2-af25-7e8469c3ec85}</PackageId>
     </None>
@@ -76,6 +82,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="BlingPointAssets\BlackbirdJs\blackbird.css" />
+    <Content Include="BlingPointAssets\BlackbirdJs\blackbird.min.css" />
+    <Content Include="BlingPointAssets\BlackbirdJs\blackbird_icons.png" />
+    <Content Include="BlingPointAssets\BlackbirdJs\blackbird_panel.png" />
+    <Content Include="BlingPointAssets\BlingPoint.js" />
+    <Content Include="BlingPointAssets\BlingPoint.min.js" />
     <Content Include="BlingPointDevScriptLinkCustomAction\BlingPointDevScriptLinkCustomAction.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -87,6 +99,10 @@
     </Content>
     <Content Include="Features\BlingPoint SandBox Min\BlingPoint SandBox Min.Template.xml">
       <DependentUpon>BlingPoint SandBox Min.feature</DependentUpon>
+    </Content>
+    <Content Include="BlingPointAssets\Elements.xml" />
+    <Content Include="Features\BlingPoint SandBox Assets\BlingPoint SandBox Assets.Template.xml">
+      <DependentUpon>BlingPoint SandBox Assets.feature</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

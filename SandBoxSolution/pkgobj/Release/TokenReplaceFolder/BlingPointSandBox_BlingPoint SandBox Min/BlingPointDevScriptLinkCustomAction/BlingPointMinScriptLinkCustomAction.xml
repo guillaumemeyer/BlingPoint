@@ -1,13 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <CustomAction Location="ScriptLink" ScriptBlock ="
-    function LoadBlingPoint() {
-    _my_script = document.createElement('SCRIPT');
-    _my_script.type = 'text/javascript';
-    _my_script.src = 'https://www.eryemconseil.com/wp-content/BlingPoint/BlingPoint.min.js';
-    document.getElementsByTagName('head')[0].appendChild(_my_script);
-    }
-    LoadBlingPoint();
-    ">
+  <CustomAction ScriptSrc="~SiteCollection/SiteAssets/BlingPointAssets/BlingPoint.min.js"
+             Location="ScriptLink"
+             Sequence="100">
   </CustomAction>
 </Elements>

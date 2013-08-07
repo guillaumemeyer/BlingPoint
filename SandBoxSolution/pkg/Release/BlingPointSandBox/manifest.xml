@@ -3,5 +3,6 @@
   <FeatureManifests>
     <FeatureManifest Location="BlingPointSandBox_BlingPoint SandBox Dev\Feature.xml" />
     <FeatureManifest Location="BlingPointSandBox_BlingPoint SandBox Min\Feature.xml" />
+    <FeatureManifest Location="BlingPointSandBox_BlingPoint SandBox Assets\Feature.xml" />
   </FeatureManifests>
 </Solution>
