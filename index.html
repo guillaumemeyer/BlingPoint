@@ -20,14 +20,16 @@
   <body>
       <div id="header">
         <nav>
-          <li class="fork"><a href="https://github.com/guillaumemeyer/BlingPoint">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/zipball/master">Sources</a></li>
-          <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/blob/master/SandBoxSolution/bin/Release/BlingPointSandBox.wsp?raw=true">WSP</a></li>
-          <li class="title">DOWNLOADS</li>
+          <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/zipball/master">Get Sources</a></li>
+          <li class="downloads"><a href="https://github.com/guillaumemeyer/BlingPoint/blob/master/SandBoxSolution/bin/Release/BlingPointSandBox.wsp?raw=true">Download WSP</a></li>
         </nav>
         <br/>
-          <a href="" onclick="scrollToAnchor('get-started')"><span class="credits left">Get Started</span></a>
-        
+          <a href="" onclick="scrollToAnchor('features')"><span class="credits left">Features</span></a>
+          <a href="" onclick="scrollToAnchor('getstarted')"><span class="credits left">Get Started</span></a>
+          <a href="" onclick="scrollToAnchor('deployment')"><span class="credits left">Deployment</span></a>
+          <a href="" onclick="scrollToAnchor('support')"><span class="credits left">Support</span></a>
+          <a href="" onclick="scrollToAnchor('acknowledgements')"><span class="credits left">Acknowledgements</span></a>
       </div><!-- end header -->
 
     <div class="wrapper">
@@ -42,7 +44,7 @@
         </div>
 
         <h1>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>FEATURES</h1>
+<a name="features" class="anchor features" href="#features"><span class="octicon octicon-link"></span></a>FEATURES</h1>
 
 <p>BlingPoint provides an easy to use, lightweight and efficient library of tools and features to ease development of powerful, modular &amp; robust SharePoint solutions :</p>
 
@@ -68,7 +70,7 @@
 
 <br/><br/>
 
-<h1><a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>GET STARTED</h1>
+<h1><a name="get-started" class="anchor getstarted" href="#get-started"><span class="octicon octicon-link"></span></a>GET STARTED</h1>
 
 <b>This procedure is for testing purposes only ! For production use, deploy BlingPoint to your own servers.</b>
 <br/><br/>
@@ -90,7 +92,7 @@ Start by adding this link to your bookmark bar:
 Follow <a href="https://github.com/guillaumemeyer/BlingPoint/wiki/Create-a-new-blank-site">this procedure</a> to create a new blank site with just one single command.
 <br/><br/><br/>
 
-<h1><a name="deployment" class="anchor" href="#deployment"><span class="octicon octicon-link"></span></a>DEPLOYMENT</h1>
+<h1><a name="deployment" class="anchor deployment" href="#deployment"><span class="octicon octicon-link"></span></a>DEPLOYMENT</h1>
 
 <p>As a single minified javascript file, BlingPoint is easy to deploy :</p>
 
@@ -102,7 +104,7 @@ Follow <a href="https://github.com/guillaumemeyer/BlingPoint/wiki/Create-a-new-b
 
 <br/><br/>
 
-<h1><a name="more-" class="anchor" href="#more-"><span class="octicon octicon-link"></span></a>MORE ?</h1>
+<h1><a name="more-" class="anchor support" href="#more-"><span class="octicon octicon-link"></span></a>SUPPORT</h1>
 
 <ul>
 <li>Take a look at the <a href="https://github.com/guillaumemeyer/BlingPoint/wiki/_pages">wiki documentation</a></li>
@@ -118,7 +120,7 @@ And don't hesitate to fork and send a pull request for any cool example of yours
 
 <br/><br/>
 
-<h1><a name="acknowledgements" class="anchor" href="#acknowledgements"><span class="octicon octicon-link"></span></a>ACKNOWLEDGEMENTS</h1>
+<h1><a name="acknowledgements" class="anchor acknowledgements" href="#acknowledgements"><span class="octicon octicon-link"></span></a>ACKNOWLEDGEMENTS</h1>
 
 <ul>
 <li>My wonderful wife for supporting me during these weeks of late homework</li>
@@ -144,8 +146,7 @@ And don't hesitate to fork and send a pull request for any cool example of yours
           
           <script>
             function scrollToAnchor(aid){
-              var aTag = $("a[name='"+ aid +"']");
-              $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+              $('html, body').animate({scrollTop: $("." + aid).offset().top -80}, 1500);
             }
           </script>
 
