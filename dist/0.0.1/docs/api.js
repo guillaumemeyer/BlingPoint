@@ -3,12 +3,10 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [],
     "modules": [
         "Framework",
-        "Global",
         "Loader",
         "Log",
         "Parameters",
         "PlugIns",
-        "Schema",
         "Security",
         "UI"
     ],
@@ -17,11 +15,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "Framework",
             "name": "Framework",
             "description": "BlingPoint Framework Module"
-        },
-        {
-            "displayName": "Global",
-            "name": "Global",
-            "description": "BlingPoint Global Module"
         },
         {
             "displayName": "Loader",
@@ -42,11 +35,6 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "PlugIns",
             "name": "PlugIns",
             "description": "BlingPoint PlugIns Module"
-        },
-        {
-            "displayName": "Schema",
-            "name": "Schema",
-            "description": "BlingPoint Schema Module"
         },
         {
             "displayName": "Security",

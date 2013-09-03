@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\BlingPoint.Parameters.js - BlingPoint</title>
+    <title>src/BlingPoint.Parameters.js - BlingPoint</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -47,8 +47,6 @@
             
                 <li><a href="../modules/Framework.html">Framework</a></li>
             
-                <li><a href="../modules/Global.html">Global</a></li>
-            
                 <li><a href="../modules/Loader.html">Loader</a></li>
             
                 <li><a href="../modules/Log.html">Log</a></li>
@@ -56,8 +54,6 @@
                 <li><a href="../modules/Parameters.html">Parameters</a></li>
             
                 <li><a href="../modules/PlugIns.html">PlugIns</a></li>
-            
-                <li><a href="../modules/Schema.html">Schema</a></li>
             
                 <li><a href="../modules/Security.html">Security</a></li>
             
@@ -98,7 +94,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\BlingPoint.Parameters.js</h1>
+                        <h1 class="file-heading">File: src/BlingPoint.Parameters.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -122,12 +118,12 @@
 
 	function SetWebSiteProperty(property, propertyValue) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 
 		props.set_item(property, propertyValue);
-		web.update();
+		blingPointWeb.update();
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				blingpoint.log.debug(&#x27;WebSite property &#x27; + property + &#x27; = &#x27; + propertyValue);
 			},
@@ -140,10 +136,10 @@
  
 	function GetWebSiteProperty(property, callBackFunction) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 		var propertyValue = props.get_item(property);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				callBackFunction(propertyValue);
 			},

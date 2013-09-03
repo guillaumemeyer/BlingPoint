@@ -59,16 +59,16 @@
 			blingpoint.log.profile('pluginsLoading');
 		}
 
-		var list = web.get_lists().getByTitle("BlingPointPlugIns");
+		var list = blingpointWeb.get_lists().getByTitle("BlingPointPlugIns");
 		var camlQuery = new SP.CamlQuery();
 		var q = '<View><RowLimit>500</RowLimit></View>';
 
 		camlQuery.set_viewXml(q);
 		var oListItems = list.getItems(camlQuery);
 
-		ctx.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
+		blingpointContext.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function(){
 				var oListEnumerator = oListItems.getEnumerator();
 				//iterate though all of the items

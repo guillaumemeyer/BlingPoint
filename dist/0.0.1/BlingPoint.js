@@ -466,167 +466,14 @@ if (BlingPointDevMode == true) {
 	blingpoint.log.toggle();
 	blingpoint.log.profile('scriptLoading')
 }/**
- * BlingPoint Global Module
- * @module Global
- */
-( function() {
-
-	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
-	var BLINGPOINT_GLOBAL_NAMESPACE = 'global';
-	
-	// Init namespaces
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ] = {};
-	
-	/**
-	Catch unhandled errors
-	@method handleUnhandledError
-	@param {string} desc Descrpition
-	@param {string} page Page
-	@param {string} line Line
-	@param {string} chr Character
-	**/
-	function HandleUnhandledError(error, url, line) {
-		try {
-			blingpoint.log.error("An unexpected error has occured");
-			blingpoint.log.error("Description: " + error);
-			blingpoint.log.error("Url: " + url);
-			blingpoint.log.error("Line: " + line);
-		}
-		catch(err)
-		{
-			console.log("An unexpected error has occured");
-			console.log("Description: " + err.description);
-		}
-	}
-		
-	/**
-	Catch handled errors
-	@method handleUnhandledError
-	@param {string} customMessage Error message
-	@param {string} sender Sender
-	@param {string} args Arguments
-	**/
-	function HandleManagedError(customMessage, e) {
-		blingpoint.log.warn("A managed error has occured");
-		blingpoint.log.warn("Message: " + customMessage);
-		blingpoint.log.warn("Name: " + e.name);
-		blingpoint.log.warn("Technical message: " + e.message);
-		blingpoint.log.warn("Number: " + e.number);
-	}
-	
-
-	function ExecuteCallback(callbackFunction) {
-		try {
-			if (typeof callbackFunction !== undefined && callbackFunction !== null) {
-				callbackFunction();
-			}
-		}
-		catch(e)
-		{
-			HandleManagedError('An error has occurred during calling a callback method', e);
-		}
-	}
-
-
-	/**
-	Retrieves parameters and values from current URL
-	@method getUrlParameters
-	@return {string} vars A table of key / Value pairs
-	@example blingpoint.global.getUrlParameters() => ["PARAMETERNAME", "PARAMETERVALUE"]
-	@example blingpoint.global.getUrlParameters()['PARAMETERNAME'] => "PARAMETERVALUE"
-	**/
-	function GetUrlParameters() {
-	
-		var vars = [], hash;
-		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		for(var i = 0; i < hashes.length; i++)
-		{
-			hash = hashes[i].split('=');
-			vars.push(hash[0]);
-			vars[hash[0]] = decodeURIComponent(hash[1]);
-		}
-		return vars;
-	}
-	
-	/**
-	Checks if the current URL matchs a specific regular expression (Case insensitive)
-	@method checkUrl
-	@param {string} regExp A valid JS regular expression
-	@return {boolean} Returns the regex result against current URL
-	@example blingpoint.global.checkUrl('/lists/mylist/')
-	**/
-	function CheckUrl(regExp) {
-	
-		// Alternative regex creation
-		//Expression = /motif/drapeau
-		
-		var oRegExp = new RegExp(regExp,'gi');
-		if(oRegExp.test(window.location.href))
-		{ 
-			return true;
-		}  
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
-	Checks if a string matchs a specific regular expression (Case insensitive)
-	@method check
-	@param {string} inputString String to be tested
-	@param {string} regExp A valid JS regular expression
-	@return {boolean} Returns the regex result against current URL
-	@example blingpoint.global.check('abcde','bcd') => True
-	**/
-	function Check(inputString, regExp) {
-
-		var oRegExp = new RegExp(regExp,'gi');
-		if(oRegExp.test(inputString))
-		{ 
-			return true;
-		}  
-		else
-		{
-			return false;
-		}
-
-	}
-
-	/**
-	Checks if a string is a number
-	@method isNumber
-	@param {string} n String to be tested
-	@return {boolean} Returns true if n is a number
-	@example blingpoint.global.isNumber(3) => True
-	**/
-	function IsNumber(n) {
-		return !isNaN(parseFloat(n)) && isFinite(n);
-	}
-	
-	// Public functions mapping
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].getUrlParameters = GetUrlParameters;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].checkUrl = CheckUrl;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].check = Check;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].isNumber = IsNumber;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleUnhandledError = HandleUnhandledError;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleManagedError = HandleManagedError;
-	window[ BLINGPOINT_GLOBAL_NAMESPACE ].executeCallback = ExecuteCallback;
-	
-	window[ BLINGPOINT_ROOT_NAMESPACE ].global = window[ BLINGPOINT_GLOBAL_NAMESPACE ];
-
-	window.onerror = blingpoint.global.handleUnhandledError;
-
-})();
-/**
  * BlingPoint Framework Module
  * @module Framework
  */
-var ctx;
-var hostCtx;
-var web;
-var hostWeb;
-var user;
+var blingpointContext;
+var blingpointHostContext;
+var blingpointWeb;
+var blingpointHostWeb;
+var blingpointUser;
 
 ( function() {
 	
@@ -645,42 +492,42 @@ var user;
 			blingpoint.log.profile('contextLoading');
 		}
 
-		ctx = SP.ClientContext.get_current();
-		web = ctx.get_web();
-		ctx.load(web);
-		user = ctx.get_web().get_currentUser();
-		ctx.load(user);
+		blingpointContext = SP.ClientContext.get_current();
+		blingpointWeb = blingpointContext.get_web();
+		blingpointContext.load(blingpointWeb);
+		blingpointUser = blingpointContext.get_web().get_currentUser();
+		blingpointContext.load(blingpointUser);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function() {
 				log.info('Web Context loaded');
-				log.debug('web title:' + web.get_title());
-				log.debug('Description:' + web.get_description());
-				log.debug('ID:' + web.get_id());
-				log.debug('Created Date:' + web.get_created());
-				log.debug('Web Url:' + web.get_serverRelativeUrl());
+				log.debug('web title:' + blingpointWeb.get_title());
+				log.debug('Description:' + blingpointWeb.get_description());
+				log.debug('ID:' + blingpointWeb.get_id());
+				log.debug('Created Date:' + blingpointWeb.get_created());
+				log.debug('Web Url:' + blingpointWeb.get_serverRelativeUrl());
 				log.info('Current user loaded');
-				log.debug('ID:' + user.get_id());
-				log.debug('User title:' + user.get_title());
-				log.debug('Email:' + user.get_email());
+				log.debug('ID:' + blingpointUser.get_id());
+				log.debug('User title:' + blingpointUser.get_title());
+				log.debug('Email:' + blingpointUser.get_email());
 
-				if ( hostWebUrl !== undefined && hostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
+				if ( blingpointHostWebUrl !== undefined && blingpointHostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
 					
 					blingpoint.log.debug('App context detected, loading both SPHost context');
 
 					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
-					ctx.set_webRequestExecutorFactory(factory);
-					var hostCtx = new SP.AppContextSite(ctx, hostWebUrl);
-					hostWeb = hostCtx.get_web();
-					ctx.load(hostWeb);
-					ctx.executeQueryAsync(
+					blingpointContext.set_webRequestExecutorFactory(factory);
+					var blingpointHostContext = new SP.AppContextSite(ctx, blingpointHostWebUrl);
+					blingpointHostWeb = blingpointHostContext.get_web();
+					blingpointContext.load(blingpointHostWeb);
+					blingpointContext.executeQueryAsync(
 						function() {
 							log.info('Host Web Context loaded');
-							log.debug('Host web title:' + hostWeb.get_title());
-							log.debug('Host Description:' + hostWeb.get_description());
-							log.debug('Host ID:' + hostWeb.get_id());
-							log.debug('Host Created Date:' + hostWeb.get_created());
-							log.debug('Host Web Url:' + hostWeb.get_serverRelativeUrl());
+							log.debug('Host web title:' + blingpointHostWeb.get_title());
+							log.debug('Host Description:' + blingpointHostWeb.get_description());
+							log.debug('Host ID:' + blingpointHostWeb.get_id());
+							log.debug('Host Created Date:' + blingpointHostWeb.get_created());
+							log.debug('Host Web Url:' + blingpointHostWeb.get_serverRelativeUrl());
 							if (BlingPointDevMode === true) {
 								blingpoint.log.profile('contextLoading');
 							}
@@ -716,9 +563,9 @@ var user;
 
 	}
 
-	var hostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
+	var blingpointHostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
 	var appWebUrl = blingpoint.global.getUrlParameters().SPAppWebUrl;
-	if ( hostWebUrl !== undefined && hostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
+	if ( blingpointHostWebUrl !== undefined && blingpointHostWebUrl !== null && appWebUrl !== undefined && appWebUrl !== null ) {
 		// Loading SP.Runtime
 		blingpoint.loader.addScriptToPage('/_layouts/15/SP.RequestExecutor.js');
 		ExecuteOrDelayUntilScriptLoaded(InitWeb,"SP.RequestExecutor.js");
@@ -737,7 +584,7 @@ var user;
 	function CreateItem(listName, itemTitle, callBackFunction) {
 
 		//Retrieve the lists
-		var lists = web.get_lists();
+		var lists = blingpointWeb.get_lists();
 		//Get the Cars List
 		var list = lists.getByTitle(listName);
 		//Create new IteamCreationInformation
@@ -752,7 +599,7 @@ var user;
 		listItem.update();
 		//Finally execute the operation
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function () {
 
 				var createdItemId;
@@ -777,7 +624,7 @@ var user;
 
 		ExecuteOrDelayUntilScriptLoaded(function(){
 
-			var list = web.get_lists().getByTitle(listName);
+			var list = blingpointWeb.get_lists().getByTitle(listName);
 			var oListItem = list.getItemById(itemId);
 			
 			/*-------------------------------------------------------------
@@ -798,6 +645,7 @@ var user;
 			Title – SP.ListItem.get_item(‘Title‘);
 			ID – SP.ListItem.get_id();
 			Url -SP.ListItem.get_item(‘urlfieldname‘).get_url()
+			
 			Description – SP.ListItem.get_item(‘descriptionfieldname‘).get_description();
 			Current Version – SP.ListItem.get_item(“_UIVersionString“);
 			Lookup field – SP.ListItem.get_item(‘LookupFieldName’).get_lookupValue();
@@ -812,11 +660,11 @@ var user;
 			Parent List – SP.ListItem.get_parentList();
 			*/		
 
-			//ctx.load(oListItem);
+			//blingpointContext.load(oListItem);
 			oListItem.set_item(column, value);
 			oListItem.update();
 			
-			ctx.executeQueryAsync(
+			blingpointContext.executeQueryAsync(
 				function () {
 					blingpoint.log.debug('Updated');
 					//blingpoint.ui.addNotification("updated", false);
@@ -842,15 +690,15 @@ var user;
 		
 		ExecuteOrDelayUntilScriptLoaded(function(){
 			
-			var list = web.get_lists().getByTitle(listName);
+			var list = blingpointWeb.get_lists().getByTitle(listName);
 			var oListItem = list.getItemById(itemId);
 
 			// context.load(<object>,'<Field1>','<Field2>','<Field3>');
 			// context.load(<objectCollection>,'Include(<Field1>,<Field2>,<Field3>');
 
-			ctx.load(oListItem,column);
+			blingpointContext.load(oListItem,column);
 
-			ctx.executeQueryAsync(
+			blingpointContext.executeQueryAsync(
 				function () {
 
 					var oFieldUrlValue;
@@ -862,7 +710,7 @@ var user;
 					
 					oListItem.update();
 
-					ctx.executeQueryAsync(
+					blingpointContext.executeQueryAsync(
 						function () {
 							log.debug('Updated');
 							//blingpoint.ui.addNotification("updated", false);
@@ -921,10 +769,10 @@ var user;
 	**/
 	function CurrentUserIsUserMemberOf(groupIdOrName, callbackFunctionIfMember, callbackFunctionIfNotMember) {
 
-		var collGroup = web.get_siteGroups();
-		ctx.load(collGroup);
+		var collGroup = blingpointWeb.get_siteGroups();
+		blingpointContext.load(collGroup);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 
 			function (sender, args) {
 
@@ -937,8 +785,8 @@ var user;
 				}
 
 				var collUser = oGroup.get_users();
-				ctx.load(collUser);
-				ctx.executeQueryAsync(
+				blingpointContext.load(collUser);
+				blingpointContext.executeQueryAsync(
 
 					function (sender, args) {
 						var userEnumerator = collUser.getEnumerator();
@@ -1127,16 +975,16 @@ var user;
 			blingpoint.log.profile('pluginsLoading');
 		}
 
-		var list = web.get_lists().getByTitle("BlingPointPlugIns");
+		var list = blingpointWeb.get_lists().getByTitle("BlingPointPlugIns");
 		var camlQuery = new SP.CamlQuery();
 		var q = '<View><RowLimit>500</RowLimit></View>';
 
 		camlQuery.set_viewXml(q);
 		var oListItems = list.getItems(camlQuery);
 
-		ctx.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
+		blingpointContext.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function(){
 				var oListEnumerator = oListItems.getEnumerator();
 				//iterate though all of the items
@@ -1207,12 +1055,12 @@ var user;
 
 	function SetWebSiteProperty(property, propertyValue) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 
 		props.set_item(property, propertyValue);
-		web.update();
+		blingPointWeb.update();
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				blingpoint.log.debug('WebSite property ' + property + ' = ' + propertyValue);
 			},
@@ -1225,10 +1073,10 @@ var user;
  
 	function GetWebSiteProperty(property, callBackFunction) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 		var propertyValue = props.get_item(property);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				callBackFunction(propertyValue);
 			},
@@ -1247,293 +1095,3 @@ var user;
 	window[ BLINGPOINT_ROOT_NAMESPACE ].parameters = window[ BLINGPOINT_PARAMETERS_NAMESPACE ];
 
 })();
-/**
- * BlingPoint Schema Module
- * @module Schema
- */
-
-( function() {
-	
-	var BLINGPOINT_ROOT_NAMESPACE = 'blingpoint';
-	var BLINGPOINT_SCHEMA_NAMESPACE = 'schema';
-	
-	// Init namespaces
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ] = {};
-	
-
-
-	function CreateField (fieldType, fieldName, fieldDisplayName, fieldGroup, fieldHidden, callBackFunctionOnSuccess, callBackFunctionOnError) {
-
-        var fields = web.get_fields();
- 
-        var fieldXml = "<Field Type='" + fieldType + "' DisplayName='" + fieldDisplayName + "' Name='" + fieldName + 
-            "' Group='" + fieldGroup + "' Hidden='" + fieldHidden + "'></Field>";
- 
-        /*
-        See XML Fields reference : http://msdn.microsoft.com/en-us/library/aa979575.aspx
-        */
-
-		var createdField = fields.addFieldAsXml(fieldXml, false, SP.AddFieldOptions.AddToNoContentType);
-
-		ctx.load(fields);
-		ctx.load(createdField);
-		ctx.executeQueryAsync(
-			function(){
-				blingpoint.log.debug('Field provisioned in host web successfully.');
-				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-			},
-			function (sender, args){
-				blingpoint.log.warn('Failed to provision field into host web. Error:' + sender.statusCode);
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		);
-	}
-
-
-	function CreateContentTypeInHost (ctypeName, ctypeDescription, ctypeGroup, callBackFunctionOnSuccess, callBackFunctionOnError) {
-		hostWebContentTypes = web.get_contentTypes();
-		var cTypeInfo = new SP.ContentTypeCreationInformation();
-		cTypeInfo.set_name(ctypeName);
-		cTypeInfo.set_description(ctypeDescription);
-		cTypeInfo.set_group(ctypeGroup);
-		hostWebContentTypes.add(cTypeInfo);
-		ctx.load(hostWebContentTypes);
-		ctx.executeQueryAsync(
-			function(){
-				blingpoint.log.debug('Content type provisioned in host web successfully.');
-				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-			},
-			function (sender, args){
-				blingpoint.log.warn('Failed to provision content type into host web. Error:' + sender.statusCode);
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		);
-	}
-
-
-	function AddFieldToContentTypeInHost (ctypeName, fieldInternalName, callBackFunctionOnSuccess, callBackFunctionOnError) {
-
-		createdFieldInternalName = fieldInternalName;
-		createdContentTypeName = ctypeName;
-
-		// re-fetch created items..
-		createdField = web.get_fields().getByInternalNameOrTitle(fieldInternalName);
-		ctx.load(createdField);
-
-		hostWebContentTypes = web.get_contentTypes();
-		ctx.load(hostWebContentTypes);
-
-		ctx.executeQueryAsync(
-			function() {
-				performAddFieldToContentTypeInHost(createdContentTypeName, createdFieldInternalName, callBackFunctionOnSuccess, callBackFunctionOnError);
-			},
-			function (sender, args) {
-				blingpoint.log.warn('Failed to re-fetch field and content type. Error:' + sender.statusCode);
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		);
-
-	}
-
-    function performAddFieldToContentTypeInHost (ctypeName, fieldInternalName, callBackFunctionOnSuccess, callBackFunctionOnError) {
-        // iterate content types, find passed one, THEN add field..
-        var cTypeFound = false;
-        var createdContentType;
-
-        var contentTypeEnumerator = hostWebContentTypes.getEnumerator();
-        while (contentTypeEnumerator.moveNext()) {
-            var contentType = contentTypeEnumerator.get_current();
-            if (contentType.get_name() === ctypeName) {
-                cTypeFound = true;
-                createdContentType = contentType;
-                break;
-            }
-        }
-
-		if (cTypeFound) {
-			// - NOT the below line - SP.FieldCollection doesn't appear to have an add() method when fetched from content type..
-			//contentType.get_fields.add(fieldInternalName)
-			// - instead, this..
-			var fieldRef = new SP.FieldLinkCreationInformation();
-			fieldRef.set_field(createdField);
-
-			createdContentType.get_fieldLinks().add(fieldRef);
-			// specify push down..
-			createdContentType.update(true);
-
-			ctx.load(createdContentType);
-			ctx.executeQueryAsync(
-				function () {
-					blingpoint.log.debug('Field added to content type in host web successfully.');
-					blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-				},
-				function (sender, args) {
-					blingpoint.log.warn('Failed to add field to content type. Error:' + sender.statusCode);
-					blingpoint.global.executeCallback(callBackFunctionOnError);
-				}
-			);
-		}
-		else {
-			blingpoint.log.warn('Failed to add field to content type - check the content type exists!');
-			blingpoint.global.executeCallback(callBackFunctionOnError);
-		}
-    }
-
-
-	function AddExistingContentTypetoList(listName, contentTypeName, callBackFunctionOnSuccess, callBackFunctionOnError) {
-        
-        var contentTypeCollection;
-        var contentType;
-        var listCollection;
-        var list;
-        var listContentTypeColl;
-
-        var clientContext = ctx;
-        
-        // Retrieve content type by name
-        hostWebContentTypes = web.get_contentTypes();
-		ctx.load(hostWebContentTypes);
-
-		ctx.executeQueryAsync(
-			function() {
-				var contentTypeEnumerator = hostWebContentTypes.getEnumerator();
-				while (contentTypeEnumerator.moveNext()) {
-					var contentType = contentTypeEnumerator.get_current();
-					if (contentType.get_name() === contentTypeName) {
-						performAddExistingContentTypetoList(listName, contentType, callBackFunctionOnSuccess, callBackFunctionOnError);
-					}
-				}
-			},
-			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		);
-	} 
-
-
-	function performAddExistingContentTypetoList(listName, contentType, callBackFunctionOnSuccess, callBackFunctionOnError) {
-		listCollection = web.get_lists();
-		list = listCollection.getByTitle(listName);
-		listContentTypeColl = list.get_contentTypes();
-		listContentTypeColl.addExistingContentType(contentType);
-		ctx.load(listContentTypeColl);
-		ctx.executeQueryAsync(
-			function () {
-				blingpoint.log.debug('Content Type added successfully');
-				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-			},
-			function (sender, args) {
-				blingpoint.log.warn('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		);
-	}
-
-
-	function CreateList(listName, listTemplate, displayInQuickLaunch, callBackFunctionOnSuccess, callBackFunctionOnError) {
-
-		//Let's create list creation information object 
-		var listCreationInfo = new SP.ListCreationInformation(); 
-		listCreationInfo.set_title(listName);
-		
-		/*
-		Type definition
-		// Référence : http://msdn.microsoft.com/en-us/library/jj245053.aspx
-		*/
-		if (listTemplate !== null) {
-			listCreationInfo.set_templateType(listTemplate);
-		}
-		else {
-			listCreationInfo.set_templateType(SP.ListTemplateType.genericList); 
-		}
-		
-		// Affichage dans le QuickLaunch
-		// Référence : http://msdn.microsoft.com/en-us/library/ee556266.aspx
-		switch (displayInQuickLaunch) {
-			case true:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.on); 
-			break;
-			case false:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
-			break;
-			default:
-			listCreationInfo.set_quickLaunchOption(SP.QuickLaunchOptions.off); 
-			break;
-		}
-
-		// Création de la liste
-		var oList = web.get_lists().add(listCreationInfo); 
-		
-		ctx.load(oList);
-	
-		//Execute the actual script 
-		ctx.executeQueryAsync(
-			function(){
-				blingpoint.log.info("List <b>" + oList.get_title() + "</b> created...", false);
-				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-			},
-			function (sender, args){
-				handleManagedError("Operation was cancelled...", sender, args);
-				blingpoint.log.warn("List creation operation was cancelled...", false);
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-		); 
-
-	}
-
-	/*-------------------------------------------------------------
-		Sites
-	-------------------------------------------------------------*/
-	function CreateSite(siteTitle, siteDescription, siteUrl, siteLanguage, siteTemplate, inheritsPermissions, callBackFunctionOnSuccess, callBackFunctionOnError) {
-
-		// siteLanguage : http://technet.microsoft.com/en-us/library/ff463597.aspx
-		// siteTemplate : https://www.nothingbutsharepoint.com/sites/devwiki/SP2010Dev/Pages/Site%20Templates%20in%20SharePoint%202010.aspx
-		// Exemple : CreateSite('monblog','madesc','blog1',1033, 'BLOG#0', true);
-		// Blank : STS#1
-	
-		var webCreateInfo = new SP.WebCreationInformation();
-		webCreateInfo.set_title(siteTitle);
-		webCreateInfo.set_description(siteDescription);
-		webCreateInfo.set_url(siteUrl);
-		webCreateInfo.set_language(siteLanguage);
-		webCreateInfo.set_webTemplate(siteTemplate);
-		webCreateInfo.set_useSamePermissionsAsParentSite(inheritsPermissions);
-
-		oNewWebsite = web.get_webs().add(webCreateInfo);
-
-		ctx.load(oNewWebsite);
-		ctx.executeQueryAsync(
-			function (sender, args) {
-				var createdSiteUrl;
-				createdSiteUrl = oNewWebsite.get_serverRelativeUrl();
-				log.info('Site Created');
-				log.debug('Site Url : ' + createdSiteUrl);
-				blingpoint.global.executeCallback(callBackFunctionOnSuccess);
-			},
-			function (sender, args) {
-				log.warn('Site creation failed : ' + args.get_message() + '\n' + args.get_stackTrace());
-				blingpoint.global.executeCallback(callBackFunctionOnError);
-			}
-
-		);
-	}
-	
-
-	/*-------------------------------------------------------------
-	Namespaces
-	-------------------------------------------------------------*/
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createField = CreateField;
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createContentTypeInHost = CreateContentTypeInHost;
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].addFieldToContentTypeInHost = AddFieldToContentTypeInHost;
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].addExistingContentTypetoList = AddExistingContentTypetoList;
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createList = CreateList;
-	window[ BLINGPOINT_SCHEMA_NAMESPACE ].createSite = CreateSite;
-
-	window[ BLINGPOINT_ROOT_NAMESPACE ].schema = window[ BLINGPOINT_SCHEMA_NAMESPACE ];
-
-})();
-
-if (BlingPointDevMode === true) {
-	blingpoint.log.profile('scriptLoading');
-}

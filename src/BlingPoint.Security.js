@@ -18,10 +18,10 @@
 	**/
 	function CurrentUserIsUserMemberOf(groupIdOrName, callbackFunctionIfMember, callbackFunctionIfNotMember) {
 
-		var collGroup = web.get_siteGroups();
-		ctx.load(collGroup);
+		var collGroup = blingpointWeb.get_siteGroups();
+		blingpointContext.load(collGroup);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 
 			function (sender, args) {
 
@@ -34,8 +34,8 @@
 				}
 
 				var collUser = oGroup.get_users();
-				ctx.load(collUser);
-				ctx.executeQueryAsync(
+				blingpointContext.load(collUser);
+				blingpointContext.executeQueryAsync(
 
 					function (sender, args) {
 						var userEnumerator = collUser.getEnumerator();

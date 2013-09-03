@@ -18,12 +18,12 @@
 
 	function SetWebSiteProperty(property, propertyValue) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 
 		props.set_item(property, propertyValue);
-		web.update();
+		blingPointWeb.update();
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				blingpoint.log.debug('WebSite property ' + property + ' = ' + propertyValue);
 			},
@@ -36,10 +36,10 @@
  
 	function GetWebSiteProperty(property, callBackFunction) {
 
-		var props = web.get_allProperties();
+		var props = blingpointWeb.get_allProperties();
 		var propertyValue = props.get_item(property);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function (sender, args) {
 				callBackFunction(propertyValue);
 			},

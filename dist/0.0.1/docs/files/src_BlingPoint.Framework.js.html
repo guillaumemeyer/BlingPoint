@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src\BlingPoint.Framework.js - BlingPoint</title>
+    <title>src/BlingPoint.Framework.js - BlingPoint</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -47,8 +47,6 @@
             
                 <li><a href="../modules/Framework.html">Framework</a></li>
             
-                <li><a href="../modules/Global.html">Global</a></li>
-            
                 <li><a href="../modules/Loader.html">Loader</a></li>
             
                 <li><a href="../modules/Log.html">Log</a></li>
@@ -56,8 +54,6 @@
                 <li><a href="../modules/Parameters.html">Parameters</a></li>
             
                 <li><a href="../modules/PlugIns.html">PlugIns</a></li>
-            
-                <li><a href="../modules/Schema.html">Schema</a></li>
             
                 <li><a href="../modules/Security.html">Security</a></li>
             
@@ -98,7 +94,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src\BlingPoint.Framework.js</h1>
+                        <h1 class="file-heading">File: src/BlingPoint.Framework.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -106,11 +102,11 @@
  * BlingPoint Framework Module
  * @module Framework
  */
-var ctx;
-var hostCtx;
-var web;
-var hostWeb;
-var user;
+var blingpointContext;
+var blingpointHostContext;
+var blingpointWeb;
+var blingpointHostWeb;
+var blingpointUser;
 
 ( function() {
 	
@@ -129,42 +125,42 @@ var user;
 			blingpoint.log.profile(&#x27;contextLoading&#x27;);
 		}
 
-		ctx = SP.ClientContext.get_current();
-		web = ctx.get_web();
-		ctx.load(web);
-		user = ctx.get_web().get_currentUser();
-		ctx.load(user);
+		blingpointContext = SP.ClientContext.get_current();
+		blingpointWeb = blingpointContext.get_web();
+		blingpointContext.load(blingpointWeb);
+		blingpointUser = blingpointContext.get_web().get_currentUser();
+		blingpointContext.load(blingpointUser);
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function() {
 				log.info(&#x27;Web Context loaded&#x27;);
-				log.debug(&#x27;web title:&#x27; + web.get_title());
-				log.debug(&#x27;Description:&#x27; + web.get_description());
-				log.debug(&#x27;ID:&#x27; + web.get_id());
-				log.debug(&#x27;Created Date:&#x27; + web.get_created());
-				log.debug(&#x27;Web Url:&#x27; + web.get_serverRelativeUrl());
+				log.debug(&#x27;web title:&#x27; + blingpointWeb.get_title());
+				log.debug(&#x27;Description:&#x27; + blingpointWeb.get_description());
+				log.debug(&#x27;ID:&#x27; + blingpointWeb.get_id());
+				log.debug(&#x27;Created Date:&#x27; + blingpointWeb.get_created());
+				log.debug(&#x27;Web Url:&#x27; + blingpointWeb.get_serverRelativeUrl());
 				log.info(&#x27;Current user loaded&#x27;);
-				log.debug(&#x27;ID:&#x27; + user.get_id());
-				log.debug(&#x27;User title:&#x27; + user.get_title());
-				log.debug(&#x27;Email:&#x27; + user.get_email());
+				log.debug(&#x27;ID:&#x27; + blingpointUser.get_id());
+				log.debug(&#x27;User title:&#x27; + blingpointUser.get_title());
+				log.debug(&#x27;Email:&#x27; + blingpointUser.get_email());
 
-				if ( hostWebUrl !== undefined &amp;&amp; hostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
+				if ( blingpointHostWebUrl !== undefined &amp;&amp; blingpointHostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
 					
 					blingpoint.log.debug(&#x27;App context detected, loading both SPHost context&#x27;);
 
 					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
-					ctx.set_webRequestExecutorFactory(factory);
-					var hostCtx = new SP.AppContextSite(ctx, hostWebUrl);
-					hostWeb = hostCtx.get_web();
-					ctx.load(hostWeb);
-					ctx.executeQueryAsync(
+					blingpointContext.set_webRequestExecutorFactory(factory);
+					var blingpointHostContext = new SP.AppContextSite(ctx, blingpointHostWebUrl);
+					blingpointHostWeb = blingpointHostContext.get_web();
+					blingpointContext.load(blingpointHostWeb);
+					blingpointContext.executeQueryAsync(
 						function() {
 							log.info(&#x27;Host Web Context loaded&#x27;);
-							log.debug(&#x27;Host web title:&#x27; + hostWeb.get_title());
-							log.debug(&#x27;Host Description:&#x27; + hostWeb.get_description());
-							log.debug(&#x27;Host ID:&#x27; + hostWeb.get_id());
-							log.debug(&#x27;Host Created Date:&#x27; + hostWeb.get_created());
-							log.debug(&#x27;Host Web Url:&#x27; + hostWeb.get_serverRelativeUrl());
+							log.debug(&#x27;Host web title:&#x27; + blingpointHostWeb.get_title());
+							log.debug(&#x27;Host Description:&#x27; + blingpointHostWeb.get_description());
+							log.debug(&#x27;Host ID:&#x27; + blingpointHostWeb.get_id());
+							log.debug(&#x27;Host Created Date:&#x27; + blingpointHostWeb.get_created());
+							log.debug(&#x27;Host Web Url:&#x27; + blingpointHostWeb.get_serverRelativeUrl());
 							if (BlingPointDevMode === true) {
 								blingpoint.log.profile(&#x27;contextLoading&#x27;);
 							}
@@ -200,9 +196,9 @@ var user;
 
 	}
 
-	var hostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
+	var blingpointHostWebUrl = blingpoint.global.getUrlParameters().SPHostUrl;
 	var appWebUrl = blingpoint.global.getUrlParameters().SPAppWebUrl;
-	if ( hostWebUrl !== undefined &amp;&amp; hostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
+	if ( blingpointHostWebUrl !== undefined &amp;&amp; blingpointHostWebUrl !== null &amp;&amp; appWebUrl !== undefined &amp;&amp; appWebUrl !== null ) {
 		// Loading SP.Runtime
 		blingpoint.loader.addScriptToPage(&#x27;/_layouts/15/SP.RequestExecutor.js&#x27;);
 		ExecuteOrDelayUntilScriptLoaded(InitWeb,&quot;SP.RequestExecutor.js&quot;);
@@ -221,7 +217,7 @@ var user;
 	function CreateItem(listName, itemTitle, callBackFunction) {
 
 		//Retrieve the lists
-		var lists = web.get_lists();
+		var lists = blingpointWeb.get_lists();
 		//Get the Cars List
 		var list = lists.getByTitle(listName);
 		//Create new IteamCreationInformation
@@ -236,7 +232,7 @@ var user;
 		listItem.update();
 		//Finally execute the operation
 
-		ctx.executeQueryAsync(
+		blingpointContext.executeQueryAsync(
 			function () {
 
 				var createdItemId;
@@ -261,7 +257,7 @@ var user;
 
 		ExecuteOrDelayUntilScriptLoaded(function(){
 
-			var list = web.get_lists().getByTitle(listName);
+			var list = blingpointWeb.get_lists().getByTitle(listName);
 			var oListItem = list.getItemById(itemId);
 			
 			/*-------------------------------------------------------------
@@ -282,6 +278,7 @@ var user;
 			Title – SP.ListItem.get_item(‘Title‘);
 			ID – SP.ListItem.get_id();
 			Url -SP.ListItem.get_item(‘urlfieldname‘).get_url()
+			
 			Description – SP.ListItem.get_item(‘descriptionfieldname‘).get_description();
 			Current Version – SP.ListItem.get_item(“_UIVersionString“);
 			Lookup field – SP.ListItem.get_item(‘LookupFieldName’).get_lookupValue();
@@ -296,11 +293,11 @@ var user;
 			Parent List – SP.ListItem.get_parentList();
 			*/		
 
-			//ctx.load(oListItem);
+			//blingpointContext.load(oListItem);
 			oListItem.set_item(column, value);
 			oListItem.update();
 			
-			ctx.executeQueryAsync(
+			blingpointContext.executeQueryAsync(
 				function () {
 					blingpoint.log.debug(&#x27;Updated&#x27;);
 					//blingpoint.ui.addNotification(&quot;updated&quot;, false);
@@ -326,15 +323,15 @@ var user;
 		
 		ExecuteOrDelayUntilScriptLoaded(function(){
 			
-			var list = web.get_lists().getByTitle(listName);
+			var list = blingpointWeb.get_lists().getByTitle(listName);
 			var oListItem = list.getItemById(itemId);
 
 			// context.load(&lt;object&gt;,&#x27;&lt;Field1&gt;&#x27;,&#x27;&lt;Field2&gt;&#x27;,&#x27;&lt;Field3&gt;&#x27;);
 			// context.load(&lt;objectCollection&gt;,&#x27;Include(&lt;Field1&gt;,&lt;Field2&gt;,&lt;Field3&gt;&#x27;);
 
-			ctx.load(oListItem,column);
+			blingpointContext.load(oListItem,column);
 
-			ctx.executeQueryAsync(
+			blingpointContext.executeQueryAsync(
 				function () {
 
 					var oFieldUrlValue;
@@ -346,7 +343,7 @@ var user;
 					
 					oListItem.update();
 
-					ctx.executeQueryAsync(
+					blingpointContext.executeQueryAsync(
 						function () {
 							log.debug(&#x27;Updated&#x27;);
 							//blingpoint.ui.addNotification(&quot;updated&quot;, false);

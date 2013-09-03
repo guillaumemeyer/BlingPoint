@@ -88,7 +88,7 @@ module.exports = function(grunt) {
         'src/BlingPoint.Ui.js',
         'src/BlingPoint.PlugIns.js',
         'src/BlingPoint.Parameters.js',
-        'src/BlingPoint.schema.js'
+        'src/BlingPoint.Schema.js'
         ],
       options: {
         // options here to override JSHint defaults

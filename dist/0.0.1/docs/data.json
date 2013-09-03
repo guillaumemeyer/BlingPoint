@@ -6,8 +6,8 @@
         "url": "https://github.com/guillaumemeyer/BlingPoint"
     },
     "files": {
-        "src\\BlingPoint.Framework.js": {
-            "name": "src\\BlingPoint.Framework.js",
+        "src/BlingPoint.Framework.js": {
+            "name": "src/BlingPoint.Framework.js",
             "modules": {
                 "Framework": 1
             },
@@ -15,17 +15,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.Global.js": {
-            "name": "src\\BlingPoint.Global.js",
-            "modules": {
-                "Global": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src\\BlingPoint.Loader.js": {
-            "name": "src\\BlingPoint.Loader.js",
+        "src/BlingPoint.Loader.js": {
+            "name": "src/BlingPoint.Loader.js",
             "modules": {
                 "Loader": 1
             },
@@ -33,8 +24,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.Log.js": {
-            "name": "src\\BlingPoint.Log.js",
+        "src/BlingPoint.Log.js": {
+            "name": "src/BlingPoint.Log.js",
             "modules": {
                 "Log": 1
             },
@@ -42,8 +33,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.Parameters.js": {
-            "name": "src\\BlingPoint.Parameters.js",
+        "src/BlingPoint.Parameters.js": {
+            "name": "src/BlingPoint.Parameters.js",
             "modules": {
                 "Parameters": 1
             },
@@ -51,8 +42,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.PlugIns.js": {
-            "name": "src\\BlingPoint.PlugIns.js",
+        "src/BlingPoint.PlugIns.js": {
+            "name": "src/BlingPoint.PlugIns.js",
             "modules": {
                 "PlugIns": 1
             },
@@ -60,17 +51,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.Schema.js": {
-            "name": "src\\BlingPoint.Schema.js",
-            "modules": {
-                "Schema": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "src\\BlingPoint.Security.js": {
-            "name": "src\\BlingPoint.Security.js",
+        "src/BlingPoint.Security.js": {
+            "name": "src/BlingPoint.Security.js",
             "modules": {
                 "Security": 1
             },
@@ -78,8 +60,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\BlingPoint.Ui.js": {
-            "name": "src\\BlingPoint.Ui.js",
+        "src/BlingPoint.Ui.js": {
+            "name": "src/BlingPoint.Ui.js",
             "modules": {
                 "UI": 1
             },
@@ -96,20 +78,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Framework.js",
+            "file": "src/BlingPoint.Framework.js",
             "line": 1,
             "description": "BlingPoint Framework Module"
-        },
-        "Global": {
-            "name": "Global",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "src\\BlingPoint.Global.js",
-            "line": 1,
-            "description": "BlingPoint Global Module"
         },
         "Loader": {
             "name": "Loader",
@@ -118,7 +89,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Loader.js",
+            "file": "src/BlingPoint.Loader.js",
             "line": 1,
             "description": "BlingPoint Loader Module"
         },
@@ -129,7 +100,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Log.js",
+            "file": "src/BlingPoint.Log.js",
             "line": 1,
             "description": "BlingPoint Log Module"
         },
@@ -140,7 +111,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Parameters.js",
+            "file": "src/BlingPoint.Parameters.js",
             "line": 1,
             "description": "BlingPoint Parameters Module"
         },
@@ -151,20 +122,9 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.PlugIns.js",
+            "file": "src/BlingPoint.PlugIns.js",
             "line": 1,
             "description": "BlingPoint PlugIns Module"
-        },
-        "Schema": {
-            "name": "Schema",
-            "submodules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "src\\BlingPoint.Schema.js",
-            "line": 1,
-            "description": "BlingPoint Schema Module"
         },
         "Security": {
             "name": "Security",
@@ -173,7 +133,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Security.js",
+            "file": "src/BlingPoint.Security.js",
             "line": 1,
             "description": "BlingPoint Security Module"
         },
@@ -184,7 +144,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\BlingPoint.Ui.js",
+            "file": "src/BlingPoint.Ui.js",
             "line": 1,
             "description": "BlingPoint UI Module"
         }
@@ -192,155 +152,7 @@
     "classes": {},
     "classitems": [
         {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 13,
-            "description": "Catch unhandled errors",
-            "itemtype": "method",
-            "name": "handleUnhandledError",
-            "params": [
-                {
-                    "name": "desc",
-                    "description": "Descrpition",
-                    "type": "String"
-                },
-                {
-                    "name": "page",
-                    "description": "Page",
-                    "type": "String"
-                },
-                {
-                    "name": "line",
-                    "description": "Line",
-                    "type": "String"
-                },
-                {
-                    "name": "chr",
-                    "description": "Character",
-                    "type": "String"
-                }
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 35,
-            "description": "Catch handled errors",
-            "itemtype": "method",
-            "name": "handleUnhandledError",
-            "params": [
-                {
-                    "name": "customMessage",
-                    "description": "Error message",
-                    "type": "String"
-                },
-                {
-                    "name": "sender",
-                    "description": "Sender",
-                    "type": "String"
-                },
-                {
-                    "name": "args",
-                    "description": "Arguments",
-                    "type": "String"
-                }
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 64,
-            "description": "Retrieves parameters and values from current URL",
-            "itemtype": "method",
-            "name": "getUrlParameters",
-            "return": {
-                "description": "vars A table of key / Value pairs",
-                "type": "String"
-            },
-            "example": [
-                " blingpoint.global.getUrlParameters() => [\"PARAMETERNAME\", \"PARAMETERVALUE\"]",
-                " blingpoint.global.getUrlParameters()['PARAMETERNAME'] => \"PARAMETERVALUE\""
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 84,
-            "description": "Checks if the current URL matchs a specific regular expression (Case insensitive)",
-            "itemtype": "method",
-            "name": "checkUrl",
-            "params": [
-                {
-                    "name": "regExp",
-                    "description": "A valid JS regular expression",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Returns the regex result against current URL",
-                "type": "Boolean"
-            },
-            "example": [
-                " blingpoint.global.checkUrl('/lists/mylist/')"
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 107,
-            "description": "Checks if a string matchs a specific regular expression (Case insensitive)",
-            "itemtype": "method",
-            "name": "check",
-            "params": [
-                {
-                    "name": "inputString",
-                    "description": "String to be tested",
-                    "type": "String"
-                },
-                {
-                    "name": "regExp",
-                    "description": "A valid JS regular expression",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Returns the regex result against current URL",
-                "type": "Boolean"
-            },
-            "example": [
-                " blingpoint.global.check('abcde','bcd') => True"
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Global.js",
-            "line": 129,
-            "description": "Checks if a string is a number",
-            "itemtype": "method",
-            "name": "isNumber",
-            "params": [
-                {
-                    "name": "n",
-                    "description": "String to be tested",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "Returns true if n is a number",
-                "type": "Boolean"
-            },
-            "example": [
-                " blingpoint.global.isNumber(3) => True"
-            ],
-            "class": "",
-            "module": "Global"
-        },
-        {
-            "file": "src\\BlingPoint.Loader.js",
+            "file": "src/BlingPoint.Loader.js",
             "line": 20,
             "description": "Returns BlingPoint loading URL",
             "itemtype": "method",
@@ -353,7 +165,7 @@
             "module": "Loader"
         },
         {
-            "file": "src\\BlingPoint.Loader.js",
+            "file": "src/BlingPoint.Loader.js",
             "line": 43,
             "description": "Loads a CSS file",
             "itemtype": "method",
@@ -373,7 +185,7 @@
             "module": "Loader"
         },
         {
-            "file": "src\\BlingPoint.Loader.js",
+            "file": "src/BlingPoint.Loader.js",
             "line": 61,
             "description": "Loads a script file",
             "itemtype": "method",
@@ -393,7 +205,7 @@
             "module": "Loader"
         },
         {
-            "file": "src\\BlingPoint.Log.js",
+            "file": "src/BlingPoint.Log.js",
             "line": 38,
             "description": "Builds BlingPoint Logviewer Markup",
             "itemtype": "method",
@@ -406,7 +218,7 @@
             "module": "Log"
         },
         {
-            "file": "src\\BlingPoint.Security.js",
+            "file": "src/BlingPoint.Security.js",
             "line": 14,
             "description": "Checks if the current user is a member of the specified group",
             "itemtype": "method",
