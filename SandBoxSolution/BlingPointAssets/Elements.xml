@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="BlingPointAssets" Url="SiteAssets">
-  <File Path="BlingPointAssets\BlingPoint.js" Url="BlingPointAssets/BlingPoint.js" />
-<File Path="BlingPointAssets\BlingPoint.min.js" Url="BlingPointAssets/BlingPoint.min.js" />
 <File Path="BlingPointAssets\BlackbirdJs\blackbird.css" Url="BlingPointAssets/BlackbirdJs/blackbird.css" />
 <File Path="BlingPointAssets\BlackbirdJs\blackbird.min.css" Url="BlingPointAssets/BlackbirdJs/blackbird.min.css" />
 <File Path="BlingPointAssets\BlackbirdJs\blackbird_icons.png" Url="BlingPointAssets/BlackbirdJs/blackbird_icons.png" />
 <File Path="BlingPointAssets\BlackbirdJs\blackbird_panel.png" Url="BlingPointAssets/BlackbirdJs/blackbird_panel.png" />
-</Module>
+    <File Path="BlingPointAssets\BlingPoint.js" Url="BlingPointAssets/BlingPoint.js" />
+    <File Path="BlingPointAssets\BlingPoint.min.js" Url="BlingPointAssets/BlingPoint.min.js" />
+  </Module>
 </Elements>

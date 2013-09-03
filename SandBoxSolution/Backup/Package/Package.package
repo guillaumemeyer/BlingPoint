@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0d088393-d54c-4ef2-af25-7e8469c3ec85" solutionId="0d088393-d54c-4ef2-af25-7e8469c3ec85" resetWebServer="false" sharePointProductVersion="15.0" name="BlingPointSandBox" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="d3bc43dd-8cb3-4c54-a24d-a508437de824" />
+    <featureReference itemId="fde810aa-4911-4012-9925-19d310e76bab" />
+    <featureReference itemId="d3ed53f8-ef7a-4dbf-9e14-70efd6825716" />
+  </features>
+</package>

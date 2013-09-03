@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="BlingPoint SandBox Assets" Id="c667e757-7ab6-4d90-be34-4c1e8ffd8d34" Scope="Web">
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Title="BlingPoint SandBox Assets" ActivateOnDefault="FALSE" Id="c667e757-7ab6-4d90-be34-4c1e8ffd8d34" Scope="Web">
   <ElementManifests>
     <ElementManifest Location="BlingPointAssets\Elements.xml" />
-    <ElementFile Location="BlingPointAssets\BlingPoint.js" />
-    <ElementFile Location="BlingPointAssets\BlingPoint.min.js" />
     <ElementFile Location="BlingPointAssets\BlackbirdJs\blackbird.css" />
     <ElementFile Location="BlingPointAssets\BlackbirdJs\blackbird.min.css" />
     <ElementFile Location="BlingPointAssets\BlackbirdJs\blackbird_icons.png" />
     <ElementFile Location="BlingPointAssets\BlackbirdJs\blackbird_panel.png" />
+    <ElementFile Location="BlingPointAssets\BlingPoint.js" />
+    <ElementFile Location="BlingPointAssets\BlingPoint.min.js" />
   </ElementManifests>
 </Feature>

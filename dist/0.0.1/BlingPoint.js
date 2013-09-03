@@ -517,7 +517,7 @@ var blingpointUser;
 
 					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
 					blingpointContext.set_webRequestExecutorFactory(factory);
-					var blingpointHostContext = new SP.AppContextSite(ctx, blingpointHostWebUrl);
+					var blingpointHostContext = new SP.AppContextSite(blingpointContext, blingpointHostWebUrl);
 					blingpointHostWeb = blingpointHostContext.get_web();
 					blingpointContext.load(blingpointHostWeb);
 					blingpointContext.executeQueryAsync(
