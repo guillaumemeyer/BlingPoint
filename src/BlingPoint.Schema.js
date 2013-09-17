@@ -139,8 +139,6 @@
         var list;
         var listContentTypeColl;
 
-        var clientContext = ctx;
-        
         // Retrieve content type by name
         hostWebContentTypes = blingpointWeb.get_contentTypes();
 		blingpointContext.load(hostWebContentTypes);

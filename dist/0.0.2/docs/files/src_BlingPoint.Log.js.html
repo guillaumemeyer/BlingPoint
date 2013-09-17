@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\BlingPoint.Log.js - BlingPoint</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="BlingPoint"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Framework.html">Framework</a></li>
+            
+                <li><a href="../modules/Global.html">Global</a></li>
+            
+                <li><a href="../modules/Loader.html">Loader</a></li>
+            
+                <li><a href="../modules/Log.html">Log</a></li>
+            
+                <li><a href="../modules/Parameters.html">Parameters</a></li>
+            
+                <li><a href="../modules/PlugIns.html">PlugIns</a></li>
+            
+                <li><a href="../modules/Schema.html">Schema</a></li>
+            
+                <li><a href="../modules/Security.html">Security</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\BlingPoint.Log.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * BlingPoint Log Module
+ * @module Log
+ */
+( function() {
+
+	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
+	var BLINGPOINT_LOG_NAMESPACE = &#x27;log&#x27;;
+
+	// Init namespaces
+	window[ BLINGPOINT_LOG_NAMESPACE ] = {};
+	
+	var IE6_POSITION_FIXED = true; // enable IE6 {position:fixed}
+	
+	var bbird;
+	var outputList;
+	var cache = [];
+	
+	var state = getState();
+	var classes = {};
+	var profiler = {};
+	var IDs = {
+		blackbird: &#x27;blackbird&#x27;,
+		checkbox: &#x27;bbVis&#x27;,
+		filters: &#x27;bbFilters&#x27;,
+		controls: &#x27;bbControls&#x27;,
+		size: &#x27;bbSize&#x27;
+	};
+	var messageTypes = { //order of these properties imply render order of filter controls
+		debug: true,
+		info: true,
+		warn: true,
+		error: true,
+		profile: true
+	};
+	
+	
+	/**
+	Builds BlingPoint Logviewer Markup
+	@method generateMarkup
+	@return {string} BlingPoint Logviewer node
+	*/
+	function generateMarkup() { //build markup
+		var spans = [];
+		for ( var type in messageTypes ) {
+			spans.push( [ &#x27;&lt;span class=&quot;&#x27;, type, &#x27;&quot; type=&quot;&#x27;, type, &#x27;&quot;&gt;&lt;/span&gt;&#x27;].join( &#x27;&#x27; ) );
+		}
+
+		var newNode = document.createElement( &#x27;DIV&#x27; );
+		newNode.id = IDs.blackbird;
+		newNode.style.display = &#x27;none&#x27;;
+		newNode.innerHTML = [
+			&#x27;&lt;div class=&quot;header&quot;&gt;&#x27;,
+				&#x27;&lt;div class=&quot;left&quot;&gt;&#x27;,
+					&#x27;&lt;div id=&quot;&#x27;, IDs.filters, &#x27;&quot; class=&quot;filters&quot; title=&quot;click to filter by message type&quot;&gt;&#x27;, spans.join( &#x27;&#x27; ), &#x27;&lt;/div&gt;&#x27;,
+				&#x27;&lt;/div&gt;&#x27;,
+				&#x27;&lt;div class=&quot;right&quot;&gt;&#x27;,
+					&#x27;&lt;div id=&quot;&#x27;, IDs.controls, &#x27;&quot; class=&quot;controls&quot;&gt;&#x27;,
+						&#x27;&lt;span id=&quot;&#x27;, IDs.size ,&#x27;&quot; title=&quot;contract&quot; op=&quot;resize&quot;&gt;&lt;/span&gt;&#x27;,
+						&#x27;&lt;span class=&quot;clear&quot; title=&quot;clear&quot; op=&quot;clear&quot;&gt;&lt;/span&gt;&#x27;,
+						&#x27;&lt;span class=&quot;close&quot; title=&quot;close&quot; op=&quot;close&quot;&gt;&lt;/span&gt;&#x27;,
+					&#x27;&lt;/div&gt;&#x27;,
+				&#x27;&lt;/div&gt;&#x27;,
+			&#x27;&lt;/div&gt;&#x27;,
+			&#x27;&lt;div class=&quot;main&quot;&gt;&#x27;,
+				&#x27;&lt;div class=&quot;left&quot;&gt;&lt;/div&gt;&lt;div class=&quot;mainBody&quot;&gt;&#x27;,
+					&#x27;&lt;ol&gt;&#x27;, cache.join( &#x27;&#x27; ), &#x27;&lt;/ol&gt;&#x27;,
+				&#x27;&lt;/div&gt;&lt;div class=&quot;right&quot;&gt;&lt;/div&gt;&#x27;,
+			&#x27;&lt;/div&gt;&#x27;,
+			&#x27;&lt;div class=&quot;footer&quot;&gt;&#x27;,
+				&#x27;&lt;div class=&quot;left&quot;&gt;&lt;label for=&quot;&#x27;, IDs.checkbox, &#x27;&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;&#x27;, IDs.checkbox, &#x27;&quot; /&gt;Visible on page load&lt;/label&gt;&lt;/div&gt;&#x27;,
+				&#x27;&lt;div class=&quot;right&quot;&gt;&lt;/div&gt;&#x27;,
+			&#x27;&lt;/div&gt;&#x27;
+		].join( &#x27;&#x27; );
+		return newNode;
+	}
+
+	function backgroundImage() { //(IE6 only) change &lt;BODY&gt; tag&#x27;s background to resolve {position:fixed} support
+		var bodyTag = document.getElementsByTagName( &#x27;BODY&#x27; )[ 0 ];
+		
+		if ( bodyTag.currentStyle &amp;&amp; IE6_POSITION_FIXED ) {
+			if (bodyTag.currentStyle.backgroundImage == &#x27;none&#x27; ) {
+				bodyTag.style.backgroundImage = &#x27;url(about:blank)&#x27;;
+			}
+			if (bodyTag.currentStyle.backgroundAttachment == &#x27;scroll&#x27; ) {
+				bodyTag.style.backgroundAttachment = &#x27;fixed&#x27;;
+			}
+		}
+	}
+
+	function addMessage( type, content ) { //adds a message to the output list
+		content = ( content.constructor == Array ) ? content.join( &#x27;&#x27; ) : content;
+		if ( outputList ) {
+			var newMsg = document.createElement( &#x27;LI&#x27; );
+			newMsg.className = type;
+			newMsg.innerHTML = [ &#x27;&lt;span class=&quot;icon&quot;&gt;&lt;/span&gt;&#x27;, content ].join( &#x27;&#x27; );
+			outputList.appendChild( newMsg );
+			scrollToBottom();
+		} else {
+			//cache.push( [ &#x27;&lt;li class=&quot;&#x27;, type, &#x27;&quot;&gt;&lt;span class=&quot;icon&quot;&gt;&lt;/span&gt;&#x27;, content, &#x27;&lt;/li&gt;&#x27; ].join( &#x27;&#x27; ) );
+		}
+	}
+	
+	function clear() { //clear list output
+		outputList.innerHTML = &#x27;&#x27;;
+	}
+	
+	function clickControl( evt ) {
+		if ( !evt ) evt = window.event;
+		var el = ( evt.target ) ? evt.target : evt.srcElement;
+
+		if ( el.tagName == &#x27;SPAN&#x27; ) {
+			switch ( el.getAttributeNode( &#x27;op&#x27; ).nodeValue ) {
+				case &#x27;resize&#x27;: resize(); break;
+				case &#x27;clear&#x27;:  clear();  break;
+				case &#x27;close&#x27;:  hide();   break;
+			}
+		}
+	}
+	
+	function clickFilter( evt ) { //show/hide a specific message type
+		if ( !evt ) evt = window.event;
+		var span = ( evt.target ) ? evt.target : evt.srcElement;
+
+		if ( span &amp;&amp; span.tagName == &#x27;SPAN&#x27; ) {
+
+			var type = span.getAttributeNode( &#x27;type&#x27; ).nodeValue;
+
+			if ( evt.altKey ) {
+				var filters = document.getElementById( IDs.filters ).getElementsByTagName( &#x27;SPAN&#x27; );
+
+				var active = 0;
+				for ( var entry in messageTypes ) {
+					if ( messageTypes[ entry ] ) active++;
+				}
+				var oneActiveFilter = ( active == 1 &amp;&amp; messageTypes[ type ] );
+
+				for ( var i = 0; filters[ i ]; i++ ) {
+					var spanType = filters[ i ].getAttributeNode( &#x27;type&#x27; ).nodeValue;
+
+					filters[ i ].className = ( oneActiveFilter || ( spanType == type ) ) ? spanType : spanType + &#x27;Disabled&#x27;;
+					messageTypes[ spanType ] = oneActiveFilter || ( spanType == type );
+				}
+			}
+			else {
+				messageTypes[ type ] = ! messageTypes[ type ];
+				span.className = ( messageTypes[ type ] ) ? type : type + &#x27;Disabled&#x27;;
+			}
+
+			//build outputList&#x27;s class from messageTypes object
+			var disabledTypes = [];
+			for ( var distype in messageTypes ) {
+				if ( ! messageTypes[ distype ] ) disabledTypes.push( distype );
+			}
+			disabledTypes.push( &#x27;&#x27; );
+			outputList.className = disabledTypes.join( &#x27;Hidden &#x27; );
+
+			scrollToBottom();
+		}
+	}
+
+	function clickVis( evt ) {
+		if ( !evt ) evt = window.event;
+		var el = ( evt.target ) ? evt.target : evt.srcElement;
+
+		state.load = el.checked;
+		setState();
+	}
+	
+	
+	function scrollToBottom() { //scroll list output to the bottom
+		outputList.scrollTop = outputList.scrollHeight;
+	}
+	
+	function isVisible() { //determine the visibility
+		return ( bbird.style.display == &#x27;block&#x27; );
+	}
+
+	function hide() { 
+		bbird.style.display = &#x27;none&#x27;;
+	}
+			
+	function show() {
+		var body = document.getElementsByTagName( &#x27;BODY&#x27; )[ 0 ];
+		body.removeChild( bbird );
+		body.appendChild( bbird );
+		bbird.style.display = &#x27;block&#x27;;
+		bbird.style.zIndex = &#x27;15000&#x27;;
+	}
+	
+	//sets the position
+	function reposition( position ) {
+		if ( position === undefined || position === null ) {
+			position = ( state &amp;&amp; state.pos === null ) ? 1 : ( state.pos + 1 ) % 4; //set to initial position (&#x27;topRight&#x27;) or move to next position
+		}
+				
+		switch ( position ) {
+			case 0: classes[ 0 ] = &#x27;bbTopLeft&#x27;; break;
+			case 1: classes[ 0 ] = &#x27;bbTopRight&#x27;; break;
+			case 2: classes[ 0 ] = &#x27;bbBottomLeft&#x27;; break;
+			case 3: classes[ 0 ] = &#x27;bbBottomRight&#x27;; break;
+		}
+		state.pos = position;
+		setState();
+	}
+
+	function resize( size ) {
+		if ( size === undefined || size === null ) {
+			size = ( state &amp;&amp; state.size === null ) ? 0 : ( state.size + 1 ) % 2;
+		}
+
+		classes[ 1 ] = ( size === 0 ) ? &#x27;bbSmall&#x27; : &#x27;bbLarge&#x27;;
+
+		var span = document.getElementById( IDs.size );
+		span.title = ( size === 1 ) ? &#x27;small&#x27; : &#x27;large&#x27;;
+		span.className = span.title;
+
+		state.size = size;
+		setState();
+		scrollToBottom();
+	}
+
+	function setState() {
+		var props = [];
+		for ( var entry in state ) {
+			var value = ( state[ entry ] &amp;&amp; state[ entry ].constructor === String ) ? &#x27;&quot;&#x27; + state[ entry ] + &#x27;&quot;&#x27; : state[ entry ]; 
+			props.push( entry + &#x27;:&#x27; + value );
+		}
+		props = props.join( &#x27;,&#x27; );
+		
+		var expiration = new Date();
+		expiration.setDate( expiration.getDate() + 14 );
+		document.cookie = [ &#x27;blackbird={&#x27;, props, &#x27;}; expires=&#x27;, expiration.toUTCString() ,&#x27;;&#x27; ].join( &#x27;&#x27; );
+
+		var newClass = [];
+		for ( var word in classes ) {
+			newClass.push( classes[ word ] );
+		}
+		bbird.className = newClass.join( &#x27; &#x27; );
+	}
+	
+	function getState() {
+		var re = new RegExp( /blackbird=({[^;]+})(;|\b|$)/ );
+		var match = re.exec( document.cookie );
+		return ( match &amp;&amp; match[ 1 ] ) ? eval( &#x27;(&#x27; + match[ 1 ] + &#x27;)&#x27; ) : { pos:null, size:null, load:null };
+	}
+	
+	//event handler for &#x27;keyup&#x27; event for window
+	function readKey( evt ) {
+		if ( !evt ) evt = window.event;
+		var code = 113; //F2 key
+					
+		if ( evt &amp;&amp; evt.keyCode == code ) {
+					
+			var visible = isVisible();
+					
+			if ( visible &amp;&amp; evt.shiftKey &amp;&amp; evt.altKey ) clear();
+			else if (visible &amp;&amp; evt.shiftKey ) reposition();
+			else if ( !evt.shiftKey &amp;&amp; !evt.altKey ) {
+				( visible ) ? hide() : show();
+			}
+		}
+	}
+
+	//event management ( thanks John Resig )
+	function addEvent( obj, type, fn ) {
+		var obj = ( obj.constructor === String ) ? document.getElementById( obj ) : obj;
+		if ( obj.attachEvent ) {
+			obj[ &#x27;e&#x27; + type + fn ] = fn;
+			obj[ type + fn ] = function(){ obj[ &#x27;e&#x27; + type + fn ]( window.event ) };
+			obj.attachEvent( &#x27;on&#x27; + type, obj[ type + fn ] );
+		} else obj.addEventListener( type, fn, false );
+	}
+	function removeEvent( obj, type, fn ) {
+		var obj = ( obj.constructor === String ) ? document.getElementById( obj ) : obj;
+		if ( obj.detachEvent ) {
+			obj.detachEvent( &#x27;on&#x27; + type, obj[ type + fn ] );
+			obj[ type + fn ] = null;
+		}
+		else obj.removeEventListener( type, fn, false );
+	}
+
+
+	function InitBlackbird() {
+		var body = document.getElementsByTagName( &#x27;BODY&#x27; )[ 0 ];
+		bbird = body.appendChild( generateMarkup() );
+		outputList = bbird.getElementsByTagName( &#x27;OL&#x27; )[ 0 ];
+	
+		backgroundImage();
+	
+		//add events
+		addEvent( IDs.checkbox, &#x27;click&#x27;, clickVis );
+		addEvent( IDs.filters, &#x27;click&#x27;, clickFilter );
+		addEvent( IDs.controls, &#x27;click&#x27;, clickControl );
+		addEvent( document, &#x27;keyup&#x27;, readKey);
+
+		resize( state.size );
+		reposition( state.pos );
+		if ( state.load ) {
+			show();
+			document.getElementById( IDs.checkbox ).checked = true; 
+		}
+
+		scrollToBottom();
+
+		window[ BLINGPOINT_LOG_NAMESPACE ].init = function() {
+			show();
+			window[ BLINGPOINT_LOG_NAMESPACE ].error( [ &#x27;&lt;b&gt;&#x27;, BLINGPOINT_LOG_NAMESPACE, &#x27;&lt;/b&gt; can only be initialized once&#x27; ] );
+		};
+
+		addEvent( window, &#x27;unload&#x27;, function() {
+			removeEvent( IDs.checkbox, &#x27;click&#x27;, clickVis );
+			removeEvent( IDs.filters, &#x27;click&#x27;, clickFilter );
+			removeEvent( IDs.controls, &#x27;click&#x27;, clickControl );
+			removeEvent( document, &#x27;keyup&#x27;, readKey );
+		});
+		
+		window[ BLINGPOINT_LOG_NAMESPACE ].info(&#x27;BlingPoint LogViewer Loaded&#x27;);
+		
+	}
+
+
+
+	// Public functions mapping
+	window[ BLINGPOINT_LOG_NAMESPACE ] = {
+		initBlackbird:
+			function() { InitBlackbird(); },
+		toggle:
+			function() { ( isVisible() ) ? hide() : show(); },
+		resize:
+			function() { resize(); },
+		clear:
+			function() { clear(); },
+		move:
+			function() { reposition(); },
+		debug: 
+			function( msg ) { addMessage( &#x27;debug&#x27;, msg ); },
+		warn:
+			function( msg ) { addMessage( &#x27;warn&#x27;, msg ); },
+		info:
+			function( msg ) { addMessage( &#x27;info&#x27;, msg ); },
+		error:
+			function( msg ) { addMessage( &#x27;error&#x27;, msg ); },
+		profile: 
+			function( label ) {
+				var currentTime = new Date(); //record the current time when profile() is executed
+				
+				if ( label === undefined || label === &#x27;&#x27; ) {
+					addMessage( &#x27;error&#x27;, &#x27;&lt;b&gt;ERROR:&lt;/b&gt; Please specify a label for your profile statement&#x27; );
+				}
+				else if ( profiler[ label ] ) {
+					addMessage( &#x27;profile&#x27;, [ label, &#x27;: &#x27;, currentTime - profiler[ label ],	&#x27;ms&#x27; ].join( &#x27;&#x27; ) );
+					delete profiler[ label ];
+				}
+				else {
+					profiler[ label ] = currentTime;
+					addMessage( &#x27;profile&#x27;, label );
+				}
+				return currentTime;
+			}
+	};
+	
+	
+	// Define Parent NameSpace
+	window[ BLINGPOINT_ROOT_NAMESPACE ].log = window[BLINGPOINT_LOG_NAMESPACE];
+	
+	
+})();
+
+blingpoint.log.initBlackbird();
+
+if (BlingPointDevMode == true) {
+	blingpoint.log.toggle();
+	blingpoint.log.profile(&#x27;scriptLoading&#x27;)
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

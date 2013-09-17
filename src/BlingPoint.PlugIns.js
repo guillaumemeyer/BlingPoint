@@ -66,7 +66,7 @@
 		camlQuery.set_viewXml(q);
 		var oListItems = list.getItems(camlQuery);
 
-		blingpointContext.load(oListItems, 'Include(DisplayName,Id,PlugInSource,UrlTrigger)');
+		blingpointContext.load(oListItems, 'Include(DisplayName,Id,PlugInSourceUrl,PlugInUrlTrigger)');
 
 		blingpointContext.executeQueryAsync(
 			function(){
@@ -77,8 +77,8 @@
 					var title = item.get_displayName();
 					var id = item.get_id();
 					// If its an URL field, add ".get_url()"
-					var plugInSource = item.get_item('PlugInSource');
-					var urlTrigger = item.get_item('UrlTrigger');
+					var plugInSource = item.get_item('PlugInSourceUrl');
+					var urlTrigger = item.get_item('PlugInUrlTrigger');
 
 					log.debug("Checking PlugIn : " + title);
 					log.debug("PlugIn ID : " + id);

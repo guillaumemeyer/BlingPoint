@@ -1,6 +1,6 @@
 {
   "name": "BlingPoint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "BlingPoint JS runtime and framework for SharePoint",
   "homepage": "https://github.com/guillaumemeyer/BlingPoint",
   "devDependencies": {

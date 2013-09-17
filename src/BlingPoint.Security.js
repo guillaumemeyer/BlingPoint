@@ -41,7 +41,7 @@
 						var userEnumerator = collUser.getEnumerator();
 						while (userEnumerator.moveNext()) {
 							var oUser = userEnumerator.get_current();
-							if (oUser.get_id() == user.get_id()) {
+							if (oUser.get_id() == blingpointUser.get_id()) {
 								
 								callbackFunctionIfMember();
 								return;

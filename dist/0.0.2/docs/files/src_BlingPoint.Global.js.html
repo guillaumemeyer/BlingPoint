@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\BlingPoint.Global.js - BlingPoint</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="BlingPoint"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.2</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Framework.html">Framework</a></li>
+            
+                <li><a href="../modules/Global.html">Global</a></li>
+            
+                <li><a href="../modules/Loader.html">Loader</a></li>
+            
+                <li><a href="../modules/Log.html">Log</a></li>
+            
+                <li><a href="../modules/Parameters.html">Parameters</a></li>
+            
+                <li><a href="../modules/PlugIns.html">PlugIns</a></li>
+            
+                <li><a href="../modules/Schema.html">Schema</a></li>
+            
+                <li><a href="../modules/Security.html">Security</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\BlingPoint.Global.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * BlingPoint Global Module
+ * @module Global
+ */
+( function() {
+
+	var BLINGPOINT_ROOT_NAMESPACE = &#x27;blingpoint&#x27;;
+	var BLINGPOINT_GLOBAL_NAMESPACE = &#x27;global&#x27;;
+	
+	// Init namespaces
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ] = {};
+	
+	/**
+	Catch unhandled errors
+	@method handleUnhandledError
+	@param {string} desc Descrpition
+	@param {string} page Page
+	@param {string} line Line
+	@param {string} chr Character
+	**/
+	function HandleUnhandledError(error, url, line) {
+		try {
+			blingpoint.log.error(&quot;An unexpected error has occured&quot;);
+			blingpoint.log.error(&quot;Description: &quot; + error);
+			blingpoint.log.error(&quot;Url: &quot; + url);
+			blingpoint.log.error(&quot;Line: &quot; + line);
+		}
+		catch(err)
+		{
+			console.log(&quot;An unexpected error has occured&quot;);
+			console.log(&quot;Description: &quot; + err.description);
+		}
+	}
+		
+	/**
+	Catch handled errors
+	@method handleUnhandledError
+	@param {string} customMessage Error message
+	@param {string} sender Sender
+	@param {string} args Arguments
+	**/
+	function HandleManagedError(customMessage, e) {
+		blingpoint.log.warn(&quot;A managed error has occured&quot;);
+		blingpoint.log.warn(&quot;Message: &quot; + customMessage);
+		blingpoint.log.warn(&quot;Name: &quot; + e.name);
+		blingpoint.log.warn(&quot;Technical message: &quot; + e.message);
+		blingpoint.log.warn(&quot;Number: &quot; + e.number);
+	}
+	
+
+	function ExecuteCallback(callbackFunction) {
+		try {
+			if (typeof callbackFunction !== undefined &amp;&amp; callbackFunction !== null) {
+				callbackFunction();
+			}
+		}
+		catch(e)
+		{
+			HandleManagedError(&#x27;An error has occurred during calling a callback method&#x27;, e);
+		}
+	}
+
+
+	/**
+	Retrieves parameters and values from current URL
+	@method getUrlParameters
+	@return {string} vars A table of key / Value pairs
+	@example blingpoint.global.getUrlParameters() =&gt; [&quot;PARAMETERNAME&quot;, &quot;PARAMETERVALUE&quot;]
+	@example blingpoint.global.getUrlParameters()[&#x27;PARAMETERNAME&#x27;] =&gt; &quot;PARAMETERVALUE&quot;
+	**/
+	function GetUrlParameters() {
+	
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf(&#x27;?&#x27;) + 1).split(&#x27;&amp;&#x27;);
+		for(var i = 0; i &lt; hashes.length; i++)
+		{
+			hash = hashes[i].split(&#x27;=&#x27;);
+			vars.push(hash[0]);
+			vars[hash[0]] = decodeURIComponent(hash[1]);
+		}
+		return vars;
+	}
+	
+	/**
+	Checks if the current URL matchs a specific regular expression (Case insensitive)
+	@method checkUrl
+	@param {string} regExp A valid JS regular expression
+	@return {boolean} Returns the regex result against current URL
+	@example blingpoint.global.checkUrl(&#x27;/lists/mylist/&#x27;)
+	**/
+	function CheckUrl(regExp) {
+	
+		// Alternative regex creation
+		//Expression = /motif/drapeau
+		
+		var oRegExp = new RegExp(regExp,&#x27;gi&#x27;);
+		if(oRegExp.test(window.location.href))
+		{ 
+			return true;
+		}  
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	Checks if a string matchs a specific regular expression (Case insensitive)
+	@method check
+	@param {string} inputString String to be tested
+	@param {string} regExp A valid JS regular expression
+	@return {boolean} Returns the regex result against current URL
+	@example blingpoint.global.check(&#x27;abcde&#x27;,&#x27;bcd&#x27;) =&gt; True
+	**/
+	function Check(inputString, regExp) {
+
+		var oRegExp = new RegExp(regExp,&#x27;gi&#x27;);
+		if(oRegExp.test(inputString))
+		{ 
+			return true;
+		}  
+		else
+		{
+			return false;
+		}
+
+	}
+
+	/**
+	Checks if a string is a number
+	@method isNumber
+	@param {string} n String to be tested
+	@return {boolean} Returns true if n is a number
+	@example blingpoint.global.isNumber(3) =&gt; True
+	**/
+	function IsNumber(n) {
+		return !isNaN(parseFloat(n)) &amp;&amp; isFinite(n);
+	}
+	
+	// Public functions mapping
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].getUrlParameters = GetUrlParameters;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].checkUrl = CheckUrl;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].check = Check;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].isNumber = IsNumber;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleUnhandledError = HandleUnhandledError;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].handleManagedError = HandleManagedError;
+	window[ BLINGPOINT_GLOBAL_NAMESPACE ].executeCallback = ExecuteCallback;
+	
+	window[ BLINGPOINT_ROOT_NAMESPACE ].global = window[ BLINGPOINT_GLOBAL_NAMESPACE ];
+
+	window.onerror = blingpoint.global.handleUnhandledError;
+
+})();
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
