@@ -370,6 +370,6 @@
 blingpoint.log.initBlackbird();
 
 if (BlingPointDevMode == true) {
-	blingpoint.log.toggle();
+	//blingpoint.log.toggle();
 	blingpoint.log.profile('scriptLoading')
 }

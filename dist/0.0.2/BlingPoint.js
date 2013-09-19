@@ -463,7 +463,7 @@ var BlingPointDevMode;
 blingpoint.log.initBlackbird();
 
 if (BlingPointDevMode == true) {
-	blingpoint.log.toggle();
+	//blingpoint.log.toggle();
 	blingpoint.log.profile('scriptLoading')
 }/**
  * BlingPoint Global Module
@@ -669,7 +669,7 @@ var blingpointUser;
 
 					var factory = new SP.ProxyWebRequestExecutorFactory(appWebUrl);
 					blingpointContext.set_webRequestExecutorFactory(factory);
-					var blingpointHostContext = new SP.AppContextSite(blingpointContext, blingpointHostWebUrl);
+					blingpointHostContext = new SP.AppContextSite(blingpointContext, blingpointHostWebUrl);
 					blingpointHostWeb = blingpointHostContext.get_web();
 					blingpointContext.load(blingpointHostWeb);
 					blingpointContext.executeQueryAsync(
